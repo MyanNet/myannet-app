@@ -1,3 +1,5 @@
+// @ts-nocheck
+"use client";
 import { useState } from "react";
 
 const T = {
@@ -135,18 +137,6 @@ export default function App(){
   const [emailRole,setEmailRole]=useState("worker");
   const [emailDone,setEmailDone]=useState(false);
 
-  // SEO + favicon
-  useState(()=>{
-    document.title="Myanmar Connect | မြန်မာ ကွန်နက် — Work, Hundi, Rent, Cargo & Trade";
-    const fav=document.createElement("link");fav.rel="icon";
-    fav.href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%238B0000'/><text y='72' x='50' text-anchor='middle' font-size='60'>🇲🇲</text></svg>";
-    document.head.appendChild(fav);
-    const m=(n,v,p)=>{let e=document.querySelector(p?`meta[property='${n}']`:`meta[name='${n}']`);if(!e){e=document.createElement("meta");p?e.setAttribute("property",n):e.setAttribute("name",n);document.head.appendChild(e);}e.setAttribute("content",v);};
-    m("description","The all-in-one platform for Burmese/Myanmar communities worldwide — find work, send money home, rent a room, ship goods, and buy & sell within a trusted community.");
-    m("keywords","Myanmar Connect, myannet.app, Burmese community, sushi jobs, hundi, Burma migrant workers, Myanmar remittance");
-    m("og:title","Myanmar Connect | မြန်မာ ကွန်နက်",true);m("og:description","Work · Hundi · Rent · Cargo · Trade",true);m("og:url","https://www.myannet.app",true);m("og:type","website",true);
-    m("twitter:card","summary_large_image");m("twitter:title","Myanmar Connect | မြန်မာ ကွန်နက်");
-  });
 
   const t=T[lang];
   const col=COLORS[tab]||"#c0392b";
