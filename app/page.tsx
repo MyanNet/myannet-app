@@ -4,10 +4,10 @@ import { useState } from "react";
 
 const T = {
   en: {
-    appName:"Myanmar Connect", appSub:"မြန်မာ ကွန်နက်", beta:"BETA",
+    appName:"MyanNet", appSub:"မြန်နက် · All-in-one services, anywhere, for the people of Myanmar", beta:"BETA",
     tagline:"The all-in-one platform for Burmese/Myanmar communities worldwide — find work, send money home, rent a room, ship goods, and buy & sell within a trusted community.",
     vision:"Connecting Myanmar Communities working/living abroad to their loved ones living locally, and vice versa.",
-    visionTitle:"🌏 Our Vision", whoTitle:"Who Myanmar Connect Serves",
+    visionTitle:"🌏 Our Vision", whoTitle:"Who MyanNet Serves",
     pillars:["Help Wanted","Hundi / Send Money","Rent","Cargo / Hand Carry","2nd Hand Goods"],
     pillarIcons:["💼","💸","🏠","✈️","🛍️"],
     pillarDesc:["Find work or post openings across all countries","Send money home through trusted community agents","Find or offer housing in the Burmese community","Hand-carry goods between countries — trusted travelers","Buy & sell within the trusted Burmese community"],
@@ -17,7 +17,7 @@ const T = {
     allCargo:"All", canCarry:"✈️ Can Carry", needCarry:"📦 Need Carry",
     postJob:"Post Job", postAgent:"Register as Agent", postRental:"Post Rental", postCarry:"Post Carry Offer", postItem:"Post Item",
     contactFb:"💬 Contact on Facebook", contactViber:"📱 WhatsApp / Viber", msgSeller:"💬 Message Seller",
-    hundiNotice:"⚠️ Community Notice: Hundi is an informal trust-based transfer system widely used by Myanmar migrants. Agents are community-verified. Always use known, reviewed agents. Myanmar Connect does not handle funds directly.",
+    hundiNotice:"⚠️ Community Notice: Hundi is an informal trust-based transfer system widely used by Myanmar migrants. Agents are community-verified. Always use known, reviewed agents. MyanNet does not handle funds directly.",
     cargoNotice:"✈️ Hand Carry Network: Travelers with spare baggage space offer to carry goods between countries. Always meet in person. Community trust is everything.",
     rateCalc:"💱 Quick Rate Calculator", from:"From", amount:"Amount", communityAgents:"🤝 Community Agents",
     verified:"✅ Verified", pending:"⏳ Pending", reviews:"reviews", rate:"Rate", fee:"Fee", dailyLimit:"Daily Limit",
@@ -29,13 +29,13 @@ const T = {
     goFb:"🌐 Go to Facebook Group", close:"Close", services:"Services", countries:"Countries", contact:"Contact & Community", privacy:"Privacy Policy", terms:"Terms of Use", about:"About",
     signIn:"Sign in to your account", continueWithFb:"Continue with Facebook", or:"or", phone:"Phone Number", sendOTP:"Send OTP Code", verifyCode:"Verify Code", changePhone:"Change phone number", emailAddr:"Email Address", password:"Password", signingIn:"Signing in…", sending:"Sending…", verifying:"Verifying…", connecting:"Connecting…",
     iAm:"I am a…", worker:"👷 Worker / Job Seeker", business:"🏪 Business Owner", hundiAgent:"💸 Hundi Agent", other:"🌏 Other", country:"Country", registerNow:"Register Now", noSpam:"We never share your info. No spam, ever.",
-    registered:"You're registered!", thankyou:"Thank you for joining Myanmar Connect. We'll be in touch soon with updates!", bySigningIn:"By signing in, you agree to our Terms of Use and Privacy Policy",
+    registered:"You're registered!", thankyou:"Thank you for joining MyanNet. We'll be in touch soon with updates!", bySigningIn:"By signing in, you agree to our Terms of Use and Privacy Policy",
   },
   mm: {
-    appName:"မြန်မာ ကွန်နက်", appSub:"Myanmar Connect", beta:"ဘီတာ",
+    appName:"မြန်နက်", appSub:"MyanNet · မည်သည့်နေရာမဆို မြန်မာပြည်သူများအတွက် စုံလင်သော ဝန်ဆောင်မှု", beta:"ဘီတာ",
     tagline:"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ/ဗမာ လူ့အဖွဲ့အစည်းများအတွက် စုံလင်သောပလက်ဖောင်း — အလုပ်ရှာ၊ အိမ်သို့ငွေလွှဲ၊ အခန်းငှား၊ ကုန်ပို့နှင့် ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းနိုင်သည်။",
     vision:"နိုင်ငံခြားတွင် အလုပ်လုပ်/နေထိုင်နေသော မြန်မာများနှင့် ဒေသတွင်းရှိ ချစ်ခင်ရသူများကို ချိတ်ဆက်ပေးသည် — နှစ်ဦးနှစ်ဖက်စလုံးအတွက်။",
-    visionTitle:"🌏 ကျွန်ုပ်တို့၏ မျှော်မှန်းချက်", whoTitle:"မြန်မာ ကွန်နက် မည်သူများအတွက်",
+    visionTitle:"🌏 ကျွန်ုပ်တို့၏ မျှော်မှန်းချက်", whoTitle:"မြန်နက် မည်သူများအတွက်",
     pillars:["အလုပ်အကိုင်","ဟွန်ဒီ / ငွေလွှဲ","အိမ်ငှား","ကုန်တင်ဆောင်","အသုံးချပစ္စည်း"],
     pillarIcons:["💼","💸","🏠","✈️","🛍️"],
     pillarDesc:["နိုင်ငံအားလုံးတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","ယုံကြည်ရသော ကိုယ်စားလှယ်များမှတစ်ဆင့် ငွေလွှဲပေးပို့ရန်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းရန်"],
@@ -52,12 +52,12 @@ const T = {
     urgent:"🔥 အရေးပေါ်", burmeseHouse:"🇲🇲 မြန်မာ့အိမ်", jobAvail:"🏪 အလုပ်ရှိသည်", seekingWork:"👷 အလုပ်ရှာနေသည်",
     available:"🏠 ငှားရမ်းရန်ရှိ", seeking:"🔍 ရှာဖွေနေသည်", canCarryTag:"✈️ ဆောင်ပေးနိုင်", needCarryTag:"📦 ဆောင်ပေးမည့်သူရှာ", budget:"ဘတ်ဂျက်",
     send:"ပို့သည်", receive:"MMK လက်ခံရရှိ*", logIn:"ဝင်ရောက်မည်", logOut:"ထွက်မည်", myProfile:"ကျွန်ုပ်၏ ပရိုဖိုင်", myListings:"ကျွန်ုပ်၏ ကြော်ငြာ", settings:"ဆက်တင်",
-    registerInterest:"မှတ်ပုံတင်မည်", beFirst:"မြန်မာ ကွန်နက်နှင့် ချိတ်ဆက်ပါ", registerDesc:"အသစ်သောဝန်ဆောင်မှုများ၊ အလုပ်အကိုင်များနှင့် အပ်ဒိတ်များ အကြောင်း ပထမဆုံးသိရှိရန် မှတ်ပုံတင်ပါ",
+    registerInterest:"မှတ်ပုံတင်မည်", beFirst:"မြန်နက်နှင့် ချိတ်ဆက်ပါ", registerDesc:"အသစ်သောဝန်ဆောင်မှုများ၊ အလုပ်အကိုင်များနှင့် အပ်ဒိတ်များ အကြောင်း ပထမဆုံးသိရှိရန် မှတ်ပုံတင်ပါ",
     joinFb:"Facebook အုပ်စုတွင် ပါဝင်မည်", comingSoon:"မကြာမီ ဖော်ပြနိုင်သောစနစ် ရောက်ရှိလာမည်! ယခုအချိန်တွင် Facebook အုပ်စုမှတစ်ဆင့် ဖော်ပြပါ:",
     goFb:"🌐 Facebook အုပ်စုသို့သွား", close:"ပိတ်", services:"ဝန်ဆောင်မှုများ", countries:"နိုင်ငံများ", contact:"ဆက်သွယ်ရန်", privacy:"မူဝါဒ", terms:"အသုံးပြုသည့်စည်းမျဉ်း", about:"အကြောင်း",
     signIn:"သင်၏အကောင့်သို့ ဝင်ရောက်ပါ", continueWithFb:"Facebook ဖြင့် ဆက်လက်မည်", or:"သို့မဟုတ်", phone:"ဖုန်းနံပါတ် (WhatsApp / Viber)", sendOTP:"OTP ကုဒ် ပို့မည်", verifyCode:"အတည်ပြုမည်", changePhone:"ဖုန်းနံပါတ် ပြောင်းမည်", emailAddr:"အီးမေးလ် လိပ်စာ", password:"စကားဝှက်", signingIn:"ဝင်နေသည်…", sending:"ပို့နေသည်…", verifying:"စစ်ဆေးနေသည်…", connecting:"ချိတ်ဆက်နေသည်…",
     iAm:"သင်သည် ဘာလုပ်သနည်း?", worker:"👷 အလုပ်သမား", business:"🏪 လုပ်ငန်းရှင်", hundiAgent:"💸 ဟွန်ဒီ ကိုယ်စားလှယ်", other:"🌏 အခြား", country:"နိုင်ငံ", registerNow:"မှတ်ပုံတင်မည်", noSpam:"သင့်အချက်အလက်ကို ကျွန်ုပ်တို့ မျှဝေမည်မဟုတ်ပါ",
-    registered:"မှတ်ပုံတင်ပြီးပါပြီ!", thankyou:"မြန်မာ ကွန်နက်တွင် ပါဝင်ကြောင်း ကျေးဇူးတင်ပါသည်။", bySigningIn:"ဝင်ရောက်ခြင်းဖြင့် ကျွန်ုပ်တို့၏ အသုံးပြုသည့်စည်းမျဉ်းများကို သဘောတူသည်",
+    registered:"မှတ်ပုံတင်ပြီးပါပြီ!", thankyou:"မြန်နက်တွင် ပါဝင်ကြောင်း ကျေးဇူးတင်ပါသည်။", bySigningIn:"ဝင်ရောက်ခြင်းဖြင့် ကျွန်ုပ်တို့၏ အသုံးပြုသည့်စည်းမျဉ်းများကို သဘောတူသည်",
   }
 };
 
@@ -426,8 +426,8 @@ export default function App(){
         <div style={{maxWidth:1000,margin:"0 auto"}}>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:28,marginBottom:28}}>
             <div>
-              <div style={{fontWeight:900,fontSize:18,color:"#fff",marginBottom:6}}>🇲🇲 Myanmar Connect</div>
-              <div style={{fontSize:12,color:"rgba(255,255,255,0.45)",lineHeight:1.8,marginBottom:10}}>မြန်မာ ကွန်နက်</div>
+              <div style={{fontWeight:900,fontSize:18,color:"#fff",marginBottom:6}}>🇲🇲 MyanNet</div>
+              <div style={{fontSize:12,color:"rgba(255,255,255,0.45)",lineHeight:1.8,marginBottom:10}}>မြန်နက် · All-in-one services, anywhere, for the people of Myanmar</div>
               <div style={{fontSize:12,color:"rgba(255,255,255,0.5)",lineHeight:1.8}}>{lang==="mm"?"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ့လူ့အဖွဲ့အစည်းအတွက် ယုံကြည်ရသောပလက်ဖောင်း":"The trusted platform for Burmese/Myanmar communities worldwide."}</div>
             </div>
             <div>
@@ -455,7 +455,7 @@ export default function App(){
             </div>
           </div>
           <div style={{borderTop:"1px solid rgba(255,255,255,0.08)",paddingTop:16,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}}>
-            <div style={{fontSize:11,color:"rgba(255,255,255,0.3)"}}>© 2025 Myanmar Connect · www.myannet.app · All rights reserved</div>
+            <div style={{fontSize:11,color:"rgba(255,255,255,0.3)"}}>© 2026 MyanNet · www.myannet.app · All rights reserved</div>
             <div style={{display:"flex",gap:14}}>
               {[t.privacy,t.terms,t.about].map(l=><span key={l} style={{fontSize:11,color:"rgba(255,255,255,0.3)",cursor:"pointer"}}>{l}</span>)}
             </div>
@@ -469,7 +469,7 @@ export default function App(){
           <div style={{background:"#fff",borderRadius:22,padding:28,width:"100%",maxWidth:390,boxShadow:"0 24px 64px rgba(0,0,0,0.3)"}}>
             <div style={{textAlign:"center",marginBottom:20}}>
               <div style={{fontSize:34,marginBottom:6}}>🇲🇲</div>
-              <div style={{fontWeight:900,fontSize:19,color:"#1a1a1a"}}>Myanmar Connect</div>
+              <div style={{fontWeight:900,fontSize:19,color:"#1a1a1a"}}>MyanNet</div>
               <div style={{fontSize:13,color:"#888",marginTop:3}}>{t.signIn}</div>
             </div>
             <button onClick={handleFbLogin} disabled={loginLoading} style={{width:"100%",background:"#1877f2",color:"#fff",border:"none",borderRadius:12,padding:"13px",fontWeight:800,cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center",gap:10,marginBottom:14,boxShadow:"0 4px 14px rgba(24,119,242,0.3)"}}>

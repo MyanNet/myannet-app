@@ -5,22 +5,22 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.myannet.app"),
-  title: "Myanmar Connect | မြန်မာ ကွန်နက် — Work, Hundi, Rent, Cargo & Trade",
+  title: "MyanNet | မြန်နက် — All-in-one services, anywhere, for the people of Myanmar",
   description,
   keywords: [
-    "Myanmar Connect", "myannet.app", "Burmese community", "sushi jobs",
+    "MyanNet", "မြန်နက်", "myannet.app", "Burmese community", "sushi jobs",
     "hundi", "Burma migrant workers", "Myanmar remittance",
   ],
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%238B0000'/><text y='72' x='50' text-anchor='middle' font-size='60'>🇲🇲</text></svg>",
   },
   openGraph: {
-    title: "Myanmar Connect | မြန်မာ ကွန်နက်",
+    title: "MyanNet | မြန်နက်",
     description: "Work · Hundi · Rent · Cargo · Trade",
     url: "https://www.myannet.app",
     type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Myanmar Connect | မြန်မာ ကွန်နက်" },
+  twitter: { card: "summary_large_image", title: "MyanNet | မြန်နက်" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
