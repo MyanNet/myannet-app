@@ -13,6 +13,7 @@ export const S = {
     emailPh: "you@example.com", sendLink: "Send sign-in link", back: "Back", or: "or",
     tiktokPending: "TikTok sign-in opens after TikTok approves MyanNet. Use another option for now.",
     telegramPending: "Telegram sign-in opens once the MyanNet bot is set up. Use another option for now.",
+    comingSoon: "This sign-in option is coming soon during the beta. Please use another option.",
     agree: "By signing in you agree to our", terms: "Terms", and: "and", privacy: "Privacy Policy",
     whatShare: "What do you want to share?", whatShareSub: "Posting is free. Your contact buttons appear on your post.",
     types: {
@@ -49,6 +50,7 @@ export const S = {
     emailPh: "you@example.com", sendLink: "ဝင်ရန်လင့်ခ် ပို့ရန်", back: "နောက်သို့", or: "သို့မဟုတ်",
     tiktokPending: "TikTok မှ အတည်ပြုပြီးနောက် TikTok ဖြင့် ဝင်နိုင်ပါမည်။ ယခု အခြားနည်းလမ်းကို သုံးပါ။",
     telegramPending: "မြန်နက် ဘော့ ပြင်ဆင်ပြီးနောက် Telegram ဖြင့် ဝင်နိုင်ပါမည်။",
+    comingSoon: "ဤဝင်ရောက်နည်းကို ဘီတာကာလအတွင်း မကြာမီ ဖွင့်ပေးပါမည်။ အခြားနည်းကို သုံးပါ။",
     agree: "ဝင်ရောက်ခြင်းဖြင့် ကျွန်ုပ်တို့၏", terms: "စည်းမျဉ်း", and: "နှင့်", privacy: "ကိုယ်ရေးလုံခြုံမှုမူဝါဒ",
     whatShare: "ဘာကို မျှဝေချင်ပါသလဲ?", whatShareSub: "အခမဲ့ တင်နိုင်ပါသည်။ သင့်ဆက်သွယ်ရန် ခလုတ်များ ပို့စ်တွင် ပေါ်ပါမည်။",
     types: {
