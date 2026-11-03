@@ -1,6 +1,15 @@
 // @ts-nocheck
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { AppCtx } from "@/lib/ctx";
+import { LIVE } from "@/lib/supabase";
+import { S } from "@/lib/i18n";
+import * as store from "@/lib/store";
+import Login from "@/components/Login";
+import PostFlow from "@/components/PostFlow";
+import { ReviewBar } from "@/components/Reviews";
+import { CommunityListings, MyListings } from "@/components/Listings";
+import { THEME } from "@/components/ui";
 
 const T = {
   en: {
@@ -8,9 +17,9 @@ const T = {
     tagline:"The all-in-one platform for Burmese/Myanmar communities worldwide — find work, send money home, rent a room, ship goods, and buy & sell within a trusted community.",
     vision:"Connecting Myanmar Communities working/living abroad to their loved ones living locally, and vice versa.",
     visionTitle:"🌏 Our Vision", whoTitle:"Who MyanNet Serves",
-    pillars:["Help Wanted","Hundi / Send Money","Rent","Cargo / Hand Carry","2nd Hand Goods"],
-    pillarIcons:["💼","💸","🏠","✈️","🛍️"],
-    pillarDesc:["Find work or post openings across all countries","Send money home through trusted community agents","Find or offer housing in the Burmese community","Hand-carry goods between countries — trusted travelers","Buy & sell within the trusted Burmese community"],
+    pillars:["Help Wanted","Hundi / Send Money","Rent","Cargo / Hand Carry","2nd Hand Goods","Businesses"],
+    pillarIcons:["💼","💸","🏠","✈️","🛍️","🏪"],
+    pillarDesc:["Find work or post openings across all countries","Send money home through trusted community agents","Find or offer housing in the Burmese community","Hand-carry goods between countries — trusted travelers","Buy & sell within the trusted Burmese community","Find Burmese-owned businesses, shops & services"],
     who:[{e:"🍣",t:"Burmese Sushi Workers",d:"In US restaurants, grocery stores & catering"},{e:"🏭",t:"Factory & Construction Workers",d:"In Thailand, Malaysia, Korea & Japan"},{e:"🏪",t:"Small Business Owners",d:"Restaurants, shops & services in diaspora"},{e:"✈️",t:"New Arrivals",d:"Need housing, work & community fast"},{e:"💰",t:"Families Back Home",d:"Receiving remittances from abroad"},{e:"🌏",t:"Cross-Border Travelers",d:"Hand-carrying goods between countries"}],
     findWork:"Find Work", hireWorkers:"Hire Workers", allPosts:"All", jobsAvail:"🏪 Jobs Available", seekWork:"👷 Seeking Work",
     allRooms:"All", roomsAvail:"🏠 Available", seekRoom:"🔍 Seeking",
@@ -36,9 +45,9 @@ const T = {
     tagline:"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ/ဗမာ လူ့အဖွဲ့အစည်းများအတွက် စုံလင်သောပလက်ဖောင်း — အလုပ်ရှာ၊ အိမ်သို့ငွေလွှဲ၊ အခန်းငှား၊ ကုန်ပို့နှင့် ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းနိုင်သည်။",
     vision:"နိုင်ငံခြားတွင် အလုပ်လုပ်/နေထိုင်နေသော မြန်မာများနှင့် ဒေသတွင်းရှိ ချစ်ခင်ရသူများကို ချိတ်ဆက်ပေးသည် — နှစ်ဦးနှစ်ဖက်စလုံးအတွက်။",
     visionTitle:"🌏 ကျွန်ုပ်တို့၏ မျှော်မှန်းချက်", whoTitle:"မြန်နက် မည်သူများအတွက်",
-    pillars:["အလုပ်အကိုင်","ဟွန်ဒီ / ငွေလွှဲ","အိမ်ငှား","ကုန်တင်ဆောင်","အသုံးချပစ္စည်း"],
-    pillarIcons:["💼","💸","🏠","✈️","🛍️"],
-    pillarDesc:["နိုင်ငံအားလုံးတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","ယုံကြည်ရသော ကိုယ်စားလှယ်များမှတစ်ဆင့် ငွေလွှဲပေးပို့ရန်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းရန်"],
+    pillars:["အလုပ်အကိုင်","ဟွန်ဒီ / ငွေလွှဲ","အိမ်ငှား","ကုန်တင်ဆောင်","အသုံးချပစ္စည်း","လုပ်ငန်းများ"],
+    pillarIcons:["💼","💸","🏠","✈️","🛍️","🏪"],
+    pillarDesc:["နိုင်ငံအားလုံးတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","ယုံကြည်ရသော ကိုယ်စားလှယ်များမှတစ်ဆင့် ငွေလွှဲပေးပို့ရန်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းရန်","မြန်မာလုပ်ငန်းများ၊ ဆိုင်များနှင့် ဝန်ဆောင်မှုများ ရှာဖွေရန်"],
     who:[{e:"🍣",t:"ဆူရှီ အလုပ်သမားများ",d:"အမေရိကန်ရှိ စားသောက်ဆိုင်နှင့် ကြယ်မှတ်ဆိုင်များတွင်"},{e:"🏭",t:"စက်ရုံနှင့် ဆောက်လုပ်ရေး",d:"ထိုင်း၊ မလေးရှား၊ ကိုရီးယား၊ ဂျပန်တွင်"},{e:"🏪",t:"လုပ်ငန်းရှင်များ",d:"ပြည်ပရှိ စားသောက်ဆိုင်၊ ဆိုင်ခန်းနှင့် ဝန်ဆောင်မှုများ"},{e:"✈️",t:"အသစ်ရောက်ရှိသူများ",d:"အိမ်ရာ၊ အလုပ်နှင့် အသိုင်းအဝိုင်း လိုအပ်သူများ"},{e:"💰",t:"မြန်မာပြည်ရှိ မိသားစု",d:"ပြည်ပမှ ငွေလွှဲလက်ခံသူများ"},{e:"🌏",t:"နိုင်ငံဖြတ်ကျော်ခရီးသည်",d:"နိုင်ငံများကြားတွင် ကုန်ပစ္စည်းဆောင်ဆောင်သူများ"}],
     findWork:"အလုပ်ရှာ", hireWorkers:"အလုပ်သမားခေါ်", allPosts:"အားလုံး", jobsAvail:"🏪 အလုပ်ရှိသည်", seekWork:"👷 အလုပ်ရှာနေသည်",
     allRooms:"အားလုံး", roomsAvail:"🏠 ငှားရမ်းရန်ရှိ", seekRoom:"🔍 အိမ်ရှာနေသည်",
@@ -102,8 +111,8 @@ const GOODS=[
   {id:8,title:"Sewing Machine — Singer",titleMM:"ဆင်ဂျာ ချုပ်စက်",cat:"🪡 Equipment",price:"RM 350",loc:"Penang 🇲🇾",seller:"Ma Win",img:"🧵",desc:"Works perfectly, moving sale.",descMM:"ကောင်းစွာအလုပ်လုပ်သည်"},
 ];
 
-const PILLARS=["jobs","hundi","rent","cargo","goods"];
-const COLORS={jobs:"#c0392b",hundi:"#7c3aed",rent:"#0891b2",cargo:"#d97706",goods:"#16a34a"};
+const PILLARS=["jobs","hundi","rent","cargo","goods","biz"];
+const COLORS={jobs:"#c0392b",hundi:"#7c3aed",rent:"#0891b2",cargo:"#d97706",goods:"#16a34a",biz:"#9d174d"};
 const avCol=a=>a==="Available Now"?"#16a34a":a==="Available This Week"?"#d97706":"#6366f1";
 const Tag=({bg="#f3f4f6",c="#374151",children})=><span style={{background:bg,color:c,borderRadius:20,padding:"3px 10px",fontSize:11,fontWeight:700,display:"inline-block",margin:"2px"}}>{children}</span>;
 const FbBtn=({label,style:s})=><button style={{width:"100%",background:"#1877f2",color:"#fff",border:"none",borderRadius:10,padding:"9px",fontWeight:700,cursor:"pointer",fontSize:13,marginTop:8,...s}}>{label}</button>;
@@ -119,17 +128,23 @@ export default function App(){
   const [goodsCat,setGoodsCat]=useState("All");
   const [profileOpen,setProfileOpen]=useState(false);
 
-  // Auth
+  // Auth (real Supabase sign-in once keys are set; demo sign-in until then)
   const [user,setUser]=useState(null);
   const [loginModal,setLoginModal]=useState(false);
-  const [loginTab,setLoginTab]=useState("facebook");
-  const [phone,setPhone]=useState("");
-  const [otp,setOtp]=useState("");
-  const [otpSent,setOtpSent]=useState(false);
-  const [loginEmail,setLoginEmail]=useState("");
-  const [loginPw,setLoginPw]=useState("");
-  const [loginLoading,setLoginLoading]=useState(false);
-  const [loginError,setLoginError]=useState("");
+  const [postType,setPostType]=useState(null); // null = closed, "" = choose type
+  const [mineOpen,setMineOpen]=useState(false);
+  const [version,setVersion]=useState(0);
+  const [emailCountry,setEmailCountry]=useState("🇺🇸 USA");
+  useEffect(()=>{
+    store.getUser().then(setUser);
+    const off=store.onAuthChange(u=>{setUser(u);if(u)setLoginModal(false);});
+    const q=new URLSearchParams(window.location.search);
+    if(q.get("login_error"))setLoginModal(true);
+    import("country-flag-emoji-polyfill").then(m=>m.polyfillCountryFlagEmojis()).catch(()=>{});
+    return off;
+  },[]);
+  const openPost=(type)=>{if(!user){setLoginModal(true);return;}setPostType(type||"");};
+  const ctx={user,lang,openLogin:()=>setLoginModal(true),openPost,refresh:()=>setVersion(v=>v+1),version};
 
   // Email capture
   const [emailModal,setEmailModal]=useState(false);
@@ -142,11 +157,8 @@ export default function App(){
   const col=COLORS[tab]||"#c0392b";
   const tx=(en,mm)=>lang==="mm"?mm:en;
 
-  const handleFbLogin=()=>{setLoginLoading(true);setLoginError("");setTimeout(()=>{setUser({name:"Ko Aung Kyaw",photo:"https://i.pravatar.cc/80?img=12",method:"facebook",location:"Houston, TX 🇺🇸",role:"Sushi Chef",joined:"July 2025"});setLoginLoading(false);setLoginModal(false);},1500);};
-  const handleSendOTP=()=>{if(phone.length<6){setLoginError("Please enter a valid number");return;}setLoginLoading(true);setTimeout(()=>{setOtpSent(true);setLoginLoading(false);},1200);};
-  const handleVerifyOTP=()=>{if(otp!=="1234"){setLoginError("Wrong code. Demo: use 1234");return;}setLoginLoading(true);setTimeout(()=>{setUser({name:"Phone User",photo:null,method:"phone",phone,location:"—",role:"Member",joined:"July 2025"});setLoginLoading(false);setLoginModal(false);setOtpSent(false);setOtp("");},1000);};
-  const handleEmailLogin=()=>{if(!loginEmail||!loginPw){setLoginError("Please fill both fields");return;}setLoginLoading(true);setTimeout(()=>{setUser({name:loginEmail.split("@")[0],photo:null,method:"email",location:"—",role:"Member",joined:"July 2025"});setLoginLoading(false);setLoginModal(false);},1000);};
-  const handleLogout=()=>{setUser(null);setProfileOpen(false);};
+  const handleLogout=()=>{store.signOut();setProfileOpen(false);};
+  const s3=S[lang];
 
   const pillarIdx=PILLARS.indexOf(tab);
   const FilterBtn=({val,label,active,color})=>(
@@ -157,60 +169,67 @@ export default function App(){
   );
 
   return(
-    <div style={{fontFamily:"'Segoe UI',sans-serif",minHeight:"100vh",background:"#f8f4f0"}}>
+    <AppCtx.Provider value={ctx}>
+    <div style={{fontFamily:"'Twemoji Country Flags','Segoe UI',system-ui,sans-serif",minHeight:"100vh",background:THEME.page,color:"#1f2a20"}}>
 
       {/* HEADER */}
-      <div style={{background:"linear-gradient(135deg,#7a0000,#c0392b)",padding:"0 14px",height:58,display:"flex",alignItems:"center",justifyContent:"space-between",boxShadow:"0 2px 10px rgba(0,0,0,0.25)",position:"sticky",top:0,zIndex:100}}>
-        <div onClick={()=>setTab("home")} style={{color:"#fff",fontWeight:900,fontSize:17,cursor:"pointer",display:"flex",alignItems:"center",gap:7}}>
+      <style>{`@media (max-width:760px){.mn-header{flex-wrap:wrap;height:auto!important;padding:8px 10px 4px!important;row-gap:6px}.mn-right{display:contents!important}.mn-pillars{order:3;width:100%;overflow-x:auto;justify-content:space-between}.mn-lang{margin-left:auto}}`}</style>
+      <div className="mn-header" style={{background:"#ffffff",borderBottom:"1px solid #d9e7da",padding:"0 14px",height:58,display:"flex",alignItems:"center",justifyContent:"space-between",boxShadow:"0 2px 8px rgba(0,0,0,0.05)",position:"sticky",top:0,zIndex:100}}>
+        <div onClick={()=>setTab("home")} style={{color:THEME.greenDark,fontWeight:900,fontSize:17,cursor:"pointer",display:"flex",alignItems:"center",gap:7}}>
           🇲🇲 <span>{t.appName}</span>
-          <span style={{fontSize:10,background:"rgba(255,255,255,0.2)",padding:"2px 7px",borderRadius:10}}>{t.beta}</span>
+          <span style={{fontSize:10,background:THEME.greenSoft,color:THEME.green,padding:"2px 7px",borderRadius:10}}>{t.beta}</span>
         </div>
-        <div style={{display:"flex",gap:3,alignItems:"center"}}>
-          <div style={{display:"flex",background:"rgba(255,255,255,0.15)",borderRadius:20,padding:2,marginRight:4}}>
-            {["en","mm"].map(l=><button key={l} onClick={()=>setLang(l)} style={{background:lang===l?"#fff":"transparent",color:lang===l?"#c0392b":"#fff",border:"none",borderRadius:18,padding:"4px 10px",fontWeight:800,cursor:"pointer",fontSize:12}}>{l==="en"?"EN":"မြန်မာ"}</button>)}
+        <div className="mn-right" style={{display:"flex",gap:3,alignItems:"center"}}>
+          <div className="mn-lang" style={{display:"flex",background:"#eef4ee",borderRadius:20,padding:2,marginRight:4}}>
+            {["en","mm"].map(l=><button key={l} onClick={()=>setLang(l)} style={{background:lang===l?THEME.green:"transparent",color:lang===l?"#fff":THEME.green,border:"none",borderRadius:18,padding:"4px 10px",fontWeight:800,cursor:"pointer",fontSize:12}}>{l==="en"?"EN":"မြန်မာ"}</button>)}
           </div>
+          <div className="mn-pillars" style={{display:"flex",gap:3}}>
           {PILLARS.map((p,i)=>(
-            <button key={p} onClick={()=>{setTab(p);setFilter("all");}} style={{background:tab===p?"rgba(255,255,255,0.25)":"transparent",color:"#fff",border:"none",borderRadius:14,padding:"4px 8px",cursor:"pointer",fontWeight:700,fontSize:11,display:"flex",flexDirection:"column",alignItems:"center",gap:1}}>
+            <button key={p} onClick={()=>{setTab(p);setFilter("all");}} style={{background:tab===p?THEME.greenSoft:"transparent",color:THEME.greenText,border:"none",borderRadius:14,padding:"4px 8px",cursor:"pointer",fontWeight:700,fontSize:11,display:"flex",flexDirection:"column",alignItems:"center",gap:1}}>
               <span style={{fontSize:15}}>{t.pillarIcons[i]}</span>
               <span style={{fontSize:8,opacity:.85}}>{t.pillars[i].split("/")[0].trim()}</span>
             </button>
           ))}
+          </div>
           {user?(
             <div style={{position:"relative"}}>
-              <div onClick={()=>setProfileOpen(o=>!o)} style={{display:"flex",alignItems:"center",gap:6,background:"rgba(255,255,255,0.18)",borderRadius:22,padding:"4px 10px 4px 4px",cursor:"pointer"}}>
-                {user.photo?<img src={user.photo} style={{width:26,height:26,borderRadius:"50%",border:"2px solid #fff"}} alt="av"/>:<div style={{width:26,height:26,borderRadius:"50%",background:"#fff",color:"#c0392b",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,fontSize:12}}>{user.name[0]}</div>}
-                <span style={{color:"#fff",fontSize:11,fontWeight:700,maxWidth:70,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{user.name}</span>
-                <span style={{color:"rgba(255,255,255,0.7)",fontSize:9}}>▾</span>
+              <div onClick={()=>setProfileOpen(o=>!o)} style={{display:"flex",alignItems:"center",gap:6,background:"#eef4ee",borderRadius:22,padding:"4px 10px 4px 4px",cursor:"pointer"}}>
+                {user.photo?<img src={user.photo} style={{width:26,height:26,borderRadius:"50%",border:"2px solid #fff"}} alt="av"/>:<div style={{width:26,height:26,borderRadius:"50%",background:THEME.green,color:"#fff",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:900,fontSize:12}}>{(user.name||"?")[0]}</div>}
+                <span style={{color:THEME.greenText,fontSize:11,fontWeight:700,maxWidth:70,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{user.name}</span>
+                <span style={{color:"#889",fontSize:9}}>▾</span>
               </div>
               {profileOpen&&(
                 <div style={{position:"absolute",right:0,top:42,background:"#fff",borderRadius:14,boxShadow:"0 8px 30px rgba(0,0,0,0.18)",minWidth:190,zIndex:500,padding:8}}>
                   <div style={{padding:"10px 14px",borderBottom:"1px solid #f0f0f0",marginBottom:6}}>
                     <div style={{fontWeight:800,fontSize:13}}>{user.name}</div>
-                    <div style={{fontSize:11,color:"#888",marginTop:2}}>📍 {user.location} · {user.role}</div>
+                    <div style={{fontSize:11,color:"#888",marginTop:2}}>{user.method}</div>
                   </div>
-                  {[["👤",t.myProfile],["📋",t.myListings],["⚙️",t.settings]].map(([ic,lb])=>(
-                    <div key={lb} style={{padding:"9px 14px",fontSize:13,color:"#333",cursor:"pointer",borderRadius:8,display:"flex",gap:8}}><span>{ic}</span><span>{lb}</span></div>
+                  {[["➕",s3.postFree.replace("+ ",""),()=>{setProfileOpen(false);openPost();}],["📋",s3.myListings,()=>{setProfileOpen(false);setMineOpen(true);}],...(user.is_admin?[["🛡️",s3.admin,()=>{window.location.href="/admin";}]]:[])].map(([ic,lb,fn])=>(
+                    <div key={lb} onClick={fn} style={{padding:"9px 14px",fontSize:13,color:"#333",cursor:"pointer",borderRadius:8,display:"flex",gap:8}}><span>{ic}</span><span>{lb}</span></div>
                   ))}
                   <div onClick={handleLogout} style={{padding:"9px 14px",fontSize:13,color:"#c0392b",cursor:"pointer",borderRadius:8,display:"flex",gap:8,borderTop:"1px solid #f0f0f0",marginTop:4}}><span>🚪</span><span>{t.logOut}</span></div>
                 </div>
               )}
             </div>
           ):(
-            <button onClick={()=>setLoginModal(true)} style={{background:"#fff",color:"#c0392b",border:"none",borderRadius:20,padding:"6px 14px",fontWeight:800,cursor:"pointer",fontSize:12,marginLeft:4}}>{t.logIn}</button>
+            <button onClick={()=>setLoginModal(true)} style={{background:THEME.red,color:"#fff",border:"none",borderRadius:20,padding:"6px 14px",fontWeight:800,cursor:"pointer",fontSize:12,marginLeft:4}}>{t.logIn}</button>
           )}
         </div>
       </div>
 
+      {!LIVE&&<div style={{background:"#fff8e1",color:"#7a5b00",fontSize:11,textAlign:"center",padding:"5px 10px",borderBottom:"1px solid #f3d27a"}}>🧪 {s3.demoBanner}</div>}
+
       {/* HOME */}
       {tab==="home"&&<>
-        <div style={{background:"linear-gradient(160deg,#7a0000,#c0392b,#e74c3c)",color:"#fff",padding:"44px 20px 56px",textAlign:"center"}}>
+        <div style={{background:"linear-gradient(160deg,#e3f3e4 0%,#f1f8e9 55%,#fdf0ec 100%)",color:THEME.greenText,padding:"44px 20px 56px",textAlign:"center"}}>
           <div style={{fontSize:46,marginBottom:8}}>🇲🇲</div>
-          <h1 style={{margin:"0 0 4px",fontSize:30,fontWeight:900}}>{t.appName}</h1>
+          <h1 style={{margin:"0 0 4px",fontSize:30,fontWeight:900,color:THEME.greenDark}}>{t.appName}</h1>
           <div style={{fontSize:16,opacity:.8,marginBottom:14}}>{t.appSub}</div>
-          <div style={{fontSize:14,opacity:.9,maxWidth:560,margin:"0 auto 24px",lineHeight:1.8}}>{t.tagline}</div>
+          <div style={{fontSize:14,opacity:.9,maxWidth:560,margin:"0 auto 20px",lineHeight:1.8}}>{t.tagline}</div>
+          <button onClick={()=>openPost()} style={{background:THEME.red,color:"#fff",border:"none",borderRadius:26,padding:"13px 28px",fontWeight:800,fontSize:15,cursor:"pointer",marginBottom:22,boxShadow:"0 6px 18px rgba(192,57,43,0.25)"}}>{s3.postYourBiz}</button>
           <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
             {["🇺🇸 USA","🇹🇭 Thailand","🇲🇾 Malaysia","🇯🇵 Japan","🇸🇬 Singapore","🇲🇲 Myanmar"].map(c=>(
-              <span key={c} style={{background:"rgba(255,255,255,0.15)",color:"#fff",borderRadius:20,padding:"5px 12px",fontSize:12,fontWeight:600}}>{c}</span>
+              <span key={c} style={{background:"#fff",color:THEME.greenText,border:"1px solid #d9e7da",borderRadius:20,padding:"5px 12px",fontSize:12,fontWeight:600}}>{c}</span>
             ))}
           </div>
         </div>
@@ -226,17 +245,17 @@ export default function App(){
             ))}
           </div>
           <div style={{background:"#fff",borderRadius:18,padding:24,marginBottom:14,boxShadow:"0 4px 16px rgba(0,0,0,0.06)"}}>
-            <div style={{fontWeight:900,fontSize:17,color:"#8B0000",marginBottom:14,textAlign:"center"}}>{t.whoTitle}</div>
+            <div style={{fontWeight:900,fontSize:17,color:THEME.greenDark,marginBottom:14,textAlign:"center"}}>{t.whoTitle}</div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:12}}>
               {t.who.map(x=>(
-                <div key={x.t} style={{background:"#fdf6f0",borderRadius:12,padding:14,display:"flex",gap:10,alignItems:"flex-start"}}>
+                <div key={x.t} style={{background:THEME.greenSoft,borderRadius:12,padding:14,display:"flex",gap:10,alignItems:"flex-start"}}>
                   <div style={{fontSize:24}}>{x.e}</div>
                   <div><div style={{fontWeight:700,fontSize:13,marginBottom:2}}>{x.t}</div><div style={{fontSize:11,color:"#666",lineHeight:1.5}}>{x.d}</div></div>
                 </div>
               ))}
             </div>
           </div>
-          <div style={{background:"linear-gradient(135deg,#7a0000,#c0392b)",borderRadius:18,padding:26,color:"#fff",textAlign:"center"}}>
+          <div style={{background:THEME.redSoft,borderRadius:18,padding:26,color:"#7a1f14",textAlign:"center",border:"1px solid #f6d3cd"}}>
             <div style={{fontWeight:900,fontSize:18,marginBottom:8}}>{t.visionTitle}</div>
             <div style={{fontSize:14,opacity:.95,lineHeight:1.9,maxWidth:560,margin:"0 auto"}}>{t.vision}</div>
             <div style={{marginTop:14,fontSize:20,letterSpacing:4}}>💼 💸 🏠 ✈️ 🛍️</div>
@@ -244,10 +263,10 @@ export default function App(){
         </div>
 
         {/* EMAIL BANNER */}
-        <div style={{background:"linear-gradient(135deg,#1a1a2e,#16213e)",padding:"32px 20px",textAlign:"center"}}>
+        <div style={{background:"#fff8e1",padding:"32px 20px",textAlign:"center",borderTop:"1px solid #f3e2b0"}}>
           <div style={{fontSize:28,marginBottom:8}}>📬</div>
-          <div style={{color:"#fff",fontWeight:900,fontSize:20,marginBottom:6}}>{t.beFirst}</div>
-          <div style={{color:"rgba(255,255,255,0.75)",fontSize:14,marginBottom:20,lineHeight:1.7}}>{t.registerDesc}</div>
+          <div style={{color:"#3e2a00",fontWeight:900,fontSize:20,marginBottom:6}}>{t.beFirst}</div>
+          <div style={{color:"#6b5a2e",fontSize:14,marginBottom:20,lineHeight:1.7}}>{t.registerDesc}</div>
           <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap"}}>
             <button onClick={()=>setEmailModal(true)} style={{background:"#c0392b",color:"#fff",border:"none",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer"}}>✅ {t.registerInterest}</button>
             <a href="https://facebook.com/groups/MyanmarConnect" target="_blank" rel="noreferrer" style={{background:"#1877f2",color:"#fff",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer",textDecoration:"none",display:"inline-flex",alignItems:"center",gap:6}}>👥 {t.joinFb}</a>
@@ -262,8 +281,8 @@ export default function App(){
             <div style={{fontWeight:900,fontSize:20}}>{t.pillarIcons[pillarIdx]} {t.pillars[pillarIdx]}</div>
             <div style={{opacity:.85,fontSize:13,marginTop:2}}>{t.pillarDesc[pillarIdx]}</div>
           </div>
-          <button onClick={()=>setModal(tab)} style={{background:"rgba(255,255,255,0.22)",color:"#fff",border:"2px solid rgba(255,255,255,0.45)",borderRadius:22,padding:"9px 20px",fontWeight:800,cursor:"pointer",fontSize:13}}>
-            + {tab==="jobs"?t.postJob:tab==="hundi"?t.postAgent:tab==="rent"?t.postRental:tab==="cargo"?t.postCarry:t.postItem}
+          <button onClick={()=>openPost(tab)} style={{background:"rgba(255,255,255,0.22)",color:"#fff",border:"2px solid rgba(255,255,255,0.45)",borderRadius:22,padding:"9px 20px",fontWeight:800,cursor:"pointer",fontSize:13}}>
+            + {tab==="jobs"?t.postJob:tab==="hundi"?t.postAgent:tab==="rent"?t.postRental:tab==="cargo"?t.postCarry:tab==="biz"?s3.postFree.replace("+ ",""):t.postItem}
           </button>
         </div>
       )}
@@ -275,6 +294,7 @@ export default function App(){
           <FilterBtn val="offer" label={t.jobsAvail} active={filter==="offer"} color="#c0392b"/>
           <FilterBtn val="seek" label={t.seekWork} active={filter==="seek"} color="#c0392b"/>
         </div>
+        <CommunityListings pillar="jobs" color={COLORS.jobs}/>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(285px,1fr))",gap:14}}>
           {JOBS.filter(j=>filter==="all"||j.type===filter).map(j=>(
             <Card key={j.id} topColor={j.type==="offer"?"#c0392b":"#16a34a"}>
@@ -289,6 +309,7 @@ export default function App(){
               <div style={{fontSize:12,color:"#555",marginBottom:8,lineHeight:1.5}}>{tx(j.desc,j.descMM)}</div>
               {j.skills&&<div style={{display:"flex",flexWrap:"wrap",gap:3,marginBottom:8}}>{j.skills.map(s=><Tag key={s}>{s}</Tag>)}</div>}
               <FbBtn label={t.contactFb}/>
+              <ReviewBar id={"s-jobs-"+j.id} title={tx(j.title,j.titleMM)}/>
             </Card>
           ))}
         </div>
@@ -322,6 +343,7 @@ export default function App(){
             )}
           </div>
         </div>
+        <CommunityListings pillar="hundi" color={COLORS.hundi}/>
         <div style={{fontWeight:800,fontSize:15,marginBottom:12}}>{t.communityAgents}</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(270px,1fr))",gap:14}}>
           {HUNDI.map(h=>(
@@ -342,6 +364,7 @@ export default function App(){
               <div style={{fontSize:12,color:"#555",marginBottom:6,lineHeight:1.5}}>{tx(h.desc,h.descMM)}</div>
               <div style={{fontSize:11,color:"#888",marginBottom:8}}>⭐ {h.reviews} {t.reviews} · {h.phone}</div>
               <ViberBtn label={t.contactViber}/>
+              <ReviewBar id={"s-hundi-"+h.id} title={h.agent}/>
             </Card>
           ))}
         </div>
@@ -354,6 +377,7 @@ export default function App(){
           <FilterBtn val="offer" label={t.roomsAvail} active={filter==="offer"} color="#0891b2"/>
           <FilterBtn val="seek" label={t.seekRoom} active={filter==="seek"} color="#0891b2"/>
         </div>
+        <CommunityListings pillar="rent" color={COLORS.rent}/>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(285px,1fr))",gap:14}}>
           {RENTALS.filter(r=>filter==="all"||r.type===filter).map(r=>(
             <Card key={r.id} topColor={r.type==="offer"?"#0891b2":"#d97706"}>
@@ -368,6 +392,7 @@ export default function App(){
               {r.rooms&&<div style={{fontSize:12,color:"#555",marginBottom:4}}>🛏 {r.rooms}</div>}
               <div style={{fontSize:12,color:"#555",marginBottom:8,lineHeight:1.5}}>{tx(r.desc,r.descMM)}</div>
               <FbBtn label={t.contactFb}/>
+              <ReviewBar id={"s-rent-"+r.id} title={tx(r.title,r.titleMM)}/>
             </Card>
           ))}
         </div>
@@ -381,6 +406,7 @@ export default function App(){
           <FilterBtn val="carry" label={t.canCarry} active={filter==="carry"} color="#d97706"/>
           <FilterBtn val="need" label={t.needCarry} active={filter==="need"} color="#d97706"/>
         </div>
+        <CommunityListings pillar="cargo" color={COLORS.cargo}/>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(285px,1fr))",gap:14}}>
           {CARGO.filter(c=>filter==="all"||c.type===filter).map(c=>(
             <Card key={c.id} topColor={c.type==="carry"?"#d97706":"#c0392b"}>
@@ -392,6 +418,7 @@ export default function App(){
               {c.items&&<div style={{color:"#c0392b",fontWeight:600,fontSize:12,marginBottom:4}}>🎁 {c.items}</div>}
               <div style={{fontSize:12,color:"#555",marginBottom:8,lineHeight:1.5}}>{tx(c.desc,c.descMM)}</div>
               <ViberBtn label={t.contactViber}/>
+              <ReviewBar id={"s-cargo-"+c.id} title={c.name}/>
             </Card>
           ))}
         </div>
@@ -404,6 +431,7 @@ export default function App(){
             <button key={c} onClick={()=>setGoodsCat(c)} style={{padding:"7px 14px",borderRadius:20,border:`2px solid ${goodsCat===c?"#16a34a":"#ddd"}`,background:goodsCat===c?"#16a34a":"#fff",color:goodsCat===c?"#fff":"#555",fontWeight:700,cursor:"pointer",fontSize:12}}>{c}</button>
           ))}
         </div>
+        <CommunityListings pillar="goods" color={COLORS.goods}/>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:14}}>
           {GOODS.filter(g=>goodsCat==="All"||g.cat===goodsCat).map(g=>(
             <div key={g.id} style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 4px 14px rgba(0,0,0,0.07)"}}>
@@ -416,9 +444,15 @@ export default function App(){
               <div style={{fontSize:11,color:"#555",margin:"6px 0 3px",lineHeight:1.5}}>{tx(g.desc,g.descMM)}</div>
               <div style={{fontSize:10,color:"#aaa",marginBottom:8}}>📍 {g.loc} · 👤 {g.seller}</div>
               <FbBtn label={t.msgSeller}/>
+              <ReviewBar id={"s-goods-"+g.id} title={tx(g.title,g.titleMM)}/>
             </div>
           ))}
         </div>
+      </div>}
+
+      {/* BUSINESSES */}
+      {tab==="biz"&&<div style={{maxWidth:1000,margin:"0 auto",padding:"18px 16px"}}>
+        <CommunityListings pillar="biz" color={COLORS.biz}/>
       </div>}
 
       {/* FOOTER */}
@@ -457,64 +491,14 @@ export default function App(){
           <div style={{borderTop:"1px solid rgba(255,255,255,0.08)",paddingTop:16,display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}}>
             <div style={{fontSize:11,color:"rgba(255,255,255,0.3)"}}>© 2026 MyanNet · www.myannet.app · All rights reserved</div>
             <div style={{display:"flex",gap:14}}>
-              {[t.privacy,t.terms,t.about].map(l=><span key={l} style={{fontSize:11,color:"rgba(255,255,255,0.3)",cursor:"pointer"}}>{l}</span>)}
+              {[[t.privacy,"/privacy"],[t.terms,"/terms"]].map(([l,hr])=><a key={l} href={hr} style={{fontSize:11,color:"rgba(255,255,255,0.45)",textDecoration:"none"}}>{l}</a>)}
             </div>
           </div>
         </div>
       </footer>
 
-      {/* LOGIN MODAL */}
-      {loginModal&&(
-        <div onClick={e=>e.target===e.currentTarget&&(setLoginModal(false),setLoginError(""),setOtpSent(false))} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.6)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:400}}>
-          <div style={{background:"#fff",borderRadius:22,padding:28,width:"100%",maxWidth:390,boxShadow:"0 24px 64px rgba(0,0,0,0.3)"}}>
-            <div style={{textAlign:"center",marginBottom:20}}>
-              <div style={{fontSize:34,marginBottom:6}}>🇲🇲</div>
-              <div style={{fontWeight:900,fontSize:19,color:"#1a1a1a"}}>MyanNet</div>
-              <div style={{fontSize:13,color:"#888",marginTop:3}}>{t.signIn}</div>
-            </div>
-            <button onClick={handleFbLogin} disabled={loginLoading} style={{width:"100%",background:"#1877f2",color:"#fff",border:"none",borderRadius:12,padding:"13px",fontWeight:800,cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center",gap:10,marginBottom:14,boxShadow:"0 4px 14px rgba(24,119,242,0.3)"}}>
-              <span style={{fontSize:18,fontWeight:900}}>f</span>
-              {loginLoading&&loginTab==="facebook"?t.connecting:t.continueWithFb}
-            </button>
-            <div style={{display:"flex",alignItems:"center",gap:10,margin:"0 0 14px"}}>
-              <div style={{flex:1,height:1,background:"#e5e5e5"}}/><span style={{fontSize:12,color:"#aaa"}}>{t.or}</span><div style={{flex:1,height:1,background:"#e5e5e5"}}/>
-            </div>
-            <div style={{display:"flex",gap:6,marginBottom:16}}>
-              {[["phone","📱 "+t.phone.split(" ")[0]],["email","✉️ Email"]].map(([id,lb])=>(
-                <button key={id} onClick={()=>{setLoginTab(id);setLoginError("");setOtpSent(false);}} style={{flex:1,padding:"9px",border:`2px solid ${loginTab===id?"#c0392b":"#ddd"}`,borderRadius:10,background:loginTab===id?"#fde8e8":"#fff",color:loginTab===id?"#c0392b":"#666",fontWeight:700,cursor:"pointer",fontSize:12}}>{lb}</button>
-              ))}
-            </div>
-            {loginTab==="phone"&&(!otpSent?(
-              <>
-                <div style={{fontSize:11,fontWeight:700,color:"#555",marginBottom:4}}>{t.phone}</div>
-                <div style={{display:"flex",gap:8,marginBottom:12}}>
-                  <select style={{padding:"10px 8px",borderRadius:10,border:"1px solid #ddd",fontSize:12,background:"#fff"}}>
-                    {["+1 🇺🇸","+66 🇹🇭","+60 🇲🇾","+81 🇯🇵","+65 🇸🇬","+95 🇲🇲"].map(c=><option key={c}>{c}</option>)}
-                  </select>
-                  <input value={phone} onChange={e=>setPhone(e.target.value)} placeholder="812-345-6789" style={{flex:1,padding:"10px 12px",borderRadius:10,border:"1px solid #ddd",fontSize:14}}/>
-                </div>
-                {loginError&&<div style={{color:"#c0392b",fontSize:12,marginBottom:8}}>{loginError}</div>}
-                <button onClick={handleSendOTP} disabled={loginLoading} style={{width:"100%",background:"#c0392b",color:"#fff",border:"none",borderRadius:12,padding:"12px",fontWeight:800,cursor:"pointer",fontSize:14}}>{loginLoading?t.sending:t.sendOTP}</button>
-              </>
-            ):(
-              <>
-                <div style={{background:"#f0fdf4",borderRadius:10,padding:12,marginBottom:12,fontSize:12,color:"#16a34a",textAlign:"center"}}>✅ Code sent to {phone} <br/><span style={{fontSize:10,color:"#888"}}>(Demo: enter 1234)</span></div>
-                <input value={otp} onChange={e=>setOtp(e.target.value)} placeholder="- - - -" maxLength={4} style={{width:"100%",padding:"13px",borderRadius:10,border:"1px solid #ddd",fontSize:24,textAlign:"center",letterSpacing:10,marginBottom:10,boxSizing:"border-box"}}/>
-                {loginError&&<div style={{color:"#c0392b",fontSize:12,marginBottom:8}}>{loginError}</div>}
-                <button onClick={handleVerifyOTP} disabled={loginLoading} style={{width:"100%",background:"#c0392b",color:"#fff",border:"none",borderRadius:12,padding:"12px",fontWeight:800,cursor:"pointer",fontSize:14}}>{loginLoading?t.verifying:t.verifyCode}</button>
-                <div onClick={()=>setOtpSent(false)} style={{textAlign:"center",marginTop:10,fontSize:12,color:"#888",cursor:"pointer"}}>{t.changePhone}</div>
-              </>
-            ))}
-            {loginTab==="email"&&<>
-              <input value={loginEmail} onChange={e=>setLoginEmail(e.target.value)} placeholder={t.emailAddr} type="email" style={{width:"100%",padding:"11px 12px",borderRadius:10,border:"1px solid #ddd",fontSize:14,marginBottom:9,boxSizing:"border-box"}}/>
-              <input value={loginPw} onChange={e=>setLoginPw(e.target.value)} placeholder={t.password} type="password" style={{width:"100%",padding:"11px 12px",borderRadius:10,border:"1px solid #ddd",fontSize:14,marginBottom:10,boxSizing:"border-box"}}/>
-              {loginError&&<div style={{color:"#c0392b",fontSize:12,marginBottom:8}}>{loginError}</div>}
-              <button onClick={handleEmailLogin} disabled={loginLoading} style={{width:"100%",background:"#c0392b",color:"#fff",border:"none",borderRadius:12,padding:"12px",fontWeight:800,cursor:"pointer",fontSize:14}}>{loginLoading?t.signingIn:t.logIn}</button>
-            </>}
-            <div style={{fontSize:11,color:"#bbb",textAlign:"center",marginTop:14,lineHeight:1.7}}>{t.bySigningIn}</div>
-          </div>
-        </div>
-      )}
+      {/* LOGIN */}
+      {loginModal&&<Login onClose={()=>setLoginModal(false)}/>}
 
       {/* EMAIL CAPTURE MODAL */}
       {emailModal&&(
@@ -541,33 +525,20 @@ export default function App(){
                 ))}
               </div>
               <div style={{fontSize:11,fontWeight:700,color:"#555",marginBottom:4}}>{t.country}</div>
-              <select style={{width:"100%",padding:"10px 12px",borderRadius:10,border:"1px solid #ddd",fontSize:13,marginBottom:16,boxSizing:"border-box"}}>
+              <select value={emailCountry} onChange={e=>setEmailCountry(e.target.value)} style={{width:"100%",padding:"10px 12px",borderRadius:10,border:"1px solid #ddd",fontSize:13,marginBottom:16,boxSizing:"border-box"}}>
                 {["🇺🇸 USA","🇹🇭 Thailand","🇲🇾 Malaysia","🇯🇵 Japan","🇸🇬 Singapore","🇲🇲 Myanmar","Other"].map(c=><option key={c}>{c}</option>)}
               </select>
-              <button onClick={()=>{if(email)setEmailDone(true);}} style={{width:"100%",background:email?"#c0392b":"#ccc",color:"#fff",border:"none",borderRadius:12,padding:"13px",fontWeight:800,cursor:email?"pointer":"default",fontSize:14}}>✅ {t.registerNow}</button>
+              <button onClick={async()=>{if(!email.includes("@"))return;try{await store.registerInterest(email,emailRole,emailCountry);}catch{}setEmailDone(true);}} style={{width:"100%",background:email?"#c0392b":"#ccc",color:"#fff",border:"none",borderRadius:12,padding:"13px",fontWeight:800,cursor:email?"pointer":"default",fontSize:14}}>✅ {t.registerNow}</button>
               <div style={{fontSize:11,color:"#aaa",textAlign:"center",marginTop:10}}>{t.noSpam}</div>
             </>}
           </div>
         </div>
       )}
 
-      {/* POST MODAL */}
-      {modal&&(
-        <div onClick={e=>e.target===e.currentTarget&&setModal(null)} style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:200}}>
-          <div style={{background:"#fff",borderRadius:20,padding:28,width:"100%",maxWidth:420,boxShadow:"0 20px 60px rgba(0,0,0,0.3)"}}>
-            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18}}>
-              <div style={{fontWeight:900,fontSize:17,color:"#8B0000"}}>{t.pillarIcons[PILLARS.indexOf(modal)]} {t.pillars[PILLARS.indexOf(modal)]}</div>
-              <button onClick={()=>setModal(null)} style={{background:"none",border:"none",fontSize:20,cursor:"pointer",color:"#aaa"}}>✕</button>
-            </div>
-            <div style={{background:"#fde8e8",borderRadius:12,padding:16,marginBottom:16,fontSize:13,color:"#8B0000",textAlign:"center",lineHeight:1.8}}>
-              🚀 {t.comingSoon}<br/>
-              <a href="https://facebook.com/groups/MyanmarConnect" style={{color:"#1877f2",fontWeight:700,textDecoration:"none"}}>fb.com/groups/MyanmarConnect</a>
-            </div>
-            <button onClick={()=>setModal(null)} style={{width:"100%",background:"#1877f2",color:"#fff",border:"none",borderRadius:12,padding:"12px",fontWeight:800,cursor:"pointer",fontSize:14,marginBottom:8}}>{t.goFb}</button>
-            <button onClick={()=>setModal(null)} style={{width:"100%",background:"#f3f4f6",color:"#555",border:"none",borderRadius:12,padding:"10px",fontWeight:700,cursor:"pointer",fontSize:13}}>{t.close}</button>
-          </div>
-        </div>
-      )}
+      {/* POST + MY LISTINGS */}
+      {postType!==null&&user&&<PostFlow initialType={postType||undefined} onClose={()=>setPostType(null)}/>}
+      {mineOpen&&user&&<MyListings onClose={()=>setMineOpen(false)}/>}
     </div>
+    </AppCtx.Provider>
   );
 }
