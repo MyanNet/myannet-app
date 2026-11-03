@@ -34,7 +34,7 @@ const T = {
     available:"🏠 Available", seeking:"🔍 Seeking", canCarryTag:"✈️ Can Carry", needCarryTag:"📦 Need Carry", budget:"Budget",
     send:"You send", receive:"MMK received*", logIn:"Log In", logOut:"Log Out", myProfile:"My Profile", myListings:"My Listings", settings:"Settings",
     registerInterest:"Register Interest", beFirst:"Be the First to Know", registerDesc:"Register your interest and get notified about new jobs, agents, listings and updates on myannet.app",
-    joinFb:"Join Facebook Group", comingSoon:"Full posting system coming soon! For now, join our Facebook group:",
+    joinFb:"Follow MyanNet on Facebook", comingSoon:"Full posting system coming soon! For now, join our Facebook group:",
     goFb:"🌐 Go to Facebook Group", close:"Close", services:"Services", countries:"Countries", contact:"Contact & Community", privacy:"Privacy Policy", terms:"Terms of Use", about:"About",
     signIn:"Sign in to your account", continueWithFb:"Continue with Facebook", or:"or", phone:"Phone Number", sendOTP:"Send OTP Code", verifyCode:"Verify Code", changePhone:"Change phone number", emailAddr:"Email Address", password:"Password", signingIn:"Signing in…", sending:"Sending…", verifying:"Verifying…", connecting:"Connecting…",
     iAm:"I am a…", worker:"👷 Worker / Job Seeker", business:"🏪 Business Owner", hundiAgent:"💸 Hundi Agent", other:"🌏 Other", country:"Country", registerNow:"Register Now", noSpam:"We never share your info. No spam, ever.",
@@ -62,7 +62,7 @@ const T = {
     available:"🏠 ငှားရမ်းရန်ရှိ", seeking:"🔍 ရှာဖွေနေသည်", canCarryTag:"✈️ ဆောင်ပေးနိုင်", needCarryTag:"📦 ဆောင်ပေးမည့်သူရှာ", budget:"ဘတ်ဂျက်",
     send:"ပို့သည်", receive:"MMK လက်ခံရရှိ*", logIn:"ဝင်ရောက်မည်", logOut:"ထွက်မည်", myProfile:"ကျွန်ုပ်၏ ပရိုဖိုင်", myListings:"ကျွန်ုပ်၏ ကြော်ငြာ", settings:"ဆက်တင်",
     registerInterest:"မှတ်ပုံတင်မည်", beFirst:"မြန်နက်နှင့် ချိတ်ဆက်ပါ", registerDesc:"အသစ်သောဝန်ဆောင်မှုများ၊ အလုပ်အကိုင်များနှင့် အပ်ဒိတ်များ အကြောင်း ပထမဆုံးသိရှိရန် မှတ်ပုံတင်ပါ",
-    joinFb:"Facebook အုပ်စုတွင် ပါဝင်မည်", comingSoon:"မကြာမီ ဖော်ပြနိုင်သောစနစ် ရောက်ရှိလာမည်! ယခုအချိန်တွင် Facebook အုပ်စုမှတစ်ဆင့် ဖော်ပြပါ:",
+    joinFb:"Facebook တွင် မြန်နက်ကို Follow လုပ်ပါ", comingSoon:"မကြာမီ ဖော်ပြနိုင်သောစနစ် ရောက်ရှိလာမည်! ယခုအချိန်တွင် Facebook အုပ်စုမှတစ်ဆင့် ဖော်ပြပါ:",
     goFb:"🌐 Facebook အုပ်စုသို့သွား", close:"ပိတ်", services:"ဝန်ဆောင်မှုများ", countries:"နိုင်ငံများ", contact:"ဆက်သွယ်ရန်", privacy:"မူဝါဒ", terms:"အသုံးပြုသည့်စည်းမျဉ်း", about:"အကြောင်း",
     signIn:"သင်၏အကောင့်သို့ ဝင်ရောက်ပါ", continueWithFb:"Facebook ဖြင့် ဆက်လက်မည်", or:"သို့မဟုတ်", phone:"ဖုန်းနံပါတ် (WhatsApp / Viber)", sendOTP:"OTP ကုဒ် ပို့မည်", verifyCode:"အတည်ပြုမည်", changePhone:"ဖုန်းနံပါတ် ပြောင်းမည်", emailAddr:"အီးမေးလ် လိပ်စာ", password:"စကားဝှက်", signingIn:"ဝင်နေသည်…", sending:"ပို့နေသည်…", verifying:"စစ်ဆေးနေသည်…", connecting:"ချိတ်ဆက်နေသည်…",
     iAm:"သင်သည် ဘာလုပ်သနည်း?", worker:"👷 အလုပ်သမား", business:"🏪 လုပ်ငန်းရှင်", hundiAgent:"💸 ဟွန်ဒီ ကိုယ်စားလှယ်", other:"🌏 အခြား", country:"နိုင်ငံ", registerNow:"မှတ်ပုံတင်မည်", noSpam:"သင့်အချက်အလက်ကို ကျွန်ုပ်တို့ မျှဝေမည်မဟုတ်ပါ",
@@ -269,7 +269,7 @@ export default function App(){
           <div style={{color:"#6b5a2e",fontSize:14,marginBottom:20,lineHeight:1.7}}>{t.registerDesc}</div>
           <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap"}}>
             <button onClick={()=>setEmailModal(true)} style={{background:"#c0392b",color:"#fff",border:"none",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer"}}>✅ {t.registerInterest}</button>
-            <a href="https://facebook.com/groups/MyanmarConnect" target="_blank" rel="noreferrer" style={{background:"#1877f2",color:"#fff",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer",textDecoration:"none",display:"inline-flex",alignItems:"center",gap:6}}>👥 {t.joinFb}</a>
+            <a href="https://www.facebook.com/profile.php?id=61595929243314" target="_blank" rel="noreferrer" style={{background:"#1877f2",color:"#fff",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer",textDecoration:"none",display:"inline-flex",alignItems:"center",gap:6}}>👥 {t.joinFb}</a>
           </div>
         </div>
       </>}
@@ -480,7 +480,7 @@ export default function App(){
             </div>
             <div>
               <div style={{fontWeight:700,fontSize:12,color:"#fff",marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>{t.contact}</div>
-              {[{ic:"🌐",lb:"www.myannet.app",hr:"https://www.myannet.app"},{ic:"👥",lb:"Facebook Group",hr:"https://facebook.com/groups/MyanmarConnect"},{ic:"📱",lb:"Viber Community",hr:"#"},{ic:"✉️",lb:"hello@myannet.app",hr:"mailto:hello@myannet.app"}].map(x=>(
+              {[{ic:"🌐",lb:"www.myannet.app",hr:"https://www.myannet.app"},{ic:"👥",lb:"MyanNet on Facebook",hr:"https://www.facebook.com/profile.php?id=61595929243314"},{ic:"📱",lb:"Viber Community",hr:"#"},{ic:"✉️",lb:"hello@myannet.app",hr:"mailto:hello@myannet.app"}].map(x=>(
                 <a key={x.lb} href={x.hr} style={{color:"rgba(255,255,255,0.55)",fontSize:12,marginBottom:9,display:"flex",gap:7,textDecoration:"none"}}>
                   <span>{x.ic}</span><span>{x.lb}</span>
                 </a>
