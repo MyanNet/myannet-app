@@ -269,7 +269,7 @@ export default function App(){
           <div style={{color:"#6b5a2e",fontSize:14,marginBottom:20,lineHeight:1.7}}>{t.registerDesc}</div>
           <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap"}}>
             <button onClick={()=>setEmailModal(true)} style={{background:"#c0392b",color:"#fff",border:"none",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer"}}>✅ {t.registerInterest}</button>
-            <a href="https://www.facebook.com/profile.php?id=61595929243314" target="_blank" rel="noreferrer" style={{background:"#1877f2",color:"#fff",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer",textDecoration:"none",display:"inline-flex",alignItems:"center",gap:6}}>👥 {t.joinFb}</a>
+            <a href="https://www.facebook.com/profile.php?id=61595978411240" target="_blank" rel="noreferrer" style={{background:"#1877f2",color:"#fff",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer",textDecoration:"none",display:"inline-flex",alignItems:"center",gap:6}}>👥 {t.joinFb}</a>
           </div>
         </div>
       </>}
@@ -480,7 +480,7 @@ export default function App(){
             </div>
             <div>
               <div style={{fontWeight:700,fontSize:12,color:"#fff",marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>{t.contact}</div>
-              {[{ic:"🌐",lb:"www.myannet.app",hr:"https://www.myannet.app"},{ic:"👥",lb:"MyanNet on Facebook",hr:"https://www.facebook.com/profile.php?id=61595929243314"},{ic:"📱",lb:"Viber Community",hr:"#"},{ic:"✉️",lb:"hello@myannet.app",hr:"mailto:hello@myannet.app"}].map(x=>(
+              {[{ic:"🌐",lb:"www.myannet.app",hr:"https://www.myannet.app"},{ic:"👥",lb:"MyanNet on Facebook",hr:"https://www.facebook.com/profile.php?id=61595978411240"},{ic:"📱",lb:"Viber Community",hr:"#"},{ic:"✉️",lb:"hello@myannet.app",hr:"mailto:hello@myannet.app"}].map(x=>(
                 <a key={x.lb} href={x.hr} style={{color:"rgba(255,255,255,0.55)",fontSize:12,marginBottom:9,display:"flex",gap:7,textDecoration:"none"}}>
                   <span>{x.ic}</span><span>{x.lb}</span>
                 </a>
