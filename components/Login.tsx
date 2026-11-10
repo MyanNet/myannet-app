@@ -9,8 +9,12 @@ import { Modal, Btn, inputStyle, THEME } from "./ui";
 const TG_BOT = process.env.NEXT_PUBLIC_TELEGRAM_BOT_NAME;
 const TIKTOK_ON = process.env.NEXT_PUBLIC_TIKTOK_ENABLED === "1";
 // Sign-in methods switched on in Supabase, e.g. "facebook,whatsapp,phone,email". Others show "coming soon".
-const ENABLED = (process.env.NEXT_PUBLIC_AUTH_PROVIDERS || "facebook").split(",").map((x) => x.trim());
-const on = (m: string) => !LIVE || ENABLED.includes(m) || (m === "tiktok" && TIKTOK_ON) || (m === "telegram" && !!TG_BOT);
+const ENABLED = (process.env.NEXT_PUBLIC_AUTH_PROVIDERS || "").split(",").map((x) => x.trim());
+// Facebook sign-in opens to the public only once the Meta app is published (business verification).
+const FACEBOOK_PUBLIC = process.env.NEXT_PUBLIC_FACEBOOK_PUBLIC === "1";
+const on = (m: string) =>
+  !LIVE || m === "google" || (m === "facebook" ? FACEBOOK_PUBLIC : ENABLED.includes(m)) ||
+  (m === "tiktok" && TIKTOK_ON) || (m === "telegram" && !!TG_BOT);
 const CODES = [["+1", "🇺🇸 +1"], ["+95", "🇲🇲 +95"], ["+66", "🇹🇭 +66"], ["+60", "🇲🇾 +60"], ["+81", "🇯🇵 +81"], ["+65", "🇸🇬 +65"], ["+82", "🇰🇷 +82"], ["+91", "🇮🇳 +91"]];
 
 type Mode = "menu" | "whatsapp" | "phone" | "email" | "telegram" | "tiktok";
@@ -60,7 +64,7 @@ export default function Login({ onClose }: { onClose: () => void }) {
   };
 
   const big = (bg: string, icon: React.ReactNode, label: string, onClick: () => void, color = "#fff") => (
-    <Btn bg={bg} color={color} onClick={onClick} disabled={busy} style={{ marginBottom: 10, justifyContent: "flex-start", paddingLeft: 18 }}>
+    <Btn bg={bg} color={color} onClick={onClick} disabled={busy} style={{ marginBottom: 10, justifyContent: "flex-start", paddingLeft: 18, border: bg === "#ffffff" ? "1px solid #dadce0" : "none" }}>
       <span style={{ width: 22, textAlign: "center", fontSize: 17 }}>{icon}</span><span>{label}</span>
     </Btn>
   );
@@ -76,6 +80,7 @@ export default function Login({ onClose }: { onClose: () => void }) {
       {!LIVE && <div style={{ background: "#fff8e1", border: "1px solid #f3d27a", borderRadius: 10, padding: 10, fontSize: 11, color: "#7a5b00", marginBottom: 14, lineHeight: 1.5 }}>{s.demoBanner}</div>}
 
       {mode === "menu" && <>
+        {big("#ffffff", <b style={{ color: "#4285F4" }}>G</b>, s.google, () => run(store.signInGoogle, !LIVE), "#1f1f1f")}
         {big("#1877f2", <b>f</b>, s.fb, () => (on("facebook") ? run(store.signInFacebook, !LIVE) : setNote(s.comingSoon)))}
         {big("#000", "♪", s.tiktok, () => pick("tiktok"))}
         {big("#229ED9", "✈", s.telegram, () => pick("telegram"))}

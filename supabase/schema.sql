@@ -142,3 +142,7 @@ create policy "admins read signups" on public.interest_signups for select using 
 -- ---------- After you sign in for the first time, make yourself admin ----------
 -- update public.profiles set is_admin = true where id = (
 --   select id from auth.users order by created_at limit 1);
+
+-- ---------- v3.1: what each person came for (offer / seek / browse) ----------
+alter table public.profiles add column if not exists intent text check (intent in ('offer','seek','browse'));
+grant update (intent) on public.profiles to authenticated;

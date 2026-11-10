@@ -15,7 +15,7 @@ export type Review = {
   stars: number | null; body: string; created_at: string;
 };
 export type AppUser = {
-  id: string; name: string; photo?: string | null; method: string; is_admin?: boolean;
+  id: string; name: string; photo?: string | null; method: string; is_admin?: boolean; intent?: string | null;
 };
 
 export const DAILY_POST_LIMIT = 5;
@@ -37,7 +37,7 @@ const emitDemo = (u: AppUser | null) => authListeners.forEach((f) => f(u));
 // ---------- auth ----------
 async function toAppUser(u: any): Promise<AppUser | null> {
   if (!u || !supabase) return null;
-  const { data: p } = await supabase.from("profiles").select("display_name,avatar_url,is_admin").eq("id", u.id).maybeSingle();
+  const { data: p } = await supabase.from("profiles").select("*").eq("id", u.id).maybeSingle();
   const meta = u.user_metadata || {};
   return {
     id: u.id,
@@ -45,6 +45,7 @@ async function toAppUser(u: any): Promise<AppUser | null> {
     photo: p?.avatar_url || meta.avatar_url || meta.picture || null,
     method: meta.provider || u.app_metadata?.provider || "member",
     is_admin: !!p?.is_admin,
+    intent: p?.intent ?? null,
   };
 }
 
@@ -62,11 +63,28 @@ export function onAuthChange(cb: (u: AppUser | null) => void): () => void {
 
 export function demoSignIn(method: string) {
   const names: Record<string, string> = {
-    facebook: "Demo Facebook User", tiktok: "Demo TikTok User", telegram: "Demo Telegram User",
+    facebook: "Demo Facebook User", google: "Demo Google User", tiktok: "Demo TikTok User", telegram: "Demo Telegram User",
     whatsapp: "Demo WhatsApp User", phone: "Demo Phone User", email: "Demo Email User",
   };
   const u: AppUser = { id: "demo-" + method, name: names[method] || "Demo User", method, is_admin: true };
   write("mn_user", u); emitDemo(u); return u;
+}
+
+export async function signInGoogle() {
+  if (!LIVE) return demoSignIn("google");
+  const { error } = await supabase!.auth.signInWithOAuth({ provider: "google", options: { redirectTo: window.location.origin } });
+  if (error) throw error;
+}
+
+// What the person came for: "offer" (seller/provider), "seek" (buyer/seeker) or "browse" (visitor/tester).
+export async function setIntent(user: AppUser, intent: string) {
+  try { localStorage.setItem("mn_intent_" + user.id, intent); } catch {}
+  if (!LIVE) return;
+  await supabase!.from("profiles").update({ intent }).eq("id", user.id);
+}
+export function knownIntent(user: AppUser): string | null {
+  if (user.intent) return user.intent;
+  try { return localStorage.getItem("mn_intent_" + user.id); } catch { return null; }
 }
 
 export async function signInFacebook() {

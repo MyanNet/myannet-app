@@ -9,6 +9,7 @@ import Login from "@/components/Login";
 import PostFlow from "@/components/PostFlow";
 import { ReviewBar } from "@/components/Reviews";
 import { CommunityListings, MyListings } from "@/components/Listings";
+import Welcome from "@/components/Welcome";
 import { THEME } from "@/components/ui";
 
 const T = {
@@ -234,7 +235,7 @@ export default function App(){
           </div>
         </div>
 
-        <div style={{maxWidth:1000,margin:"-28px auto 0",padding:"0 16px 32px"}}>
+        <div id="mn-pillars-home" style={{maxWidth:1000,margin:"-28px auto 0",padding:"0 16px 32px"}}>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))",gap:12,marginBottom:16}}>
             {PILLARS.map((p,i)=>(
               <div key={p} onClick={()=>{setTab(p);setFilter("all");}} style={{background:"#fff",borderRadius:16,padding:20,textAlign:"center",cursor:"pointer",boxShadow:"0 4px 16px rgba(0,0,0,0.08)",border:`2px solid ${COLORS[p]}18`}}>
@@ -538,6 +539,7 @@ export default function App(){
       {/* POST + MY LISTINGS */}
       {postType!==null&&user&&<PostFlow initialType={postType||undefined} onClose={()=>setPostType(null)}/>}
       {mineOpen&&user&&<MyListings onClose={()=>setMineOpen(false)}/>}
+      {!loginModal&&postType===null&&<Welcome/>}
     </div>
     </AppCtx.Provider>
   );
