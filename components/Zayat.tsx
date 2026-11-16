@@ -11,7 +11,7 @@ const CATS = ["ask", "business", "city", "help", "announce", "general"];
 
 const Z = {
   en: {
-    title: "🛖 MyanNet Zayat",
+    title: "💬 MyanNet Zayat",
     sub: "Ask questions, share tips and help each other — Myanmar people everywhere.",
     start: "+ Start a topic", all: "All",
     cats: { ask: "❓ Ask & Advice", business: "💼 Business & Work", city: "📍 Local / By City", help: "🤝 Help Needed", announce: "📣 Announcements", general: "☕ General Chat" },
@@ -34,7 +34,7 @@ const Z = {
     by: "by",
   },
   mm: {
-    title: "🛖 မြန်နက် ဇရပ်",
+    title: "💬 မြန်နက် ဇရပ်",
     sub: "မေးမြန်းပါ၊ အတွေ့အကြုံမျှဝေပါ၊ အချင်းချင်း ကူညီကြပါ — နေရာတိုင်းရှိ မြန်မာများအတွက်။",
     start: "+ ခေါင်းစဉ်အသစ် စတင်ရန်", all: "အားလုံး",
     cats: { ask: "❓ မေးမြန်း / အကြံဉာဏ်", business: "💼 လုပ်ငန်း / အလုပ်", city: "📍 မြို့အလိုက်", help: "🤝 အကူအညီလိုသည်", announce: "📣 ကြေညာချက်", general: "☕ အထွေထွေ" },
