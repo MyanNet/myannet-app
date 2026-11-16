@@ -7,7 +7,6 @@ import { S } from "@/lib/i18n";
 import * as store from "@/lib/store";
 import Login from "@/components/Login";
 import PostFlow from "@/components/PostFlow";
-import { ReviewBar } from "@/components/Reviews";
 import { CommunityListings, MyListings } from "@/components/Listings";
 import Welcome from "@/components/Welcome";
 import { THEME } from "@/components/ui";
@@ -30,7 +29,7 @@ const T = {
     hundiNotice:"⚠️ Community Notice: Hundi is an informal trust-based transfer system widely used by Myanmar migrants. Agents are community-verified. Always use known, reviewed agents. MyanNet does not handle funds directly.",
     cargoNotice:"✈️ Hand Carry Network: Travelers with spare baggage space offer to carry goods between countries. Always meet in person. Community trust is everything.",
     rateCalc:"💱 Quick Rate Calculator", from:"From", amount:"Amount", communityAgents:"🤝 Community Agents",
-    verified:"✅ Verified", pending:"⏳ Pending", reviews:"reviews", rate:"Rate", fee:"Fee", dailyLimit:"Daily Limit",
+    example:"📌 Example",examplesNote:"📌 Examples below show what posts look like — they are not real people or businesses. Real community posts appear above.",verified:"✅ Verified", pending:"⏳ Pending", reviews:"reviews", rate:"Rate", fee:"Fee", dailyLimit:"Daily Limit",
     urgent:"🔥 Urgent", burmeseHouse:"🇲🇲 Burmese House", jobAvail:"🏪 Job Available", seekingWork:"👷 Seeking Work",
     available:"🏠 Available", seeking:"🔍 Seeking", canCarryTag:"✈️ Can Carry", needCarryTag:"📦 Need Carry", budget:"Budget",
     send:"You send", receive:"MMK received*", logIn:"Log In", logOut:"Log Out", myProfile:"My Profile", myListings:"My Listings", settings:"Settings",
@@ -58,7 +57,7 @@ const T = {
     hundiNotice:"⚠️ ဟွန်ဒီသည် မြန်မာ့ရွှေ့ပြောင်းသူများ အကြားတွင် ကျယ်ကျယ်ပြန့်ပြန့် အသုံးပြုသော ယုံကြည်မှုအခြေခံ ငွေလွှဲစနစ်ဖြစ်သည်။ ကိုယ်စားလှယ်များကို အသိုင်းအဝိုင်းမှ စစ်ဆေးအတည်ပြုသည်။",
     cargoNotice:"✈️ ကိုယ်ထည်ဆောင်ကွန်ရက်: ခရီးသွားများသည် ထားခဲ့သောဘက်ဂေ့နေရာကို ကုန်ပစ္စည်းများ ဆောင်ဆောင်ပေးရန် ကမ်းလှမ်းသည်။",
     rateCalc:"💱 နှုန်းထားတွက်ချက်မှု", from:"မှ", amount:"ပမာဏ", communityAgents:"🤝 အသိုင်းအဝိုင်း ကိုယ်စားလှယ်များ",
-    verified:"✅ အတည်ပြုပြီး", pending:"⏳ စောင့်ဆိုင်းဆဲ", reviews:"သုံးသပ်ချက်", rate:"နှုန်းထား", fee:"ကြေးငွေ", dailyLimit:"နေ့စဉ်ကန့်သတ်",
+    example:"📌 နမူနာ",examplesNote:"📌 အောက်ပါတို့သည် ပို့စ်ပုံစံ နမူနာများသာ ဖြစ်ပြီး လူ သို့မဟုတ် လုပ်ငန်း အစစ်အမှန် မဟုတ်ပါ။ အသိုင်းအဝိုင်းမှ တကယ့်ပို့စ်များကို အပေါ်တွင် ပြသထားသည်။",verified:"✅ အတည်ပြုပြီး", pending:"⏳ စောင့်ဆိုင်းဆဲ", reviews:"သုံးသပ်ချက်", rate:"နှုန်းထား", fee:"ကြေးငွေ", dailyLimit:"နေ့စဉ်ကန့်သတ်",
     urgent:"🔥 အရေးပေါ်", burmeseHouse:"🇲🇲 မြန်မာ့အိမ်", jobAvail:"🏪 အလုပ်ရှိသည်", seekingWork:"👷 အလုပ်ရှာနေသည်",
     available:"🏠 ငှားရမ်းရန်ရှိ", seeking:"🔍 ရှာဖွေနေသည်", canCarryTag:"✈️ ဆောင်ပေးနိုင်", needCarryTag:"📦 ဆောင်ပေးမည့်သူရှာ", budget:"ဘတ်ဂျက်",
     send:"ပို့သည်", receive:"MMK လက်ခံရရှိ*", logIn:"ဝင်ရောက်မည်", logOut:"ထွက်မည်", myProfile:"ကျွန်ုပ်၏ ပရိုဖိုင်", myListings:"ကျွန်ုပ်၏ ကြော်ငြာ", settings:"ဆက်တင်",
@@ -296,10 +295,12 @@ export default function App(){
           <FilterBtn val="seek" label={t.seekWork} active={filter==="seek"} color="#c0392b"/>
         </div>
         <CommunityListings pillar="jobs" color={COLORS.jobs}/>
+        <div style={{background:"#f3f4f6",borderRadius:10,padding:"9px 12px",margin:"6px 0 12px",fontSize:12,color:"#555"}}>{t.examplesNote}</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(285px,1fr))",gap:14}}>
           {JOBS.filter(j=>filter==="all"||j.type===filter).map(j=>(
             <Card key={j.id} topColor={j.type==="offer"?"#c0392b":"#16a34a"}>
               <div style={{display:"flex",gap:4,flexWrap:"wrap",marginBottom:8}}>
+                <Tag bg="#e5e7eb" c="#374151">{t.example}</Tag>
                 <Tag bg={j.type==="offer"?"#fde8e8":"#f0fdf4"} c={j.type==="offer"?"#c0392b":"#16a34a"}>{j.type==="offer"?t.jobAvail:t.seekingWork}</Tag>
                 {j.urgent&&<Tag bg="#fef3c7" c="#92400e">{t.urgent}</Tag>}
                 {j.avail&&<Tag bg="#ede9fe" c="#7c3aed">● {j.avail}</Tag>}
@@ -310,7 +311,6 @@ export default function App(){
               <div style={{fontSize:12,color:"#555",marginBottom:8,lineHeight:1.5}}>{tx(j.desc,j.descMM)}</div>
               {j.skills&&<div style={{display:"flex",flexWrap:"wrap",gap:3,marginBottom:8}}>{j.skills.map(s=><Tag key={s}>{s}</Tag>)}</div>}
               <FbBtn label={t.contactFb}/>
-              <ReviewBar id={"s-jobs-"+j.id} title={tx(j.title,j.titleMM)}/>
             </Card>
           ))}
         </div>
@@ -345,13 +345,14 @@ export default function App(){
           </div>
         </div>
         <CommunityListings pillar="hundi" color={COLORS.hundi}/>
+        <div style={{background:"#f3f4f6",borderRadius:10,padding:"9px 12px",margin:"6px 0 12px",fontSize:12,color:"#555"}}>{t.examplesNote}</div>
         <div style={{fontWeight:800,fontSize:15,marginBottom:12}}>{t.communityAgents}</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(270px,1fr))",gap:14}}>
           {HUNDI.map(h=>(
-            <Card key={h.id} topColor={h.verified?"#7c3aed":"#ddd"}>
+            <Card key={h.id} topColor="#ddd">
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
                 <div style={{fontWeight:800,fontSize:14}}>{h.agent}</div>
-                <Tag bg={h.verified?"#ede9fe":"#f3f4f6"} c={h.verified?"#7c3aed":"#888"}>{h.verified?t.verified:t.pending}</Tag>
+                <Tag bg="#e5e7eb" c="#374151">{t.example}</Tag>
               </div>
               <div style={{fontSize:12,color:"#888",marginBottom:8}}>{h.from} → {h.to}</div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:10}}>
@@ -363,9 +364,7 @@ export default function App(){
                 ))}
               </div>
               <div style={{fontSize:12,color:"#555",marginBottom:6,lineHeight:1.5}}>{tx(h.desc,h.descMM)}</div>
-              <div style={{fontSize:11,color:"#888",marginBottom:8}}>⭐ {h.reviews} {t.reviews} · {h.phone}</div>
-              <ViberBtn label={t.contactViber}/>
-              <ReviewBar id={"s-hundi-"+h.id} title={h.agent}/>
+                            <ViberBtn label={t.contactViber}/>
             </Card>
           ))}
         </div>
@@ -379,10 +378,12 @@ export default function App(){
           <FilterBtn val="seek" label={t.seekRoom} active={filter==="seek"} color="#0891b2"/>
         </div>
         <CommunityListings pillar="rent" color={COLORS.rent}/>
+        <div style={{background:"#f3f4f6",borderRadius:10,padding:"9px 12px",margin:"6px 0 12px",fontSize:12,color:"#555"}}>{t.examplesNote}</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(285px,1fr))",gap:14}}>
           {RENTALS.filter(r=>filter==="all"||r.type===filter).map(r=>(
             <Card key={r.id} topColor={r.type==="offer"?"#0891b2":"#d97706"}>
               <div style={{display:"flex",gap:4,flexWrap:"wrap",marginBottom:8}}>
+                <Tag bg="#e5e7eb" c="#374151">{t.example}</Tag>
                 <Tag bg={r.type==="offer"?"#e0f2fe":"#fffbeb"} c={r.type==="offer"?"#0891b2":"#d97706"}>{r.type==="offer"?t.available:t.seeking}</Tag>
                 {r.burmese&&<Tag bg="#fde8e8" c="#c0392b">{t.burmeseHouse}</Tag>}
               </div>
@@ -393,7 +394,6 @@ export default function App(){
               {r.rooms&&<div style={{fontSize:12,color:"#555",marginBottom:4}}>🛏 {r.rooms}</div>}
               <div style={{fontSize:12,color:"#555",marginBottom:8,lineHeight:1.5}}>{tx(r.desc,r.descMM)}</div>
               <FbBtn label={t.contactFb}/>
-              <ReviewBar id={"s-rent-"+r.id} title={tx(r.title,r.titleMM)}/>
             </Card>
           ))}
         </div>
@@ -408,9 +408,11 @@ export default function App(){
           <FilterBtn val="need" label={t.needCarry} active={filter==="need"} color="#d97706"/>
         </div>
         <CommunityListings pillar="cargo" color={COLORS.cargo}/>
+        <div style={{background:"#f3f4f6",borderRadius:10,padding:"9px 12px",margin:"6px 0 12px",fontSize:12,color:"#555"}}>{t.examplesNote}</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(285px,1fr))",gap:14}}>
           {CARGO.filter(c=>filter==="all"||c.type===filter).map(c=>(
             <Card key={c.id} topColor={c.type==="carry"?"#d97706":"#c0392b"}>
+              <Tag bg="#e5e7eb" c="#374151">{t.example}</Tag>
               <Tag bg={c.type==="carry"?"#fffbeb":"#fde8e8"} c={c.type==="carry"?"#d97706":"#c0392b"}>{c.type==="carry"?t.canCarryTag:t.needCarryTag}</Tag>
               <div style={{fontWeight:800,fontSize:14,margin:"8px 0 3px"}}>{c.name}</div>
               <div style={{color:"#555",fontWeight:700,fontSize:13,marginBottom:3}}>🛫 {c.route}</div>
@@ -419,7 +421,6 @@ export default function App(){
               {c.items&&<div style={{color:"#c0392b",fontWeight:600,fontSize:12,marginBottom:4}}>🎁 {c.items}</div>}
               <div style={{fontSize:12,color:"#555",marginBottom:8,lineHeight:1.5}}>{tx(c.desc,c.descMM)}</div>
               <ViberBtn label={t.contactViber}/>
-              <ReviewBar id={"s-cargo-"+c.id} title={c.name}/>
             </Card>
           ))}
         </div>
@@ -433,6 +434,7 @@ export default function App(){
           ))}
         </div>
         <CommunityListings pillar="goods" color={COLORS.goods}/>
+        <div style={{background:"#f3f4f6",borderRadius:10,padding:"9px 12px",margin:"6px 0 12px",fontSize:12,color:"#555"}}>{t.examplesNote}</div>
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:14}}>
           {GOODS.filter(g=>goodsCat==="All"||g.cat===goodsCat).map(g=>(
             <div key={g.id} style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 4px 14px rgba(0,0,0,0.07)"}}>
@@ -441,11 +443,10 @@ export default function App(){
                 <div style={{fontWeight:800,fontSize:13,flex:1}}>{tx(g.title,g.titleMM)}</div>
                 <div style={{fontWeight:900,fontSize:15,color:"#16a34a",marginLeft:6}}>{g.price}</div>
               </div>
-              <Tag bg="#f0fdf4" c="#16a34a">{g.cat}</Tag>
+              <Tag bg="#e5e7eb" c="#374151">{t.example}</Tag><Tag bg="#f0fdf4" c="#16a34a">{g.cat}</Tag>
               <div style={{fontSize:11,color:"#555",margin:"6px 0 3px",lineHeight:1.5}}>{tx(g.desc,g.descMM)}</div>
               <div style={{fontSize:10,color:"#aaa",marginBottom:8}}>📍 {g.loc} · 👤 {g.seller}</div>
               <FbBtn label={t.msgSeller}/>
-              <ReviewBar id={"s-goods-"+g.id} title={tx(g.title,g.titleMM)}/>
             </div>
           ))}
         </div>
