@@ -250,3 +250,54 @@ export async function registerInterest(email: string, role: string, country: str
   const { error } = await supabase!.from("interest_signups").insert({ email, role, country });
   if (error) throw error;
 }
+
+// ---------- MyanNet Zayat (community discussion) ----------
+// Replies are stored as reviews with listing_id = "z-" + topic id (no stars).
+export type Topic = {
+  id: string; user_id: string; author_name: string; category: string; title: string; body: string;
+  city: string; reply_count: number; last_activity: string; created_at: string;
+};
+export const DAILY_TOPIC_LIMIT = 5;
+
+export async function fetchTopics(category?: string): Promise<Topic[]> {
+  if (!LIVE) {
+    const all = read<Topic[]>("mn_topics", []).map((t) => ({ ...t, reply_count: read<Review[]>("mn_reviews", []).filter((r) => r.listing_id === "z-" + t.id).length }));
+    return (category ? all.filter((t) => t.category === category) : all).sort((a, b) => b.last_activity.localeCompare(a.last_activity));
+  }
+  let q = supabase!.from("zayat_topics").select("*").order("last_activity", { ascending: false }).limit(100);
+  if (category) q = q.eq("category", category);
+  const { data, error } = await q;
+  if (error) throw error;
+  return data as Topic[];
+}
+
+export async function getTopic(id: string): Promise<Topic | null> {
+  if (!LIVE) return read<Topic[]>("mn_topics", []).find((t) => t.id === id) || null;
+  const { data } = await supabase!.from("zayat_topics").select("*").eq("id", id).maybeSingle();
+  return (data as Topic) || null;
+}
+
+export async function createTopic(user: AppUser, input: { category: string; title: string; body: string; city: string }): Promise<Topic> {
+  if (!LIVE) {
+    const all = read<Topic[]>("mn_topics", []);
+    const dayAgo = new Date(Date.now() - 864e5).toISOString();
+    if (all.filter((t) => t.user_id === user.id && t.created_at > dayAgo).length >= DAILY_TOPIC_LIMIT)
+      throw new Error("Daily topic limit reached (5 per day)");
+    const now = new Date().toISOString();
+    const t: Topic = { ...input, id: uid(), user_id: user.id, author_name: user.name, reply_count: 0, last_activity: now, created_at: now };
+    write("mn_topics", [t, ...all]); return t;
+  }
+  const { data, error } = await supabase!.from("zayat_topics").insert({ ...input, author_name: user.name }).select().single();
+  if (error) throw error;
+  return data as Topic;
+}
+
+export async function deleteTopic(id: string) {
+  if (!LIVE) {
+    write("mn_topics", read<Topic[]>("mn_topics", []).filter((t) => t.id !== id));
+    write("mn_reviews", read<Review[]>("mn_reviews", []).filter((r) => r.listing_id !== "z-" + id));
+    return;
+  }
+  const { error } = await supabase!.from("zayat_topics").delete().eq("id", id);
+  if (error) throw error;
+}

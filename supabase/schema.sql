@@ -146,3 +146,84 @@ create policy "admins read signups" on public.interest_signups for select using 
 -- ---------- v3.1: what each person came for (offer / seek / browse) ----------
 alter table public.profiles add column if not exists intent text check (intent in ('offer','seek','browse'));
 grant update (intent) on public.profiles to authenticated;
+
+-- ---------- v3.2: MyanNet Zayat (ဇရပ်) community discussion ----------
+-- Topics live here; replies reuse the reviews table with listing_id = 'z-<topic id>' (no stars),
+-- so reporting and admin removal work the same way as for listings.
+create table if not exists public.zayat_topics (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null default auth.uid() references auth.users on delete cascade,
+  author_name text not null default '',
+  category text not null default 'general' check (category in ('ask','business','city','help','announce','general')),
+  title text not null check (char_length(title) between 3 and 140),
+  body text not null default '' check (char_length(body) <= 3000),
+  city text not null default '' check (char_length(city) <= 80),
+  reply_count int not null default 0,
+  last_activity timestamptz not null default now(),
+  created_at timestamptz not null default now()
+);
+create index if not exists zayat_recent on public.zayat_topics (last_activity desc);
+alter table public.zayat_topics enable row level security;
+drop policy if exists "read zayat" on public.zayat_topics;
+create policy "read zayat" on public.zayat_topics for select using (true);
+drop policy if exists "start own topic" on public.zayat_topics;
+create policy "start own topic" on public.zayat_topics for insert with check (user_id = auth.uid());
+drop policy if exists "delete own topic or admin" on public.zayat_topics;
+create policy "delete own topic or admin" on public.zayat_topics for delete using (user_id = auth.uid() or public.is_admin());
+revoke update on public.zayat_topics from anon, authenticated;
+
+-- Spam guard: at most 5 new topics per person per day.
+create or replace function public.limit_topics() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if (select count(*) from public.zayat_topics
+      where user_id = new.user_id and created_at > now() - interval '1 day') >= 5 then
+    raise exception 'Daily topic limit reached (5 per day)';
+  end if;
+  return new;
+end $$;
+drop trigger if exists zayat_limit on public.zayat_topics;
+create trigger zayat_limit before insert on public.zayat_topics
+  for each row execute function public.limit_topics();
+
+-- Keep reply counts and "last activity" up to date.
+create or replace function public.zayat_reply_count() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' and new.listing_id like 'z-%' then
+    update public.zayat_topics set reply_count = reply_count + 1, last_activity = now()
+      where id::text = substr(new.listing_id, 3);
+  elsif tg_op = 'DELETE' and old.listing_id like 'z-%' then
+    update public.zayat_topics set reply_count = greatest(reply_count - 1, 0)
+      where id::text = substr(old.listing_id, 3);
+  end if;
+  return null;
+end $$;
+drop trigger if exists reviews_zayat_count on public.reviews;
+create trigger reviews_zayat_count after insert or delete on public.reviews
+  for each row execute function public.zayat_reply_count();
+
+-- When a topic is removed, remove its replies too.
+create or replace function public.zayat_cleanup() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  delete from public.reviews where listing_id = 'z-' || old.id::text;
+  return old;
+end $$;
+drop trigger if exists zayat_cleanup on public.zayat_topics;
+create trigger zayat_cleanup after delete on public.zayat_topics
+  for each row execute function public.zayat_cleanup();
+
+-- Spam guard for comments and replies: at most 30 per person per day.
+create or replace function public.limit_reviews() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if (select count(*) from public.reviews
+      where user_id = new.user_id and created_at > now() - interval '1 day') >= 30 then
+    raise exception 'Daily comment limit reached (30 per day)';
+  end if;
+  return new;
+end $$;
+drop trigger if exists reviews_limit on public.reviews;
+create trigger reviews_limit before insert on public.reviews
+  for each row execute function public.limit_reviews();

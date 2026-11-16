@@ -9,6 +9,7 @@ import Login from "@/components/Login";
 import PostFlow from "@/components/PostFlow";
 import { CommunityListings, MyListings } from "@/components/Listings";
 import Welcome from "@/components/Welcome";
+import Zayat from "@/components/Zayat";
 import { THEME } from "@/components/ui";
 
 const T = {
@@ -190,6 +191,10 @@ export default function App(){
               <span style={{fontSize:8,opacity:.85}}>{t.pillars[i].split("/")[0].trim()}</span>
             </button>
           ))}
+            <button onClick={()=>setTab("zayat")} style={{background:tab==="zayat"?"#f5e9dc":"transparent",color:"#8d5a2b",border:"none",borderRadius:14,padding:"4px 8px",cursor:"pointer",fontWeight:700,fontSize:11,display:"flex",flexDirection:"column",alignItems:"center",gap:1}}>
+              <span style={{fontSize:15}}>🛖</span>
+              <span style={{fontSize:8,opacity:.85}}>{lang==="mm"?"ဇရပ်":"Zayat"}</span>
+            </button>
           </div>
           {user?(
             <div style={{position:"relative"}}>
@@ -244,6 +249,14 @@ export default function App(){
               </div>
             ))}
           </div>
+          <div onClick={()=>setTab("zayat")} style={{background:"linear-gradient(135deg,#b07a45,#8d5a2b)",color:"#fff",borderRadius:18,padding:"18px 20px",marginBottom:14,cursor:"pointer",display:"flex",alignItems:"center",gap:14,boxShadow:"0 4px 16px rgba(0,0,0,0.08)"}}>
+            <div style={{fontSize:38}}>🛖</div>
+            <div style={{flex:1}}>
+              <div style={{fontWeight:900,fontSize:17}}>{lang==="mm"?"မြန်နက် ဇရပ် — ဆွေးနွေးရာ နေရာ":"MyanNet Zayat — the community discussion space"}</div>
+              <div style={{fontSize:12,opacity:.9,marginTop:3,lineHeight:1.5}}>{lang==="mm"?"မေးမြန်းပါ၊ အကြံဉာဏ်မျှဝေပါ၊ အချင်းချင်း ကူညီကြပါ။":"Ask questions, share tips about work, business and life abroad, and help each other."}</div>
+            </div>
+            <div style={{fontWeight:800,fontSize:20}}>›</div>
+          </div>
           <div style={{background:"#fff",borderRadius:18,padding:24,marginBottom:14,boxShadow:"0 4px 16px rgba(0,0,0,0.06)"}}>
             <div style={{fontWeight:900,fontSize:17,color:THEME.greenDark,marginBottom:14,textAlign:"center"}}>{t.whoTitle}</div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:12}}>
@@ -275,7 +288,7 @@ export default function App(){
       </>}
 
       {/* PILLAR HEADER */}
-      {tab!=="home"&&(
+      {tab!=="home"&&tab!=="zayat"&&(
         <div style={{background:`linear-gradient(135deg,${col}cc,${col})`,color:"#fff",padding:"20px 18px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:10}}>
           <div>
             <div style={{fontWeight:900,fontSize:20}}>{t.pillarIcons[pillarIdx]} {t.pillars[pillarIdx]}</div>
@@ -451,6 +464,9 @@ export default function App(){
           ))}
         </div>
       </div>}
+
+      {/* ZAYAT */}
+      {tab==="zayat"&&<Zayat/>}
 
       {/* BUSINESSES */}
       {tab==="biz"&&<div style={{maxWidth:1000,margin:"0 auto",padding:"18px 16px"}}>

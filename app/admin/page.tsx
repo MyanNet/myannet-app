@@ -9,6 +9,7 @@ export default function Admin() {
   const [user, setUser] = useState<store.AppUser | null | undefined>(undefined);
   const [reports, setReports] = useState<store.Report[]>([]);
   const [listings, setListings] = useState<Record<string, store.Listing | null>>({});
+  const [topics, setTopics] = useState<Record<string, store.Topic | null>>({});
   const [err, setErr] = useState("");
 
   const load = async () => {
@@ -16,8 +17,12 @@ export default function Admin() {
       const r = await store.fetchReports();
       setReports(r);
       const m: Record<string, store.Listing | null> = {};
-      for (const id of Array.from(new Set(r.map((x) => x.listing_id)))) m[id] = id.startsWith("s-") ? null : await store.getListing(id);
-      setListings(m);
+      const tm: Record<string, store.Topic | null> = {};
+      for (const id of Array.from(new Set(r.map((x) => x.listing_id)))) {
+        if (id.startsWith("z-")) tm[id] = await store.getTopic(id.slice(2));
+        else m[id] = id.startsWith("s-") ? null : await store.getListing(id);
+      }
+      setListings(m); setTopics(tm);
     } catch (e) { setErr((e as Error).message); }
   };
   useEffect(() => { store.getUser().then((u) => { setUser(u); if (u?.is_admin) load(); }); }, []);
@@ -38,13 +43,17 @@ export default function Admin() {
         {user?.is_admin && !reports.length && <p>No open reports. 🎉</p>}
         {reports.map((r) => {
           const l = listings[r.listing_id];
+          const tp = topics[r.listing_id];
+          const isZ = r.listing_id.startsWith("z-");
           return (
             <div key={r.id} style={box}>
-              <div style={{ fontSize: 12, color: "#888" }}>{new Date(r.created_at).toLocaleString()} · {r.review_id ? "review" : "listing"} · {r.listing_id}</div>
-              <div style={{ fontWeight: 800, margin: "4px 0" }}>{l ? l.title : r.listing_id.startsWith("s-") ? "Sample listing" : "(listing removed)"}</div>
+              <div style={{ fontSize: 12, color: "#888" }}>{new Date(r.created_at).toLocaleString()} · {r.review_id ? (isZ ? "Zayat reply" : "review") : isZ ? "Zayat topic" : "listing"} · {r.listing_id}</div>
+              <div style={{ fontWeight: 800, margin: "4px 0" }}>{isZ ? (tp ? "🛖 " + tp.title : "(topic removed)") : l ? l.title : r.listing_id.startsWith("s-") ? "Sample listing" : "(listing removed)"}</div>
+              {tp && <div style={{ fontSize: 13, color: "#555", marginBottom: 6 }}>by {tp.author_name} · {tp.body.slice(0, 160)}</div>}
               {l && <div style={{ fontSize: 13, color: "#555", marginBottom: 6 }}>by {l.author_name} · {l.description.slice(0, 160)}</div>}
               <div style={{ fontSize: 13, background: "#fdecea", borderRadius: 8, padding: 8, marginBottom: 8 }}>Reason: {r.reason || "(none given)"}</div>
               {r.review_id && <button style={btn("#c0392b")} onClick={async () => { await store.deleteReview(r.review_id!); await store.clearReport(r.id); load(); }}>Remove review</button>}
+              {!r.review_id && tp && <button style={btn("#c0392b")} onClick={async () => { await store.deleteTopic(tp.id); await store.clearReport(r.id); load(); }}>Remove topic</button>}
               {!r.review_id && l && <button style={btn("#c0392b")} onClick={async () => { await store.deleteListing(l.id); await store.clearReport(r.id); load(); }}>Remove listing</button>}
               <button style={btn("#2e7d32")} onClick={async () => { await store.clearReport(r.id); load(); }}>Dismiss</button>
             </div>
