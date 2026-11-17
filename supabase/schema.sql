@@ -252,3 +252,17 @@ begin
 end $$;
 revoke all on function public.set_my_name(text, boolean) from public, anon;
 grant execute on function public.set_my_name(text, boolean) to authenticated;
+
+-- ---------- v3.4: kyat exchange rates (hundi + open market, set by admins) ----------
+create table if not exists public.fx_settings (
+  id int primary key default 1 check (id = 1),
+  usd_mmk_market numeric,
+  usd_mmk_hundi numeric,
+  note text not null default '',
+  updated_at timestamptz not null default now()
+);
+alter table public.fx_settings enable row level security;
+drop policy if exists "read fx" on public.fx_settings;
+create policy "read fx" on public.fx_settings for select using (true);
+drop policy if exists "admins set fx" on public.fx_settings;
+create policy "admins set fx" on public.fx_settings for update using (public.is_admin()) with check (public.is_admin());

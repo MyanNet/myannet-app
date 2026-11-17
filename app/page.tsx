@@ -13,6 +13,7 @@ import Zayat from "@/components/Zayat";
 import Share from "@/components/Share";
 import Profile from "@/components/Profile";
 import Latest, { NewBanner } from "@/components/Latest";
+import { RatesBoard, RatesTicker } from "@/components/Rates";
 import { THEME } from "@/components/ui";
 import { countryOptions, flag, nameOf } from "@/lib/countries";
 
@@ -259,6 +260,7 @@ export default function App(){
               <span style={{fontWeight:800,fontSize:12,color:"#8d5a2b",lineHeight:1.2}}>{lang==="mm"?"ဇရပ် (ဆွေးနွေးရာ)":"Zayat (discussion)"}</span>
             </div>
           </div>
+          <RatesTicker lang={lang} onOpen={()=>{setTab("hundi");window.scrollTo(0,0);}}/>
           <div id="mn-latest"><Latest onOpen={p=>{setTab(p);setFilter("all");window.scrollTo(0,0);}}/></div>
           <div style={{textAlign:"center",fontSize:12,color:"#6b7a6c",marginTop:8}}>
             {t.vision} · <a onClick={()=>setEmailModal(true)} style={{color:THEME.red,fontWeight:700,cursor:"pointer"}}>✅ {t.registerInterest}</a> · <a href="https://www.facebook.com/profile.php?id=61595978411240" target="_blank" rel="noreferrer" style={{color:"#1877f2",fontWeight:700}}>👥 {t.joinFb}</a>
@@ -311,31 +313,7 @@ export default function App(){
       {/* HUNDI */}
       {tab==="hundi"&&<div style={{maxWidth:900,margin:"0 auto",padding:"18px 16px"}}>
         <div style={{background:"#fef3c7",borderRadius:12,padding:13,marginBottom:18,border:"1px solid #f59e0b",fontSize:12,color:"#92400e"}}>{t.hundiNotice}</div>
-        <div style={{background:"#fff",borderRadius:16,padding:22,marginBottom:18,boxShadow:"0 4px 14px rgba(0,0,0,0.07)"}}>
-          <div style={{fontWeight:800,fontSize:16,color:"#7c3aed",marginBottom:12}}>{t.rateCalc}</div>
-          <div style={{display:"flex",gap:10,flexWrap:"wrap",alignItems:"flex-end",marginBottom:14}}>
-            <div><div style={{fontSize:11,fontWeight:700,color:"#555",marginBottom:3}}>{t.from}</div>
-              <select value={fromC} onChange={e=>setFromC(e.target.value)} style={{padding:"8px 12px",borderRadius:10,border:"1px solid #ddd",fontSize:13}}>
-                {["🇺🇸 USA","🇹🇭 Thailand","🇲🇾 Malaysia","🇯🇵 Japan","🇸🇬 Singapore"].map(c=><option key={c}>{c}</option>)}
-              </select>
-            </div>
-            <div><div style={{fontSize:11,fontWeight:700,color:"#555",marginBottom:3}}>{t.amount}</div>
-              <input type="number" value={sendAmt} onChange={e=>setSendAmt(e.target.value)} style={{padding:"8px 12px",borderRadius:10,border:"1px solid #ddd",fontSize:13,width:100}}/>
-            </div>
-            <div style={{paddingBottom:4,fontSize:16}}>→ 🇲🇲 Myanmar</div>
-          </div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(140px,1fr))",gap:10}}>
-            {[["USA","$",2100],["Thailand","฿",870],["Malaysia","RM",450],["Japan","¥",13.5],["Singapore","S$",1550]].map(([c,sym,rate])=>
-              fromC.includes(c)&&(
-                <div key={c} style={{background:"#faf5ff",borderRadius:12,padding:14,textAlign:"center",border:"1px solid #e9d5ff"}}>
-                  <div style={{fontSize:11,color:"#888",marginBottom:4}}>{t.send} {sym}{(+sendAmt).toLocaleString()}</div>
-                  <div style={{fontWeight:900,fontSize:22,color:"#7c3aed"}}>{(+sendAmt*rate).toLocaleString()}</div>
-                  <div style={{fontSize:11,color:"#888"}}>{t.receive}</div>
-                </div>
-              )
-            )}
-          </div>
-        </div>
+        <RatesBoard lang={lang}/>
         <CommunityListings pillar="hundi" color={COLORS.hundi}/>
         <div style={{background:"#f3f4f6",borderRadius:10,padding:"9px 12px",margin:"6px 0 12px",fontSize:12,color:"#555"}}>{t.examplesNote}</div>
         <div style={{fontWeight:800,fontSize:15,marginBottom:12}}>{t.communityAgents}</div>

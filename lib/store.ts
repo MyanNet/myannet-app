@@ -310,3 +310,17 @@ export async function setMyName(user: AppUser, name: string, showPhoto: boolean)
   if (error) throw new Error(error.message);
   return (await getUser())!;
 }
+
+// ---------- kyat exchange rates (admin) ----------
+export type Fx = { usd_mmk_market: number | null; usd_mmk_hundi: number | null; note: string; updated_at: string };
+export async function getFx(): Promise<Fx | null> {
+  if (!LIVE) return read<Fx | null>("mn_fx", null);
+  const { data } = await supabase!.from("fx_settings").select("*").eq("id", 1).maybeSingle();
+  return (data as Fx) || null;
+}
+export async function setFx(market: number | null, hundi: number | null, note: string) {
+  const row = { usd_mmk_market: market, usd_mmk_hundi: hundi, note, updated_at: new Date().toISOString() };
+  if (!LIVE) { write("mn_fx", row); return; }
+  const { error } = await supabase!.from("fx_settings").update(row).eq("id", 1);
+  if (error) throw error;
+}
