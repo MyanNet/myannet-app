@@ -17,7 +17,7 @@ export default function Share({ lang }: { lang: string }) {
   ];
   const btn = (bg: string): React.CSSProperties => ({ background: bg, color: "#fff", border: "none", borderRadius: 18, padding: "6px 12px", fontWeight: 700, fontSize: 12, cursor: "pointer", textDecoration: "none", display: "inline-block" });
   return (
-    <div style={{ display: "flex", gap: 6, justifyContent: "center", flexWrap: "wrap", alignItems: "center", marginTop: 14 }}>
+    <div style={{ display: "flex", gap: 6, justifyContent: "center", flexWrap: "wrap", alignItems: "center", marginTop: 10 }}>
       <span style={{ fontSize: 12, fontWeight: 700, color: "#556" }}>{lang === "mm" ? "မျှဝေရန်:" : "Share MyanNet:"}</span>
       {links.map(([n, c, href]) => <a key={n} href={href} target="_blank" rel="noreferrer" style={btn(c)}>{n}</a>)}
       <button style={btn("#555")} onClick={async () => { try { await navigator.clipboard.writeText(URL_); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch {} }}>

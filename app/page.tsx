@@ -234,66 +234,34 @@ export default function App(){
 
       {/* HOME */}
       {tab==="home"&&<>
-        <div style={{background:"linear-gradient(160deg,#e3f3e4 0%,#f1f8e9 55%,#fdf0ec 100%)",color:THEME.greenText,padding:"44px 20px 56px",textAlign:"center"}}>
-          <div style={{fontSize:46,marginBottom:8}}>🇲🇲</div>
-          <h1 style={{margin:"0 0 4px",fontSize:30,fontWeight:900,color:THEME.greenDark}}>{t.appName}</h1>
-          <div style={{fontSize:16,opacity:.8,marginBottom:14}}>{t.appSub}</div>
-          <NewBanner lang={lang}/>
-          <div style={{fontSize:14,opacity:.9,maxWidth:560,margin:"0 auto 20px",lineHeight:1.8}}>{t.tagline}</div>
-          <button onClick={()=>openPost()} style={{background:THEME.red,color:"#fff",border:"none",borderRadius:26,padding:"13px 28px",fontWeight:800,fontSize:15,cursor:"pointer",marginBottom:22,boxShadow:"0 6px 18px rgba(192,57,43,0.25)"}}>{s3.postYourBiz}</button>
-          <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
-            {[...["MM","TH","MY","SG","JP","KR","US","AU","AE"].map(c=>flag(c)+" "+nameOf(c,lang)),lang==="mm"?"🌍 နိုင်ငံအားလုံး":"🌍 + every country"].map(c=>(
-              <span key={c} style={{background:"#fff",color:THEME.greenText,border:"1px solid #d9e7da",borderRadius:20,padding:"5px 12px",fontSize:12,fontWeight:600}}>{c}</span>
-            ))}
+        {/* Compact hero: everything important fits on one screen */}
+        <div style={{background:"linear-gradient(160deg,#e3f3e4 0%,#f1f8e9 55%,#fdf0ec 100%)",color:THEME.greenText,padding:"16px 16px 40px",textAlign:"center"}}>
+          <h1 style={{margin:0,fontSize:26,fontWeight:900,color:THEME.greenDark}}>🇲🇲 {t.appName}</h1>
+          <div style={{fontSize:14,opacity:.85,margin:"2px 0 10px"}}>{t.appSub}</div>
+          <div style={{display:"flex",gap:10,justifyContent:"center",alignItems:"center",flexWrap:"wrap"}}>
+            <NewBanner lang={lang}/>
+            <button onClick={()=>openPost()} style={{background:THEME.red,color:"#fff",border:"none",borderRadius:22,padding:"8px 20px",fontWeight:800,fontSize:14,cursor:"pointer",boxShadow:"0 4px 12px rgba(192,57,43,0.25)"}}>{s3.postYourBiz}</button>
           </div>
           <Share lang={lang}/>
         </div>
 
-        <div id="mn-pillars-home" style={{maxWidth:1000,margin:"-28px auto 0",padding:"0 16px 32px"}}>
-          <div id="mn-latest"><Latest onOpen={p=>{setTab(p);setFilter("all");window.scrollTo(0,0);}}/></div>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))",gap:12,marginBottom:16}}>
+        <div id="mn-pillars-home" style={{maxWidth:1100,margin:"-30px auto 0",padding:"0 14px 18px"}}>
+          {/* Section shortcuts: one compact row */}
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(130px,1fr))",gap:8,marginBottom:10}}>
             {PILLARS.map((p,i)=>(
-              <div key={p} onClick={()=>{setTab(p);setFilter("all");}} style={{background:"#fff",borderRadius:16,padding:20,textAlign:"center",cursor:"pointer",boxShadow:"0 4px 16px rgba(0,0,0,0.08)",border:`2px solid ${COLORS[p]}18`}}>
-                <div style={{fontSize:34,marginBottom:8}}>{t.pillarIcons[i]}</div>
-                <div style={{fontWeight:800,fontSize:13,color:COLORS[p],lineHeight:1.3}}>{t.pillars[i]}</div>
-                <div style={{fontSize:11,color:"#888",marginTop:4,lineHeight:1.4}}>{t.pillarDesc[i]}</div>
+              <div key={p} onClick={()=>{setTab(p);setFilter("all");}} title={t.pillarDesc[i]} style={{background:"#fff",borderRadius:12,padding:"8px 10px",cursor:"pointer",boxShadow:"0 3px 10px rgba(0,0,0,0.07)",borderBottom:`3px solid ${COLORS[p]}`,display:"flex",alignItems:"center",gap:8}}>
+                <span style={{fontSize:22}}>{t.pillarIcons[i]}</span>
+                <span style={{fontWeight:800,fontSize:12,color:COLORS[p],lineHeight:1.2}}>{t.pillars[i]}</span>
               </div>
             ))}
-          </div>
-          <div onClick={()=>setTab("zayat")} style={{background:"linear-gradient(135deg,#b07a45,#8d5a2b)",color:"#fff",borderRadius:18,padding:"18px 20px",marginBottom:14,cursor:"pointer",display:"flex",alignItems:"center",gap:14,boxShadow:"0 4px 16px rgba(0,0,0,0.08)"}}>
-            <div style={{fontSize:38}}>💬</div>
-            <div style={{flex:1}}>
-              <div style={{fontWeight:900,fontSize:17}}>{lang==="mm"?"မြန်နက် ဇရပ် — ဆွေးနွေးရာ နေရာ":"MyanNet Zayat — the community discussion space"}</div>
-              <div style={{fontSize:12,opacity:.9,marginTop:3,lineHeight:1.5}}>{lang==="mm"?"မေးမြန်းပါ၊ အကြံဉာဏ်မျှဝေပါ၊ အချင်းချင်း ကူညီကြပါ။":"Ask questions, share tips about work, business and life abroad, and help each other."}</div>
-            </div>
-            <div style={{fontWeight:800,fontSize:20}}>›</div>
-          </div>
-          <div style={{background:"#fff",borderRadius:18,padding:24,marginBottom:14,boxShadow:"0 4px 16px rgba(0,0,0,0.06)"}}>
-            <div style={{fontWeight:900,fontSize:17,color:THEME.greenDark,marginBottom:14,textAlign:"center"}}>{t.whoTitle}</div>
-            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:12}}>
-              {t.who.map(x=>(
-                <div key={x.t} style={{background:THEME.greenSoft,borderRadius:12,padding:14,display:"flex",gap:10,alignItems:"flex-start"}}>
-                  <div style={{fontSize:24}}>{x.e}</div>
-                  <div><div style={{fontWeight:700,fontSize:13,marginBottom:2}}>{x.t}</div><div style={{fontSize:11,color:"#666",lineHeight:1.5}}>{x.d}</div></div>
-                </div>
-              ))}
+            <div onClick={()=>setTab("zayat")} style={{background:"#fff",borderRadius:12,padding:"8px 10px",cursor:"pointer",boxShadow:"0 3px 10px rgba(0,0,0,0.07)",borderBottom:"3px solid #8d5a2b",display:"flex",alignItems:"center",gap:8}}>
+              <span style={{fontSize:22}}>💬</span>
+              <span style={{fontWeight:800,fontSize:12,color:"#8d5a2b",lineHeight:1.2}}>{lang==="mm"?"ဇရပ် (ဆွေးနွေးရာ)":"Zayat (discussion)"}</span>
             </div>
           </div>
-          <div style={{background:THEME.redSoft,borderRadius:18,padding:26,color:"#7a1f14",textAlign:"center",border:"1px solid #f6d3cd"}}>
-            <div style={{fontWeight:900,fontSize:18,marginBottom:8}}>{t.visionTitle}</div>
-            <div style={{fontSize:14,opacity:.95,lineHeight:1.9,maxWidth:560,margin:"0 auto"}}>{t.vision}</div>
-            <div style={{marginTop:14,fontSize:20,letterSpacing:4}}>💼 💸 🏠 ✈️ 🛍️</div>
-          </div>
-        </div>
-
-        {/* EMAIL BANNER */}
-        <div style={{background:"#fff8e1",padding:"32px 20px",textAlign:"center",borderTop:"1px solid #f3e2b0"}}>
-          <div style={{fontSize:28,marginBottom:8}}>📬</div>
-          <div style={{color:"#3e2a00",fontWeight:900,fontSize:20,marginBottom:6}}>{t.beFirst}</div>
-          <div style={{color:"#6b5a2e",fontSize:14,marginBottom:20,lineHeight:1.7}}>{t.registerDesc}</div>
-          <div style={{display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap"}}>
-            <button onClick={()=>setEmailModal(true)} style={{background:"#c0392b",color:"#fff",border:"none",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer"}}>✅ {t.registerInterest}</button>
-            <a href="https://www.facebook.com/profile.php?id=61595978411240" target="_blank" rel="noreferrer" style={{background:"#1877f2",color:"#fff",borderRadius:24,padding:"13px 28px",fontWeight:800,fontSize:14,cursor:"pointer",textDecoration:"none",display:"inline-flex",alignItems:"center",gap:6}}>👥 {t.joinFb}</a>
+          <div id="mn-latest"><Latest onOpen={p=>{setTab(p);setFilter("all");window.scrollTo(0,0);}}/></div>
+          <div style={{textAlign:"center",fontSize:12,color:"#6b7a6c",marginTop:8}}>
+            {t.vision} · <a onClick={()=>setEmailModal(true)} style={{color:THEME.red,fontWeight:700,cursor:"pointer"}}>✅ {t.registerInterest}</a> · <a href="https://www.facebook.com/profile.php?id=61595978411240" target="_blank" rel="noreferrer" style={{color:"#1877f2",fontWeight:700}}>👥 {t.joinFb}</a>
           </div>
         </div>
       </>}
