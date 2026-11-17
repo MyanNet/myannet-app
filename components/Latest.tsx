@@ -56,3 +56,22 @@ export default function Latest({ onOpen }: { onOpen: (tab: string) => void }) {
     </div>
   );
 }
+
+// Small, eye-catching line at the top of the home page: "🆕 13 new posts this week — see them".
+export function NewBanner({ lang }: { lang: string }) {
+  const { version } = useApp();
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    Promise.all([store.fetchListings().catch(() => []), store.fetchTopics().catch(() => [])])
+      .then(([l, t]) => setN(l.filter((x) => isNew(x.created_at)).length + t.filter((x) => isNew(x.created_at)).length));
+  }, [version]);
+  if (!n) return null;
+  const mm = lang === "mm";
+  return (
+    <button onClick={() => document.getElementById("mn-latest")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+      style={{ background: "#fde047", color: "#713f12", border: "none", borderRadius: 22, padding: "8px 18px", fontWeight: 800, fontSize: 14, cursor: "pointer", margin: "4px 0 14px", boxShadow: "0 4px 12px rgba(234,179,8,0.35)", animation: "mnPulse 2s ease-in-out 3" }}>
+      <style>{`@keyframes mnPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}`}</style>
+      🆕 {mm ? `ယခုအပတ် ပို့စ်အသစ် ${n} ခု — ကြည့်ရန်` : `${n} new posts this week — see them`} ↓
+    </button>
+  );
+}

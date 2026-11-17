@@ -12,7 +12,7 @@ import Welcome from "@/components/Welcome";
 import Zayat from "@/components/Zayat";
 import Share from "@/components/Share";
 import Profile from "@/components/Profile";
-import Latest from "@/components/Latest";
+import Latest, { NewBanner } from "@/components/Latest";
 import { THEME } from "@/components/ui";
 import { countryOptions, flag, nameOf } from "@/lib/countries";
 
@@ -238,6 +238,7 @@ export default function App(){
           <div style={{fontSize:46,marginBottom:8}}>🇲🇲</div>
           <h1 style={{margin:"0 0 4px",fontSize:30,fontWeight:900,color:THEME.greenDark}}>{t.appName}</h1>
           <div style={{fontSize:16,opacity:.8,marginBottom:14}}>{t.appSub}</div>
+          <NewBanner lang={lang}/>
           <div style={{fontSize:14,opacity:.9,maxWidth:560,margin:"0 auto 20px",lineHeight:1.8}}>{t.tagline}</div>
           <button onClick={()=>openPost()} style={{background:THEME.red,color:"#fff",border:"none",borderRadius:26,padding:"13px 28px",fontWeight:800,fontSize:15,cursor:"pointer",marginBottom:22,boxShadow:"0 6px 18px rgba(192,57,43,0.25)"}}>{s3.postYourBiz}</button>
           <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
@@ -249,6 +250,7 @@ export default function App(){
         </div>
 
         <div id="mn-pillars-home" style={{maxWidth:1000,margin:"-28px auto 0",padding:"0 16px 32px"}}>
+          <div id="mn-latest"><Latest onOpen={p=>{setTab(p);setFilter("all");window.scrollTo(0,0);}}/></div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))",gap:12,marginBottom:16}}>
             {PILLARS.map((p,i)=>(
               <div key={p} onClick={()=>{setTab(p);setFilter("all");}} style={{background:"#fff",borderRadius:16,padding:20,textAlign:"center",cursor:"pointer",boxShadow:"0 4px 16px rgba(0,0,0,0.08)",border:`2px solid ${COLORS[p]}18`}}>
@@ -258,7 +260,6 @@ export default function App(){
               </div>
             ))}
           </div>
-          <Latest onOpen={p=>{setTab(p);setFilter("all");window.scrollTo(0,0);}}/>
           <div onClick={()=>setTab("zayat")} style={{background:"linear-gradient(135deg,#b07a45,#8d5a2b)",color:"#fff",borderRadius:18,padding:"18px 20px",marginBottom:14,cursor:"pointer",display:"flex",alignItems:"center",gap:14,boxShadow:"0 4px 16px rgba(0,0,0,0.08)"}}>
             <div style={{fontSize:38}}>💬</div>
             <div style={{flex:1}}>
