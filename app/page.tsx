@@ -473,9 +473,12 @@ export default function App(){
             </div>
             <div>
               <div style={{fontWeight:700,fontSize:12,color:"#fff",marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>{t.countries}</div>
-              {["🇺🇸 USA","🇹🇭 Thailand","🇲🇾 Malaysia","🇯🇵 Japan","🇸🇬 Singapore","🇲🇲 Myanmar"].map(c=>(
-                <div key={c} style={{color:"rgba(255,255,255,0.55)",fontSize:13,marginBottom:7}}>{c}</div>
-              ))}
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",columnGap:12}}>
+                {["MM","TH","MY","SG","JP","KR","TW","US","AU","AE","SA","QA"].map(c=>(
+                  <div key={c} style={{color:"rgba(255,255,255,0.55)",fontSize:13,marginBottom:7,whiteSpace:"nowrap"}}>{flag(c)} {nameOf(c,lang)}</div>
+                ))}
+              </div>
+              <div style={{color:"rgba(255,255,255,0.75)",fontSize:13,fontWeight:700}}>🌍 {lang==="mm"?"+ နိုင်ငံအားလုံး":"+ every country"}</div>
             </div>
             <div>
               <div style={{fontWeight:700,fontSize:12,color:"#fff",marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>{t.contact}</div>
