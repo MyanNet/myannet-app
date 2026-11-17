@@ -28,17 +28,17 @@ export default function Latest({ onOpen }: { onOpen: (tab: string) => void }) {
   return (
     <div className="mn-latest" style={{ display: "grid", gridTemplateColumns: "minmax(0,2.2fr) minmax(0,1fr)", gap: 10 }}>
       <style>{`@media (max-width:760px){.mn-latest{grid-template-columns:1fr!important}.mn-latest-grid{grid-template-columns:1fr!important}}`}</style>
-      <div style={{ background: "#fff", borderRadius: 14, padding: "12px 14px", boxShadow: "0 3px 12px rgba(0,0,0,0.06)" }}>
+      <div style={{ background: "#fff", borderRadius: 14, padding: "12px 14px", boxShadow: "0 3px 12px rgba(0,0,0,0.06)", minWidth: 0 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
           <div style={{ fontWeight: 900, fontSize: 15, color: THEME.greenDark }}>🆕 {mm ? "နောက်ဆုံးတင်ထားသည်များ" : "Latest on MyanNet"}</div>
           {newCount > 0 && <div style={{ fontSize: 11, color: "#713f12", background: "#fef9c3", borderRadius: 10, padding: "2px 8px", fontWeight: 700 }}>{mm ? `ယခုအပတ် အသစ် ${newCount}` : `${newCount} new this week`}</div>}
         </div>
         {!items.length && <div style={{ fontSize: 13, color: "#888", padding: 10 }}>{mm ? "ပို့စ် မရှိသေးပါ။" : "No posts yet."}</div>}
-        <div className="mn-latest-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+        <div className="mn-latest-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 6 }}>
           {items.map((l) => {
             const s = SEC[l.pillar] || ["📌", l.pillar, l.pillar, THEME.green];
             return (
-              <div key={l.id} onClick={() => onOpen(l.pillar)} style={{ borderLeft: `3px solid ${s[3]}`, background: "#fafcfa", borderRadius: 8, padding: "6px 9px", cursor: "pointer" }}>
+              <div key={l.id} onClick={() => onOpen(l.pillar)} style={{ borderLeft: `3px solid ${s[3]}`, background: "#fafcfa", borderRadius: 8, padding: "6px 9px", cursor: "pointer", minWidth: 0, overflow: "hidden" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", gap: 6, fontSize: 10.5 }}>
                   <span style={{ color: s[3], fontWeight: 800 }}>{s[0]} {mm ? s[2] : s[1]}</span>
                   <span style={{ color: "#888", whiteSpace: "nowrap" }}>{isNew(l.created_at) && <b style={{ color: "#a16207" }}>🆕 </b>}{ago(l.created_at, lang)}</span>
