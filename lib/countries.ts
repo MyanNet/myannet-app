@@ -6,8 +6,20 @@ const ALL = "AD AE AF AG AI AL AM AO AR AT AU AW AZ BA BB BD BE BF BG BH BI BJ B
 export const flag = (code: string) => String.fromCodePoint(...[...code.toUpperCase()].map((c) => 0x1f1a5 + c.charCodeAt(0)));
 
 const enNames = (() => { try { return new Intl.DisplayNames(["en"], { type: "region" }); } catch { return null; } })();
+// Burmese names for the main countries (some browsers, e.g. Chrome on Windows, have no Burmese names).
+const MM: Record<string, string> = {
+  MM: "မြန်မာ", TH: "ထိုင်း", MY: "မလေးရှား", SG: "စင်ကာပူ", JP: "ဂျပန်", KR: "တောင်ကိုရီးယား", TW: "ထိုင်ဝမ်",
+  US: "အမေရိကန်", AU: "ဩစတြေးလျ", AE: "အာရပ်စော်ဘွားများ (ဒူဘိုင်း)", SA: "ဆော်ဒီအာရေဗျ", QA: "ကာတာ", IN: "အိန္ဒိယ",
+  CN: "တရုတ်", GB: "ယူကေ", CA: "ကနေဒါ", NZ: "နယူးဇီလန်", IL: "အစ္စရေး", KW: "ကူဝိတ်", MO: "မကာအို", HK: "ဟောင်ကောင်",
+};
 export const nameOf = (code: string, lang: string = "en") => {
-  try { if (lang === "mm") return new Intl.DisplayNames(["my"], { type: "region" }).of(code) || code; } catch {}
+  if (lang === "mm" && MM[code]) return MM[code];
+  try {
+    if (lang === "mm") {
+      const n = new Intl.DisplayNames(["my"], { type: "region" }).of(code);
+      if (n && n !== enNames?.of(code)) return n;
+    }
+  } catch {}
   const n = enNames?.of(code) || code;
   return code === "US" ? "USA" : n;
 };
