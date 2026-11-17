@@ -10,6 +10,7 @@ import PostFlow from "@/components/PostFlow";
 import { CommunityListings, MyListings } from "@/components/Listings";
 import Welcome from "@/components/Welcome";
 import Zayat from "@/components/Zayat";
+import Share from "@/components/Share";
 import { THEME } from "@/components/ui";
 import { countryOptions, flag, nameOf } from "@/lib/countries";
 
@@ -138,8 +139,11 @@ export default function App(){
   const [version,setVersion]=useState(0);
   const [emailCountry,setEmailCountry]=useState("USA");
   useEffect(()=>{
-    store.getUser().then(setUser);
-    const off=store.onAuthChange(u=>{setUser(u);if(u)setLoginModal(false);});
+    // After sign-in the address bar can hold private login keys (#access_token=...).
+    // Remove them so nobody copies or shares them by accident.
+    const cleanUrl=()=>{if(/access_token|refresh_token|provider_token|error_description/.test(window.location.hash))window.history.replaceState(null,"",window.location.pathname+window.location.search);};
+    store.getUser().then(u=>{setUser(u);cleanUrl();});
+    const off=store.onAuthChange(u=>{setUser(u);if(u)setLoginModal(false);cleanUrl();});
     const q=new URLSearchParams(window.location.search);
     if(q.get("login_error"))setLoginModal(true);
     import("country-flag-emoji-polyfill").then(m=>m.polyfillCountryFlagEmojis()).catch(()=>{});
@@ -238,6 +242,7 @@ export default function App(){
               <span key={c} style={{background:"#fff",color:THEME.greenText,border:"1px solid #d9e7da",borderRadius:20,padding:"5px 12px",fontSize:12,fontWeight:600}}>{c}</span>
             ))}
           </div>
+          <Share lang={lang}/>
         </div>
 
         <div id="mn-pillars-home" style={{maxWidth:1000,margin:"-28px auto 0",padding:"0 16px 32px"}}>
