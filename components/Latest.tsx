@@ -17,12 +17,14 @@ export default function Latest({ onOpen }: { onOpen: (tab: string) => void }) {
   const mm = lang === "mm";
   const [items, setItems] = useState<store.Listing[]>([]);
   const [topics, setTopics] = useState<store.Topic[]>([]);
+  const [newCount, setNewCount] = useState(0);
   useEffect(() => {
-    store.fetchListings().then((l) => setItems(l.slice(0, 8))).catch(() => {});
-    store.fetchTopics().then((t) => setTopics(t.slice(0, 3))).catch(() => {});
+    Promise.all([store.fetchListings().catch(() => []), store.fetchTopics().catch(() => [])]).then(([l, t]) => {
+      setItems(l.slice(0, 8)); setTopics(t.slice(0, 3));
+      setNewCount(l.filter((x) => isNew(x.created_at)).length + t.filter((x) => isNew(x.created_at)).length);
+    });
   }, [version]);
   if (!items.length && !topics.length) return null;
-  const newCount = items.filter((l) => isNew(l.created_at)).length;
   return (
     <div style={{ background: "#fff", borderRadius: 18, padding: 20, marginBottom: 14, boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 6, marginBottom: 12 }}>
