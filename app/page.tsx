@@ -11,6 +11,7 @@ import { CommunityListings, MyListings } from "@/components/Listings";
 import Welcome from "@/components/Welcome";
 import Zayat from "@/components/Zayat";
 import Share from "@/components/Share";
+import Profile from "@/components/Profile";
 import { THEME } from "@/components/ui";
 import { countryOptions, flag, nameOf } from "@/lib/countries";
 
@@ -136,6 +137,7 @@ export default function App(){
   const [loginModal,setLoginModal]=useState(false);
   const [postType,setPostType]=useState(null); // null = closed, "" = choose type
   const [mineOpen,setMineOpen]=useState(false);
+  const [nameOpen,setNameOpen]=useState(false);
   const [version,setVersion]=useState(0);
   const [emailCountry,setEmailCountry]=useState("USA");
   useEffect(()=>{
@@ -214,7 +216,7 @@ export default function App(){
                     <div style={{fontWeight:800,fontSize:13}}>{user.name}</div>
                     <div style={{fontSize:11,color:"#888",marginTop:2}}>{user.method}</div>
                   </div>
-                  {[["➕",s3.postFree.replace("+ ",""),()=>{setProfileOpen(false);openPost();}],["📋",s3.myListings,()=>{setProfileOpen(false);setMineOpen(true);}],...(user.is_admin?[["🛡️",s3.admin,()=>{window.location.href="/admin";}]]:[])].map(([ic,lb,fn])=>(
+                  {[["➕",s3.postFree.replace("+ ",""),()=>{setProfileOpen(false);openPost();}],["✏️",lang==="mm"?"ကျွန်ုပ်၏ အမည်":"Edit my name",()=>{setProfileOpen(false);setNameOpen(true);}],["📋",s3.myListings,()=>{setProfileOpen(false);setMineOpen(true);}],...(user.is_admin?[["🛡️",s3.admin,()=>{window.location.href="/admin";}]]:[])].map(([ic,lb,fn])=>(
                     <div key={lb} onClick={fn} style={{padding:"9px 14px",fontSize:13,color:"#333",cursor:"pointer",borderRadius:8,display:"flex",gap:8}}><span>{ic}</span><span>{lb}</span></div>
                   ))}
                   <div onClick={handleLogout} style={{padding:"9px 14px",fontSize:13,color:"#c0392b",cursor:"pointer",borderRadius:8,display:"flex",gap:8,borderTop:"1px solid #f0f0f0",marginTop:4}}><span>🚪</span><span>{t.logOut}</span></div>
@@ -470,6 +472,8 @@ export default function App(){
           ))}
         </div>
       </div>}
+
+      {nameOpen&&user&&<Profile user={user} lang={lang} onClose={()=>setNameOpen(false)} onSaved={u=>{setUser(u);setVersion(v=>v+1);}}/>}
 
       {/* ZAYAT */}
       {tab==="zayat"&&<Zayat/>}

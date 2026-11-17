@@ -42,7 +42,8 @@ async function toAppUser(u: any): Promise<AppUser | null> {
   return {
     id: u.id,
     name: p?.display_name || meta.full_name || meta.name || u.phone || (u.email || "").split("@")[0] || "Member",
-    photo: p?.avatar_url || meta.avatar_url || meta.picture || null,
+    // avatar_url "" means the person chose to hide their photo
+    photo: p?.avatar_url === "" ? null : p?.avatar_url || meta.avatar_url || meta.picture || null,
     method: meta.provider || u.app_metadata?.provider || "member",
     is_admin: !!p?.is_admin,
     intent: p?.intent ?? null,
@@ -300,4 +301,12 @@ export async function deleteTopic(id: string) {
   }
   const { error } = await supabase!.from("zayat_topics").delete().eq("id", id);
   if (error) throw error;
+}
+
+// ---------- public name / photo ----------
+export async function setMyName(user: AppUser, name: string, showPhoto: boolean): Promise<AppUser> {
+  if (!LIVE) { const u = { ...user, name: name.trim(), photo: showPhoto ? user.photo : null }; write("mn_user", u); emitDemo(u); return u; }
+  const { error } = await supabase!.rpc("set_my_name", { new_name: name, show_photo: showPhoto });
+  if (error) throw new Error(error.message);
+  return (await getUser())!;
 }

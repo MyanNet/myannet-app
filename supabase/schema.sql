@@ -227,3 +227,28 @@ end $$;
 drop trigger if exists reviews_limit on public.reviews;
 create trigger reviews_limit before insert on public.reviews
   for each row execute function public.limit_reviews();
+
+-- ---------- v3.3: choose your public name (and hide your photo) ----------
+-- Names go through this function only, so "Admin"/"MyanNet" names stay reserved for admins,
+-- and the new name is applied to everything the person has already posted.
+revoke update (display_name, avatar_url) on public.profiles from authenticated;
+create or replace function public.set_my_name(new_name text, show_photo boolean) returns void
+language plpgsql security definer set search_path = public as $$
+declare n text := btrim(coalesce(new_name, ''));
+begin
+  if auth.uid() is null then raise exception 'Please sign in'; end if;
+  if char_length(n) < 2 or char_length(n) > 40 then raise exception 'Name must be 2 to 40 characters'; end if;
+  if not public.is_admin() and n ~* '(admin|myannet|moderator|မြန်နက်)' then
+    raise exception 'This name is reserved. Please choose another.';
+  end if;
+  update public.profiles p set display_name = n,
+    avatar_url = case when show_photo then coalesce(nullif(p.avatar_url, ''),
+        (select coalesce(u.raw_user_meta_data->>'avatar_url', u.raw_user_meta_data->>'picture') from auth.users u where u.id = auth.uid()))
+      else '' end
+    where p.id = auth.uid();
+  update public.listings set author_name = n where user_id = auth.uid();
+  update public.reviews set author_name = n where user_id = auth.uid();
+  update public.zayat_topics set author_name = n where user_id = auth.uid();
+end $$;
+revoke all on function public.set_my_name(text, boolean) from public, anon;
+grant execute on function public.set_my_name(text, boolean) to authenticated;
