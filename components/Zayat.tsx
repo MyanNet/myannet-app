@@ -4,6 +4,7 @@ import { useApp } from "@/lib/ctx";
 import * as store from "@/lib/store";
 import { Modal, Btn, inputStyle, THEME } from "./ui";
 import { ReportLink } from "./Reviews";
+import { ago, isNew } from "@/lib/when";
 
 // MyanNet Zayat (ဇရပ်): community discussion. Business and community help only — no politics.
 const BROWN = "#8d5a2b";
@@ -109,11 +110,11 @@ export default function Zayat() {
         {topics.map((t) => (
           <div key={t.id} onClick={() => setOpen(t)} style={{ background: "#fff", borderRadius: 14, padding: "14px 16px", boxShadow: "0 3px 12px rgba(0,0,0,0.06)", cursor: "pointer", borderLeft: `4px solid ${BROWN}` }}>
             <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
-              <div style={{ fontWeight: 800, fontSize: 15, color: "#2b1d10" }}>{t.title}</div>
+              <div style={{ fontWeight: 800, fontSize: 15, color: "#2b1d10" }}>{isNew(t.created_at) && <span style={{ background: "#fde047", color: "#713f12", borderRadius: 12, padding: "1px 8px", fontSize: 10, fontWeight: 800, marginRight: 6, verticalAlign: "middle" }}>🆕 {lang === "mm" ? "အသစ်" : "NEW"}</span>}{t.title}</div>
               <div style={{ fontSize: 12, color: BROWN, fontWeight: 800, whiteSpace: "nowrap" }}>💬 {t.reply_count}</div>
             </div>
             <div style={{ fontSize: 11, color: "#888", marginTop: 4 }}>
-              {(z.cats as Record<string, string>)[t.category] || t.category}{t.city ? " · 📍 " + t.city : ""} · {z.by} {t.author_name || "Member"} · {when(t.created_at)}
+              {(z.cats as Record<string, string>)[t.category] || t.category}{t.city ? " · 📍 " + t.city : ""} · {z.by} {t.author_name || "Member"} · 🕒 {ago(t.last_activity || t.created_at, lang)}
             </div>
             {t.body && <div style={{ fontSize: 13, color: "#555", marginTop: 6, lineHeight: 1.5, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>{t.body}</div>}
           </div>

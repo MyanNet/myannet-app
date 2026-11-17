@@ -5,6 +5,7 @@ import { useApp } from "@/lib/ctx";
 import * as store from "@/lib/store";
 import { ReviewBar } from "./Reviews";
 import { Modal, Btn, THEME } from "./ui";
+import { ago, isNew } from "@/lib/when";
 
 const KIND_LABEL: Record<string, [string, string]> = {
   offer: ["Offering", "ပေးဆောင်သည်"], seek: ["Looking for", "ရှာဖွေနေသည်"],
@@ -29,16 +30,22 @@ function contactLinks(c: store.Contact) {
 export function ListingCard({ l, color }: { l: store.Listing; color: string }) {
   const { lang } = useApp();
   const k = KIND_LABEL[l.kind];
+  const [more, setMore] = useState(false);
+  const long = (l.description || "").length > 280;
   return (
     <div style={{ background: "#fff", borderRadius: 16, padding: 18, boxShadow: "0 4px 14px rgba(0,0,0,0.06)", borderTop: `4px solid ${color}` }}>
       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 8 }}>
         {k && <span style={{ background: `${color}18`, color, borderRadius: 20, padding: "3px 10px", fontSize: 11, fontWeight: 700 }}>{lang === "mm" ? k[1] : k[0]}</span>}
-        <span style={{ background: THEME.greenSoft, color: THEME.green, borderRadius: 20, padding: "3px 10px", fontSize: 11, fontWeight: 700 }}>🆕 MyanNet</span>
+        {isNew(l.created_at) && <span style={{ background: "#fde047", color: "#713f12", borderRadius: 20, padding: "3px 10px", fontSize: 11, fontWeight: 800 }}>🆕 {lang === "mm" ? "အသစ်" : "NEW"}</span>}
+        <span style={{ background: "#f3f4f6", color: "#555", borderRadius: 20, padding: "3px 10px", fontSize: 11, fontWeight: 700 }}>🕒 {ago(l.created_at, lang)}</span>
       </div>
       <div style={{ fontWeight: 800, fontSize: 15, marginBottom: 2, overflowWrap: "anywhere" }}>{l.title}</div>
       <div style={{ color: "#888", fontSize: 12, marginBottom: 4 }}>📍 {[l.city, l.country].filter(Boolean).join(", ")} · 👤 {l.author_name}</div>
       {l.price && <div style={{ color, fontWeight: 700, fontSize: 14, marginBottom: 6 }}>💰 {l.price}</div>}
-      {l.description && <div style={{ fontSize: 12, color: "#555", marginBottom: 8, lineHeight: 1.6, whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>{l.description}</div>}
+      {l.description && <div style={{ fontSize: 12, color: "#555", marginBottom: 8, lineHeight: 1.6, whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
+        {long && !more ? l.description.slice(0, 260).trimEnd() + "…" : l.description}
+        {long && <button onClick={() => setMore(!more)} style={{ background: "none", border: "none", color: THEME.green, fontWeight: 700, cursor: "pointer", fontSize: 12, padding: "0 4px" }}>{more ? (lang === "mm" ? "ချုံ့ရန်" : "Less") : (lang === "mm" ? "ဆက်ဖတ်ရန်" : "More")}</button>}
+      </div>}
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
         {contactLinks(l.contact).map(([label, bg, href]) => (
           <a key={label} href={href} target="_blank" rel="noreferrer noopener" style={{ background: bg, color: "#fff", borderRadius: 10, padding: "7px 12px", fontSize: 12, fontWeight: 700, textDecoration: "none" }}>{label}</a>

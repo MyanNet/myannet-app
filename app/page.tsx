@@ -12,6 +12,7 @@ import Welcome from "@/components/Welcome";
 import Zayat from "@/components/Zayat";
 import Share from "@/components/Share";
 import Profile from "@/components/Profile";
+import Latest from "@/components/Latest";
 import { THEME } from "@/components/ui";
 import { countryOptions, flag, nameOf } from "@/lib/countries";
 
@@ -257,6 +258,7 @@ export default function App(){
               </div>
             ))}
           </div>
+          <Latest onOpen={p=>{setTab(p);setFilter("all");window.scrollTo(0,0);}}/>
           <div onClick={()=>setTab("zayat")} style={{background:"linear-gradient(135deg,#b07a45,#8d5a2b)",color:"#fff",borderRadius:18,padding:"18px 20px",marginBottom:14,cursor:"pointer",display:"flex",alignItems:"center",gap:14,boxShadow:"0 4px 16px rgba(0,0,0,0.08)"}}>
             <div style={{fontSize:38}}>💬</div>
             <div style={{flex:1}}>
