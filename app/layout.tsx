@@ -6,7 +6,7 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.myannet.app"),
-  title: "MyanNet | မြန်နက် — All-in-one services, anywhere, for the people of Myanmar",
+  title: "MyanNet | မြန်နက် — All-in-one services, anywhere, for Myanmar and Burmese people",
   description,
   applicationName: "MyanNet",
   keywords: [

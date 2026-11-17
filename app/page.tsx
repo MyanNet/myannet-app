@@ -11,12 +11,13 @@ import { CommunityListings, MyListings } from "@/components/Listings";
 import Welcome from "@/components/Welcome";
 import Zayat from "@/components/Zayat";
 import { THEME } from "@/components/ui";
+import { countryOptions, flag, nameOf } from "@/lib/countries";
 
 const T = {
   en: {
-    appName:"MyanNet", appSub:"မြန်နက် · All-in-one services, anywhere, for the people of Myanmar", beta:"BETA",
+    appName:"MyanNet", appSub:"မြန်နက် · All-in-one services, anywhere, for Myanmar and Burmese people", beta:"BETA",
     tagline:"The all-in-one platform for Burmese/Myanmar communities worldwide — find work, send money home, rent a room, ship goods, and buy & sell within a trusted community.",
-    vision:"Connecting Myanmar Communities working/living abroad to their loved ones living locally, and vice versa.",
+    vision:"Connecting Myanmar/Burmese communities living and working abroad with their loved ones at home, and vice versa.",
     visionTitle:"🌏 Our Vision", whoTitle:"Who MyanNet Serves",
     pillars:["Help Wanted","Hundi / Send Money","Rent","Cargo / Hand Carry","2nd Hand Goods","Businesses"],
     pillarIcons:["💼","💸","🏠","✈️","🛍️","🏪"],
@@ -135,7 +136,7 @@ export default function App(){
   const [postType,setPostType]=useState(null); // null = closed, "" = choose type
   const [mineOpen,setMineOpen]=useState(false);
   const [version,setVersion]=useState(0);
-  const [emailCountry,setEmailCountry]=useState("🇺🇸 USA");
+  const [emailCountry,setEmailCountry]=useState("USA");
   useEffect(()=>{
     store.getUser().then(setUser);
     const off=store.onAuthChange(u=>{setUser(u);if(u)setLoginModal(false);});
@@ -233,7 +234,7 @@ export default function App(){
           <div style={{fontSize:14,opacity:.9,maxWidth:560,margin:"0 auto 20px",lineHeight:1.8}}>{t.tagline}</div>
           <button onClick={()=>openPost()} style={{background:THEME.red,color:"#fff",border:"none",borderRadius:26,padding:"13px 28px",fontWeight:800,fontSize:15,cursor:"pointer",marginBottom:22,boxShadow:"0 6px 18px rgba(192,57,43,0.25)"}}>{s3.postYourBiz}</button>
           <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
-            {["🇺🇸 USA","🇹🇭 Thailand","🇲🇾 Malaysia","🇯🇵 Japan","🇸🇬 Singapore","🇲🇲 Myanmar"].map(c=>(
+            {[...["MM","TH","MY","SG","JP","KR","US","AU","AE"].map(c=>flag(c)+" "+nameOf(c,lang)),lang==="mm"?"🌍 နိုင်ငံအားလုံး":"🌍 + every country"].map(c=>(
               <span key={c} style={{background:"#fff",color:THEME.greenText,border:"1px solid #d9e7da",borderRadius:20,padding:"5px 12px",fontSize:12,fontWeight:600}}>{c}</span>
             ))}
           </div>
@@ -479,7 +480,7 @@ export default function App(){
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:28,marginBottom:28}}>
             <div>
               <div style={{fontWeight:900,fontSize:18,color:"#fff",marginBottom:6}}>🇲🇲 MyanNet</div>
-              <div style={{fontSize:12,color:"rgba(255,255,255,0.45)",lineHeight:1.8,marginBottom:10}}>မြန်နက် · All-in-one services, anywhere, for the people of Myanmar</div>
+              <div style={{fontSize:12,color:"rgba(255,255,255,0.45)",lineHeight:1.8,marginBottom:10}}>မြန်နက် · All-in-one services, anywhere, for Myanmar and Burmese people</div>
               <div style={{fontSize:12,color:"rgba(255,255,255,0.5)",lineHeight:1.8}}>{lang==="mm"?"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ့လူ့အဖွဲ့အစည်းအတွက် ယုံကြည်ရသောပလက်ဖောင်း":"The trusted platform for Burmese/Myanmar communities worldwide."}</div>
             </div>
             <div>
@@ -544,7 +545,7 @@ export default function App(){
               </div>
               <div style={{fontSize:11,fontWeight:700,color:"#555",marginBottom:4}}>{t.country}</div>
               <select value={emailCountry} onChange={e=>setEmailCountry(e.target.value)} style={{width:"100%",padding:"10px 12px",borderRadius:10,border:"1px solid #ddd",fontSize:13,marginBottom:16,boxSizing:"border-box"}}>
-                {["🇺🇸 USA","🇹🇭 Thailand","🇲🇾 Malaysia","🇯🇵 Japan","🇸🇬 Singapore","🇲🇲 Myanmar","Other"].map(c=><option key={c}>{c}</option>)}
+                {(()=>{const o=countryOptions(lang);return<><optgroup label="★">{o.popular.map(x=><option key={x.value} value={x.value}>{x.label}</option>)}</optgroup><optgroup label="A–Z">{o.all.map(x=><option key={x.value} value={x.value}>{x.label}</option>)}</optgroup></>;})()}
               </select>
               <button onClick={async()=>{if(!email.includes("@"))return;try{await store.registerInterest(email,emailRole,emailCountry);}catch{}setEmailDone(true);}} style={{width:"100%",background:email?"#c0392b":"#ccc",color:"#fff",border:"none",borderRadius:12,padding:"13px",fontWeight:800,cursor:email?"pointer":"default",fontSize:14}}>✅ {t.registerNow}</button>
               <div style={{fontSize:11,color:"#aaa",textAlign:"center",marginTop:10}}>{t.noSpam}</div>

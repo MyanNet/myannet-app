@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "MyanNet | မြန်နက်",
     short_name: "MyanNet",
-    description: "All-in-one services, anywhere, for the people of Myanmar",
+    description: "All-in-one services, anywhere, for Myanmar and Burmese people",
     start_url: "/",
     display: "standalone",
     background_color: "#f4faf4",

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { S } from "@/lib/i18n";
 import { useApp } from "@/lib/ctx";
 import * as store from "@/lib/store";
+import { countryOptions } from "@/lib/countries";
 import { Modal, Btn, inputStyle, THEME } from "./ui";
 
 // Each post type maps to one of the site's sections ("pillars").
@@ -10,7 +11,6 @@ export const TYPE_TO_PILLAR: Record<string, string> = {
   biz: "biz", ad: "biz", card: "biz", jobs: "jobs", rent: "rent", hundi: "hundi", cargo: "cargo", goods: "goods",
 };
 const TYPE_ORDER = ["biz", "ad", "card", "jobs", "rent", "hundi", "cargo", "goods"];
-const COUNTRIES = ["USA", "Myanmar", "Thailand", "Malaysia", "Japan", "Singapore", "South Korea", "India", "Other"];
 const CONTACT_FIELDS: [keyof store.Contact, string][] = [
   ["facebook", "cFacebook"], ["tiktok", "cTiktok"], ["telegram", "cTelegram"],
   ["viber", "cViber"], ["whatsapp", "cWhatsapp"], ["phone", "cPhone"],
@@ -90,7 +90,7 @@ export default function PostFlow({ initialType, onClose }: { initialType?: strin
       <textarea value={f.description} maxLength={2000} rows={4} onChange={(e) => setF({ ...f, description: e.target.value })} placeholder={s.descPh} style={{ ...inputStyle, resize: "vertical" }} />
       <div style={{ display: "flex", gap: 10 }}>
         <div style={{ flex: 1 }}>{lbl(s.country)}
-          <select value={f.country} onChange={(e) => setF({ ...f, country: e.target.value })} style={inputStyle}>{COUNTRIES.map((c) => <option key={c}>{c}</option>)}</select>
+          <select value={f.country} onChange={(e) => setF({ ...f, country: e.target.value })} style={inputStyle}>{(() => { const o = countryOptions(lang); return <><optgroup label="★">{o.popular.map((x) => <option key={x.value} value={x.value}>{x.label}</option>)}</optgroup><optgroup label="A–Z">{o.all.map((x) => <option key={x.value} value={x.value}>{x.label}</option>)}</optgroup></>; })()}</select>
         </div>
         <div style={{ flex: 1 }}>{lbl(s.city)}<input value={f.city} onChange={(e) => setF({ ...f, city: e.target.value })} style={inputStyle} /></div>
       </div>
