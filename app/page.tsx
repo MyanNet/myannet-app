@@ -43,20 +43,20 @@ const T = {
     registered:"You're registered!", thankyou:"Thank you for joining MyanNet. We'll be in touch soon with updates!", bySigningIn:"By signing in, you agree to our Terms of Use and Privacy Policy",
   },
   mm: {
-    appName:"မြန်နက်", appSub:"MyanNet · မည်သည့်နေရာမဆို မြန်မာပြည်သူများအတွက် စုံလင်သော ဝန်ဆောင်မှု", beta:"ဘီတာ",
-    tagline:"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ/ဗမာ လူ့အဖွဲ့အစည်းများအတွက် စုံလင်သောပလက်ဖောင်း — အလုပ်ရှာ၊ အိမ်သို့ငွေလွှဲ၊ အခန်းငှား၊ ကုန်ပို့နှင့် ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းနိုင်သည်။",
-    vision:"နိုင်ငံခြားတွင် အလုပ်လုပ်/နေထိုင်နေသော မြန်မာများနှင့် ဒေသတွင်းရှိ ချစ်ခင်ရသူများကို ချိတ်ဆက်ပေးသည် — နှစ်ဦးနှစ်ဖက်စလုံးအတွက်။",
-    visionTitle:"🌏 ကျွန်ုပ်တို့၏ မျှော်မှန်းချက်", whoTitle:"မြန်နက် မည်သူများအတွက်",
+    appName:"မြန်နက်", appSub:"MyanNet · မည်သည့်နေရာမဆို မြန်မာပြည်သူများအတွက် ဝန်ဆောင်မှုများ", beta:"ဘီတာ",
+    tagline:"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ/ဗမာ လူ့အဖွဲ့အစည်းများအတွက် စုံလင်သောပလက်ဖောင်း — အလုပ်ရှာ၊ အိမ်သို့ငွေလွှဲ၊ အခန်းငှား၊ ကုန်ပို့နှင့် ယုံကြည်စိတ်ချရသော အသိုင်းအဝိုင်းအတွင်း ဝယ်/ရောင်း နိုင်ပါတယ်။",
+    vision:"နိုင်ငံခြားတွင် အလုပ်လုပ်/နေထိုင်နေသော မြန်မာများနှင့် ဒေသတွင်းရှိ မိသားစု မိတ်ဆွေများအတွက်/ကို  ချိတ်ဆက်ပေးမည့် — နှစ်ဦးနှစ်ဖက်/အပြန်အလှန် အကျိုးတူ",
+    visionTitle:"🌏 ကျွန်ုပ်တို့၏ မျှော်မှန်းချက်", whoTitle:"မြန်နက် မည်သူမဆို",
     pillars:["အလုပ်အကိုင်","ဟွန်ဒီ / ငွေလွှဲ","အိမ်ငှား","ကုန်တင်ဆောင်","အသုံးချပစ္စည်း","လုပ်ငန်းများ"],
     pillarIcons:["💼","💸","🏠","✈️","🛍️","🏪"],
-    pillarDesc:["နိုင်ငံအားလုံးတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","ယုံကြည်ရသော ကိုယ်စားလှယ်များမှတစ်ဆင့် ငွေလွှဲပေးပို့ရန်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းရန်","မြန်မာလုပ်ငန်းများ၊ ဆိုင်များနှင့် ဝန်ဆောင်မှုများ ရှာဖွေရန်"],
-    who:[{e:"🍣",t:"ဆူရှီ အလုပ်သမားများ",d:"အမေရိကန်ရှိ စားသောက်ဆိုင်နှင့် ကြယ်မှတ်ဆိုင်များတွင်"},{e:"🏭",t:"စက်ရုံနှင့် ဆောက်လုပ်ရေး",d:"ထိုင်း၊ မလေးရှား၊ ကိုရီးယား၊ ဂျပန်တွင်"},{e:"🏪",t:"လုပ်ငန်းရှင်များ",d:"ပြည်ပရှိ စားသောက်ဆိုင်၊ ဆိုင်ခန်းနှင့် ဝန်ဆောင်မှုများ"},{e:"✈️",t:"အသစ်ရောက်ရှိသူများ",d:"အိမ်ရာ၊ အလုပ်နှင့် အသိုင်းအဝိုင်း လိုအပ်သူများ"},{e:"💰",t:"မြန်မာပြည်ရှိ မိသားစု",d:"ပြည်ပမှ ငွေလွှဲလက်ခံသူများ"},{e:"🌏",t:"နိုင်ငံဖြတ်ကျော်ခရီးသည်",d:"နိုင်ငံများကြားတွင် ကုန်ပစ္စည်းဆောင်ဆောင်သူများ"}],
+    pillarDesc:["နိုင်ငံတကာတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","ယုံကြည်ရသော ကိုယ်စားလှယ်များ/agentများ မှတစ်ဆင့် ငွေလွှဲပေးပို့ရန်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းရန်","မြန်မာလုပ်ငန်းများ၊ ဆိုင်များနှင့် ဝန်ဆောင်မှုများ ရှာဖွေရန်"],
+    who:[{e:"🍣",t:"ဆူရှီ သမားများအတွက်",d:"အမေရိကန်ရှိ စားသောက်ဆိုင်နှင့်လိုအပ်တာများ"},{e:"🏭",t:"စက်ရုံနှင့် ဆောက်လုပ်ရေး",d:"ထိုင်း၊ မလေးရှား၊ ကိုရီးယား၊ ဂျပန်တွင်"},{e:"🏪",t:"လုပ်ငန်းရှင်များ",d:"ပြည်ပရှိ စားသောက်ဆိုင်၊ ဆိုင်ခန်းနှင့် ဝန်ဆောင်မှုများ"},{e:"✈️",t:"အသစ်ရောက်ရှိသူများ",d:"အိမ်ရာ၊ အလုပ်နှင့် အသိုင်းအဝိုင်း လိုအပ်သူများ"},{e:"💰",t:"မြန်မာပြည်ရှိ မိသားစု",d:"ပြည်ပမှ ငွေလွှဲလက်ခံသူများ"},{e:"🌏",t:"နိုင်ငံဖြတ်ကျော်ခရီးသည်",d:"နိုင်ငံများကြားတွင် ကုန်ပစ္စည်းဆောင်ဆောင်သူများ"}],
     findWork:"အလုပ်ရှာ", hireWorkers:"အလုပ်သမားခေါ်", allPosts:"အားလုံး", jobsAvail:"🏪 အလုပ်ရှိသည်", seekWork:"👷 အလုပ်ရှာနေသည်",
     allRooms:"အားလုံး", roomsAvail:"🏠 ငှားရမ်းရန်ရှိ", seekRoom:"🔍 အိမ်ရှာနေသည်",
     allCargo:"အားလုံး", canCarry:"✈️ ဆောင်ပေးနိုင်", needCarry:"📦 ဆောင်ပေးမည့်သူရှာ",
     postJob:"အလုပ်ဖော်ပြ", postAgent:"ကိုယ်စားလှယ်မှတ်ပုံတင်", postRental:"အိမ်ငှားဖော်ပြ", postCarry:"ဆောင်ဆောင်ဖော်ပြ", postItem:"ပစ္စည်းရောင်းဖော်ပြ",
     contactFb:"💬 Facebook မှ ဆက်သွယ်", contactViber:"📱 WhatsApp / Viber", msgSeller:"💬 ရောင်းသူကို မက်ဆေ့ပို့",
-    hundiNotice:"⚠️ ဟွန်ဒီသည် မြန်မာ့ရွှေ့ပြောင်းသူများ အကြားတွင် ကျယ်ကျယ်ပြန့်ပြန့် အသုံးပြုသော ယုံကြည်မှုအခြေခံ ငွေလွှဲစနစ်ဖြစ်သည်။ ကိုယ်စားလှယ်များကို အသိုင်းအဝိုင်းမှ စစ်ဆေးအတည်ပြုသည်။",
+    hundiNotice:"⚠️ ဟွန်ဒီသည် မြန်မာ့ရွှေ့ပြောင်းသူများ အကြားတွင် ကျယ်ကျယ်ပြန့်ပြန့် အသုံးပြုသော ယုံကြည်မှုအခြေခံ ငွေလွှဲစနစ်ဖြစ်သည်။ ကိုယ်စားလှယ်များကို/agentများ စစ်ဆေးအတည်ပြုမည့်။",
     cargoNotice:"✈️ ကိုယ်ထည်ဆောင်ကွန်ရက်: ခရီးသွားများသည် ထားခဲ့သောဘက်ဂေ့နေရာကို ကုန်ပစ္စည်းများ ဆောင်ဆောင်ပေးရန် ကမ်းလှမ်းသည်။",
     rateCalc:"💱 နှုန်းထားတွက်ချက်မှု", from:"မှ", amount:"ပမာဏ", communityAgents:"🤝 အသိုင်းအဝိုင်း ကိုယ်စားလှယ်များ",
     example:"📌 နမူနာ",examplesNote:"📌 အောက်ပါတို့သည် ပို့စ်ပုံစံ နမူနာများသာ ဖြစ်ပြီး လူ သို့မဟုတ် လုပ်ငန်း အစစ်အမှန် မဟုတ်ပါ။ အသိုင်းအဝိုင်းမှ တကယ့်ပို့စ်များကို အပေါ်တွင် ပြသထားသည်။",verified:"✅ အတည်ပြုပြီး", pending:"⏳ စောင့်ဆိုင်းဆဲ", reviews:"သုံးသပ်ချက်", rate:"နှုန်းထား", fee:"ကြေးငွေ", dailyLimit:"နေ့စဉ်ကန့်သတ်",
@@ -73,11 +73,11 @@ const T = {
 };
 
 const JOBS=[
-  {id:1,type:"offer",title:"Head Sushi Chef Needed",titleMM:"ဦးဆောင်ဆူရှီ ဆရာ လိုအပ်သည်",employer:"Golden Sushi Co.",location:"Houston, TX 🇺🇸",pay:"$28-32/hr",urgent:true,skills:["Nigiri","Sashimi","Rolling"],desc:"Busy restaurant, immediate start, housing help available.",descMM:"လုပ်ငန်းအလုပ်များသောဆိုင်၊ ချက်ချင်းစတင်နိုင်၊ အိမ်ရာကူညီမည်။"},
+  {id:1,type:"offer",title:"Head Sushi Chef Needed",titleMM:"ဆူရှီ အလုပ်သမား လိုအပ်သည်",employer:"Golden Sushi Co.",location:"Houston, TX 🇺🇸",pay:"$28-32/hr",urgent:true,skills:["Nigiri","Sashimi","Rolling"],desc:"Busy restaurant, immediate start, housing help available.",descMM:"လုပ်ငန်းအလုပ်များသောဆိုင်၊ ချက်ချင်းစတင်နိုင်၊ အိမ်ရာကူညီမည်။"},
   {id:2,type:"seek",title:"Sushi Chef Looking for Work",titleMM:"ဆူရှီ ဆရာ အလုပ်ရှာနေ",name:"Kyaw Zin Oo",location:"Los Angeles, CA 🇺🇸",pay:"$22-26/hr",avail:"Available Now",skills:["Rolling","Plating","Sashimi"],desc:"8 years experience, can drive, looking full-time.",descMM:"အတွေ့အကြုံ ၈ နှစ်ရှိ၊ မောင်းနှင်နိုင်၊ အချိန်ပြည့်အလုပ်ရှာနေ။"},
-  {id:3,type:"offer",title:"Thai Restaurant Kitchen Help",titleMM:"ထိုင်းစားသောက်ဆိုင် မီးဖိုချောင်ကူ",employer:"Sawadee Kitchen",location:"Bangkok 🇹🇭",pay:"฿15,000/mo",urgent:false,skills:["Prep","Dishwash","Cooking"],desc:"Burmese owner, accommodation included.",descMM:"မြန်မာပိုင်ဆိုင်သည်၊ နေရာထိုင်ခင်း ပါဝင်သည်။"},
+  {id:3,type:"offer",title:"Thai Restaurant Kitchen Help",titleMM:"စားသောက်ဆိုင် မီးဖိုချောင်ကူ",employer:"Sawadee Kitchen",location:"Bangkok 🇹🇭",pay:"฿15,000/mo",urgent:false,skills:["Prep","Dishwash","Cooking"],desc:"Burmese owner, accommodation included.",descMM:"မြန်မာပိုင်ဆိုင်သည်၊ နေရာထိုင်ခင်း ပါဝင်သည်။"},
   {id:4,type:"seek",title:"Any Kitchen Work Available",titleMM:"မီးဖိုချောင်အလုပ် မည်သည်မဆို",name:"Ei Ei Phyu",location:"Kuala Lumpur 🇲🇾",pay:"Negotiable",avail:"Available This Week",skills:["Cleaning","Prep","Delivery"],desc:"New arrival, hardworking, need work urgently.",descMM:"အသစ်ရောက်ရှိသူ၊ ကြိုးစားသော၊ အလုပ်အမြန်လိုအပ်သည်။"},
-  {id:5,type:"offer",title:"Sushi Counter Helper x2",titleMM:"ဆူရှီ ကောင်တာ ကူညီသူ x2",employer:"Sakura Market",location:"Tokyo 🇯🇵",pay:"¥1,200/hr",urgent:true,skills:["Rolling","Cashier","Packaging"],desc:"Grocery counter, part-time ok.",descMM:"ကြယ်မှတ်ဆိုင်ကောင်တာ၊ အချိန်ပိုင်းလက်ခံသည်။"},
+  {id:5,type:"offer",title:"Sushi Counter Helper x2",titleMM:"ဆူရှီ လုပ်ငန်းအကူ x2",employer:"Sakura Market",location:"Tokyo 🇯🇵",pay:"¥1,200/hr",urgent:true,skills:["Rolling","Cashier","Packaging"],desc:"Grocery counter, part-time ok.",descMM:"ကြယ်မှတ်ဆိုင်ကောင်တာ၊ အချိန်ပိုင်းလက်ခံသည်။"},
   {id:6,type:"seek",title:"Factory or Construction Work",titleMM:"စက်ရုံ သို့ ဆောက်လုပ်ရေးအလုပ်",name:"Zaw Lin",location:"Penang 🇲🇾",pay:"RM 1,500+/mo",avail:"Available Now",skills:["Construction","Driving","Loading"],desc:"Strong worker, 5 years factory experience.",descMM:"ကြံ့ခိုင်သောအလုပ်သမား၊ စက်ရုံတွင် ၅ နှစ်အတွေ့အကြုံ။"},
 ];
 const HUNDI=[
@@ -88,7 +88,7 @@ const HUNDI=[
   {id:5,agent:"Ko Naing (Singapore)",from:"🇸🇬 Singapore",to:"🇲🇲 Myanmar",rate:"1,550 MMK per S$",fee:"1.8%",limit:"S$8,000/day",phone:"+65-9555-0505",verified:true,reviews:55,desc:"Fast, discreet, reliable.",descMM:"မြန်ဆန်၊ ယုံကြည်ရနိုင်သည်။"},
 ];
 const RENTALS=[
-  {id:1,type:"offer",title:"Shared Room Available",titleMM:"မျှဝေသောအခန်း ရှိသည်",location:"Houston, TX 🇺🇸",price:"$450/mo",rooms:"1 bed in shared house",burmese:true,desc:"Bills included. Sushi workers welcome.",descMM:"ဘီလ်ပါဝင်သည်။ ဆူရှီအလုပ်သမားများကြိုဆိုသည်။"},
+  {id:1,type:"offer",title:"Shared Room Available",titleMM:"အခန်းရှယ်ရန် ရှိသည်",location:"Houston, TX 🇺🇸",price:"$450/mo",rooms:"1 bed in shared house",burmese:true,desc:"Bills included. Sushi workers welcome.",descMM:"ဘီလ်ပါဝင်သည်။ ဆူရှီအလုပ်သမားများကြိုဆိုသည်။"},
   {id:2,type:"seek",title:"Looking for Cheap Room",titleMM:"သက်သာသောအခန်း ရှာနေ",name:"Aung Ko Ko",location:"Los Angeles, CA 🇺🇸",budget:"$400-500/mo",desc:"New arrival, quiet, need room ASAP.",descMM:"အသစ်ရောက်ရှိသူ၊ တိတ်ဆိတ်သော၊ အခန်းချက်ချင်းလိုသည်။"},
   {id:3,type:"offer",title:"Room — Burmese Community Area",titleMM:"မြန်မာ ဧရိယာ — အခန်းငှား",location:"Bangkok, Don Mueang 🇹🇭",price:"฿3,500/mo",rooms:"Private room, shared kitchen",burmese:true,desc:"Near Burmese worker community.",descMM:"မြန်မာအလုပ်သမားအသိုင်းအဝိုင်းနီးကပ်သည်။"},
   {id:4,type:"offer",title:"Cheap Room, Factory Workers OK",titleMM:"သက်သာသောအခန်း၊ စက်ရုံကြိုဆို",location:"Penang 🇲🇾",price:"RM 250/mo",rooms:"Shared dorm, 4 beds",burmese:false,desc:"Walking distance to industrial zone.",descMM:"စက်မှုဇုန်သို့ လမ်းလျှောက်ကြောင်းမှ ရောက်နိုင်သည်။"},
