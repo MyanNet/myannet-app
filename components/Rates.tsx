@@ -13,21 +13,20 @@ const META: Record<string, [string, string]> = {
   GBP: ["GB", "British Pound"], CAD: ["CA", "Canadian Dollar"],
 };
 const KINDS = [
-  ["hundi", "Hundi", "ဟွန်ဒီ", "#7c3aed"],
   ["market", "Open market", "ပြင်ပဈေး", "#0e7490"],
   ["official", "Official (CBM)", "တရားဝင် (ဗဟိုဘဏ်)", "#9ca3af"],
 ] as const;
 const fmt = (n: number) => n >= 100 ? Math.round(n).toLocaleString() : n.toLocaleString(undefined, { maximumFractionDigits: 2 });
 let cache: Promise<Data> | null = null;
 const load = () => (cache ||= fetch("/api/rates").then((r) => r.json()));
-const best = (r?: Row) => r?.hundi ?? r?.market ?? null;
+const best = (r?: Row) => r?.market ?? null;
 
 // One-line strip for the home page.
 export function RatesTicker({ lang, onOpen }: { lang: string; onOpen: () => void }) {
   const [d, setD] = useState<Data | null>(null);
   useEffect(() => { load().then(setD).catch(() => {}); }, []);
-  if (!d?.set || !(d.set.hundi || d.set.market)) return null;
-  const label = d.set.hundi ? (lang === "mm" ? "ဟွန်ဒီ နှုန်း" : "Hundi rate") : (lang === "mm" ? "ပြင်ပဈေး" : "Market rate");
+  if (!d?.set?.market) return null;
+  const label = lang === "mm" ? "ကျပ် ပြင်ပဈေး" : "Kyat market rate";
   return (
     <div onClick={onOpen} style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", fontSize: 12, color: "#4c1d95", background: "#f5f3ff", border: "1px solid #ddd6fe", borderRadius: 12, padding: "6px 12px", marginBottom: 10, cursor: "pointer" }}>
       <b>💱 {label}</b>
@@ -52,8 +51,8 @@ export function RatesBoard({ lang }: { lang: string }) {
     <div style={{ background: "#fff", borderRadius: 16, padding: 20, marginBottom: 18, boxShadow: "0 4px 14px rgba(0,0,0,0.07)" }}>
       <div style={{ fontWeight: 900, fontSize: 17, color: "#7c3aed", marginBottom: 4 }}>💱 {mm ? "မြန်မာကျပ် ငွေလဲနှုန်း" : "Myanmar kyat exchange rates"}</div>
       <div style={{ fontSize: 12, color: "#666", marginBottom: 12, lineHeight: 1.6 }}>
-        {mm ? "နှုန်း ၃ မျိုး — ဟွန်ဒီ (ကိုယ်စားလှယ်များ ပေးနှုန်း)၊ ပြင်ပဈေး၊ တရားဝင် (နေပြည်တော် ဗဟိုဘဏ် သတ်မှတ်ချက်)။ " : "Three rates — hundi (what agents pay), open market, and official (set by the Central Bank in Naypyitaw). "}
-        {d.set ? (mm ? `ဟွန်ဒီ/ပြင်ပဈေး နှုန်းကို ${ago(d.set.updated_at, lang)} က မြန်နက်မှ အပ်ဒိတ်လုပ်ခဲ့သည်။ ` : `Hundi/market rates updated by MyanNet ${ago(d.set.updated_at, lang).toLowerCase()}. `) : ""}
+        {mm ? "ပြင်ပဈေးနှုန်း (ဟွန်ဒီ နှုန်းနှင့် နီးစပ်သည်) — ငွေလွှဲရာတွင် တကယ်ရရှိမည့် နှုန်း။ တရားဝင် (နေပြည်တော် ဗဟိုဘဏ်) နှုန်းကို ရည်ညွှန်းရန်သာ ပြထားသည်။ " : "Market rate (close to the hundi rate) — what you actually get when sending money home. The official Central Bank (Naypyitaw) rate is shown for reference only. "}
+        {d.set ? (mm ? `${ago(d.set.updated_at, lang)} က မြန်နက်မှ အပ်ဒိတ်လုပ်ခဲ့သည်။ ` : `Updated by MyanNet ${ago(d.set.updated_at, lang).toLowerCase()}. `) : ""}
         {mm ? "အခြားငွေကြေးများကို ကမ္ဘာ့ငွေလဲနှုန်းဖြင့် နာရီတိုင်း တွက်ချက်သည်။" : "Other currencies are worked out from world rates, refreshed every hour."}
         {d.set?.note ? " " + d.set.note : ""}
       </div>

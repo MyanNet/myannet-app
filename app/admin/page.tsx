@@ -19,11 +19,10 @@ function FxForm() {
       <div style={{ fontWeight: 800, color: "#5b21b6", marginBottom: 6 }}>💱 Kyat rates — 1 US dollar = ? kyat</div>
       <div style={{ fontSize: 12, color: "#666", marginBottom: 10 }}>Update once a day. The official Central Bank rate updates by itself. Last saved: {when || "never"}</div>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "flex-end" }}>
-        <label style={{ fontSize: 12, fontWeight: 700 }}>Hundi rate<br /><input style={inp} type="number" value={hundi} onChange={(e) => setHundi(e.target.value)} placeholder="e.g. 4850" /></label>
-        <label style={{ fontSize: 12, fontWeight: 700 }}>Open market rate<br /><input style={inp} type="number" value={market} onChange={(e) => setMarket(e.target.value)} placeholder="e.g. 4900" /></label>
+        <label style={{ fontSize: 12, fontWeight: 700 }}>Market rate<br /><input style={inp} type="number" value={market} onChange={(e) => setMarket(e.target.value)} placeholder="e.g. 4900" /></label>
         <label style={{ fontSize: 12, fontWeight: 700, flex: 1, minWidth: 200 }}>Note (optional)<br /><input style={{ ...inp, width: "100%" }} value={note} onChange={(e) => setNote(e.target.value)} placeholder="e.g. Yangon market, morning" /></label>
         <button style={{ background: "#7c3aed", color: "#fff", border: "none", borderRadius: 8, padding: "10px 16px", fontWeight: 800, cursor: "pointer" }}
-          onClick={async () => { try { await store.setFx(market ? +market : null, hundi ? +hundi : null, note); setMsg("✓ Saved — live on the site within an hour"); setWhen(new Date().toLocaleString()); } catch (e) { setMsg((e as Error).message); } }}>Save rates</button>
+          onClick={async () => { try { await store.setFx(market ? +market : null, null, note); setMsg("✓ Saved — live on the site within an hour"); setWhen(new Date().toLocaleString()); } catch (e) { setMsg((e as Error).message); } }}>Save rates</button>
       </div>
       {msg && <div style={{ fontSize: 12, marginTop: 8, color: "#2e7d32" }}>{msg}</div>}
     </div>
