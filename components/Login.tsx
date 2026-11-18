@@ -11,7 +11,9 @@ const TIKTOK_ON = process.env.NEXT_PUBLIC_TIKTOK_ENABLED === "1";
 // Sign-in methods switched on in Supabase, e.g. "facebook,whatsapp,phone,email". Others show "coming soon".
 const ENABLED = (process.env.NEXT_PUBLIC_AUTH_PROVIDERS || "").split(",").map((x) => x.trim());
 // Facebook sign-in opens to the public only once the Meta app is published (business verification).
-const FACEBOOK_PUBLIC = process.env.NEXT_PUBLIC_FACEBOOK_PUBLIC === "1";
+// Meta app "MyanNet" is published (business verified Nov 16, 2026), so Facebook sign-in is on for everyone.
+// Set NEXT_PUBLIC_FACEBOOK_PUBLIC=0 in Vercel to hide it again.
+const FACEBOOK_PUBLIC = process.env.NEXT_PUBLIC_FACEBOOK_PUBLIC !== "0";
 const on = (m: string) =>
   !LIVE || m === "google" || (m === "facebook" ? FACEBOOK_PUBLIC : ENABLED.includes(m)) ||
   (m === "tiktok" && TIKTOK_ON) || (m === "telegram" && !!TG_BOT);
