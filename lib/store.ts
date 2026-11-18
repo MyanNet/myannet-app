@@ -252,7 +252,7 @@ export async function registerInterest(email: string, role: string, country: str
   if (error) throw error;
 }
 
-// ---------- MyanNet Zayat (community discussion) ----------
+// ---------- MyanNet Podium (community discussion) ----------
 // Replies are stored as reviews with listing_id = "z-" + topic id (no stars).
 export type Topic = {
   id: string; user_id: string; author_name: string; category: string; title: string; body: string;

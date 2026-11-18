@@ -202,7 +202,7 @@ export default function App(){
           ))}
             <button onClick={()=>setTab("zayat")} style={{background:tab==="zayat"?"#f5e9dc":"transparent",color:"#8d5a2b",border:"none",borderRadius:14,padding:"4px 8px",cursor:"pointer",fontWeight:700,fontSize:11,display:"flex",flexDirection:"column",alignItems:"center",gap:1}}>
               <span style={{fontSize:15}}>💬</span>
-              <span style={{fontSize:8,opacity:.85}}>{lang==="mm"?"ဇရပ်":"Zayat"}</span>
+              <span style={{fontSize:8,opacity:.85}}>{lang==="mm"?"ဟစ်တိုင်":"Podium"}</span>
             </button>
           </div>
           {user?(
@@ -257,7 +257,7 @@ export default function App(){
             ))}
             <div onClick={()=>setTab("zayat")} style={{background:"#fff",borderRadius:12,padding:"8px 10px",cursor:"pointer",boxShadow:"0 3px 10px rgba(0,0,0,0.07)",borderBottom:"3px solid #8d5a2b",display:"flex",alignItems:"center",gap:8}}>
               <span style={{fontSize:22}}>💬</span>
-              <span style={{fontWeight:800,fontSize:12,color:"#8d5a2b",lineHeight:1.2}}>{lang==="mm"?"ဇရပ် (ဆွေးနွေးရာ)":"Zayat (discussion)"}</span>
+              <span style={{fontWeight:800,fontSize:12,color:"#8d5a2b",lineHeight:1.2}}>{lang==="mm"?"ဟစ်တိုင် (ဆွေးနွေးရာ)":"Podium (discussion)"}</span>
             </div>
           </div>
           <RatesTicker lang={lang} onOpen={()=>{setTab("hundi");window.scrollTo(0,0);}}/>

@@ -5,7 +5,7 @@ import * as store from "@/lib/store";
 import { ago, isNew } from "@/lib/when";
 import { THEME } from "./ui";
 
-// Home page: newest listings (left) and newest Zayat topics (right), compact so the home page fits one screen.
+// Home page: newest listings (left) and newest Podium topics (right), compact so the home page fits one screen.
 const SEC: Record<string, [string, string, string, string]> = {
   jobs: ["💼", "Help Wanted", "အလုပ်အကိုင်", "#c0392b"], hundi: ["💸", "Hundi", "ဟွန်ဒီ", "#7c3aed"],
   rent: ["🏠", "Rent", "အိမ်ငှား", "#0891b2"], cargo: ["✈️", "Cargo", "ကုန်တင်ဆောင်", "#d97706"],
@@ -51,7 +51,7 @@ export default function Latest({ onOpen }: { onOpen: (tab: string) => void }) {
         </div>
       </div>
       <div style={{ background: "#fff", borderRadius: 14, padding: "12px 14px", boxShadow: "0 3px 12px rgba(0,0,0,0.06)", borderTop: `3px solid ${BROWN}`, display: "flex", flexDirection: "column" }}>
-        <div onClick={() => onOpen("zayat")} style={{ fontWeight: 900, fontSize: 15, color: BROWN, marginBottom: 2, cursor: "pointer" }}>💬 {mm ? "မြန်နက် ဇရပ်" : "MyanNet Zayat"} ›</div>
+        <div onClick={() => onOpen("zayat")} style={{ fontWeight: 900, fontSize: 15, color: BROWN, marginBottom: 2, cursor: "pointer" }}>💬 {mm ? "မြန်နက် ဟစ်တိုင်" : "MyanNet Podium"} ›</div>
         <div style={{ fontSize: 11, color: "#8a7a6a", marginBottom: 8 }}>{mm ? "မေးမြန်း၊ မျှဝေ၊ အချင်းချင်း ကူညီကြပါ" : "Ask, share tips and help each other"}</div>
         {topics.map((t) => (
           <div key={t.id} onClick={() => onOpen("zayat")} style={{ padding: "6px 8px", borderRadius: 8, background: "#faf6f0", marginBottom: 5, cursor: "pointer" }}>

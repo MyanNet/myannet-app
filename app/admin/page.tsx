@@ -73,7 +73,7 @@ export default function Admin() {
           const isZ = r.listing_id.startsWith("z-");
           return (
             <div key={r.id} style={box}>
-              <div style={{ fontSize: 12, color: "#888" }}>{new Date(r.created_at).toLocaleString()} · {r.review_id ? (isZ ? "Zayat reply" : "review") : isZ ? "Zayat topic" : "listing"} · {r.listing_id}</div>
+              <div style={{ fontSize: 12, color: "#888" }}>{new Date(r.created_at).toLocaleString()} · {r.review_id ? (isZ ? "Podium reply" : "review") : isZ ? "Podium topic" : "listing"} · {r.listing_id}</div>
               <div style={{ fontWeight: 800, margin: "4px 0" }}>{isZ ? (tp ? "💬 " + tp.title : "(topic removed)") : l ? l.title : r.listing_id.startsWith("s-") ? "Sample listing" : "(listing removed)"}</div>
               {tp && <div style={{ fontSize: 13, color: "#555", marginBottom: 6 }}>by {tp.author_name} · {tp.body.slice(0, 160)}</div>}
               {l && <div style={{ fontSize: 13, color: "#555", marginBottom: 6 }}>by {l.author_name} · {l.description.slice(0, 160)}</div>}

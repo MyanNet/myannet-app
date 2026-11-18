@@ -6,17 +6,17 @@ import { Modal, Btn, inputStyle, THEME } from "./ui";
 import { ReportLink } from "./Reviews";
 import { ago, isNew } from "@/lib/when";
 
-// MyanNet Zayat (ဇရပ်): community discussion. Business and community help only — no politics.
+// MyanNet Podium (ဟစ်တိုင်): community discussion. Business and community help only — no politics.
 const BROWN = "#8d5a2b";
 const CATS = ["ask", "business", "city", "help", "announce", "general"];
 
 const Z = {
   en: {
-    title: "💬 MyanNet Zayat",
+    title: "💬 MyanNet Podium",
     sub: "Ask questions, share tips and help each other — Myanmar people everywhere.",
     start: "+ Start a topic", all: "All",
     cats: { ask: "❓ Ask & Advice", business: "💼 Business & Work", city: "📍 Local / By City", help: "🤝 Help Needed", announce: "📣 Announcements", general: "☕ General Chat" },
-    rulesTitle: "Zayat rules",
+    rulesTitle: "Podium rules",
     rules: [
       "Talk about work, business, services and daily life abroad.",
       "No political discussion — MyanNet is a business and community-help space.",
@@ -29,17 +29,17 @@ const Z = {
     cat: "Category", titleL: "Title", titlePh: "e.g. Where can I find a Burmese grocery in Houston?",
     body: "Details", bodyPh: "Add more details (optional)",
     city: "City / country (optional)", post: "Post topic",
-    agree: "By posting you agree to the Zayat rules above.",
+    agree: "By posting you agree to the Podium rules above.",
     replies: "replies", replyPh: "Write a reply…", send: "Reply", noReplies: "No replies yet.",
     signIn: "Sign in to join the discussion", del: "Delete", confirmDel: "Delete this topic and its replies?",
     by: "by",
   },
   mm: {
-    title: "💬 မြန်နက် ဇရပ်",
+    title: "💬 မြန်နက် ဟစ်တိုင်",
     sub: "မေးမြန်းပါ၊ အတွေ့အကြုံမျှဝေပါ၊ အချင်းချင်း ကူညီကြပါ — နေရာတိုင်းရှိ မြန်မာများအတွက်။",
     start: "+ ခေါင်းစဉ်အသစ် စတင်ရန်", all: "အားလုံး",
     cats: { ask: "❓ မေးမြန်း / အကြံဉာဏ်", business: "💼 လုပ်ငန်း / အလုပ်", city: "📍 မြို့အလိုက်", help: "🤝 အကူအညီလိုသည်", announce: "📣 ကြေညာချက်", general: "☕ အထွေထွေ" },
-    rulesTitle: "ဇရပ် စည်းကမ်းများ",
+    rulesTitle: "ဟစ်တိုင် စည်းကမ်းများ",
     rules: [
       "အလုပ်၊ လုပ်ငန်း၊ ဝန်ဆောင်မှုနှင့် နိုင်ငံခြားနေထိုင်မှုဆိုင်ရာ အကြောင်းအရာများကို ဆွေးနွေးပါ။",
       "နိုင်ငံရေး ဆွေးနွေးချက်များ မတင်ပါနှင့် — မြန်နက်သည် စီးပွားရေးနှင့် အပြန်အလှန်ကူညီရေး နေရာဖြစ်သည်။",
@@ -52,7 +52,7 @@ const Z = {
     cat: "အမျိုးအစား", titleL: "ခေါင်းစဉ်", titlePh: "ဥပမာ - Houston တွင် မြန်မာကုန်စုံဆိုင် ဘယ်မှာရှိလဲ?",
     body: "အသေးစိတ်", bodyPh: "အသေးစိတ် ထပ်ရေးပါ (မဖြစ်မနေ မဟုတ်)",
     city: "မြို့ / နိုင်ငံ (မဖြစ်မနေ မဟုတ်)", post: "ခေါင်းစဉ် တင်ရန်",
-    agree: "တင်ခြင်းဖြင့် အထက်ပါ ဇရပ် စည်းကမ်းများကို သဘောတူပါသည်။",
+    agree: "တင်ခြင်းဖြင့် အထက်ပါ ဟစ်တိုင် စည်းကမ်းများကို သဘောတူပါသည်။",
     replies: "ပြန်စာ", replyPh: "ပြန်စာ ရေးရန်…", send: "ပြန်စာပို့ရန်", noReplies: "ပြန်စာ မရှိသေးပါ။",
     signIn: "ဆွေးနွေးရန် ဝင်ရောက်ပါ", del: "ဖျက်ရန်", confirmDel: "ဤခေါင်းစဉ်နှင့် ပြန်စာများကို ဖျက်မလား?",
     by: "",
