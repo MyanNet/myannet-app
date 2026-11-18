@@ -84,13 +84,16 @@ export default function Login({ onClose }: { onClose: () => void }) {
       {mode === "menu" && <>
         {big("#ffffff", <b style={{ color: "#4285F4" }}>G</b>, s.google, () => run(store.signInGoogle, !LIVE), "#1f1f1f")}
         {big("#1877f2", <b>f</b>, s.fb, () => (on("facebook") ? run(store.signInFacebook, !LIVE) : setNote(s.comingSoon)))}
-        {big("#000", "♪", s.tiktok, () => pick("tiktok"))}
-        {big("#229ED9", "✈", s.telegram, () => pick("telegram"))}
-        {big("#25D366", "🟢", s.whatsapp, () => pick("whatsapp"))}
-        {big("#7360f2", "📱", s.phoneViber, () => pick("phone"))}
-        <div style={{ textAlign: "center", margin: "6px 0 2px" }}>
+        {/* Only show sign-in methods that work today; the rest are listed as "coming soon". */}
+        {on("tiktok") && big("#000", "♪", s.tiktok, () => pick("tiktok"))}
+        {on("telegram") && big("#229ED9", "✈", s.telegram, () => pick("telegram"))}
+        {on("whatsapp") && big("#25D366", "🟢", s.whatsapp, () => pick("whatsapp"))}
+        {on("phone") && big("#7360f2", "📱", s.phoneViber, () => pick("phone"))}
+        {on("email") && <div style={{ textAlign: "center", margin: "6px 0 2px" }}>
           <span onClick={() => pick("email")} style={{ fontSize: 13, color: THEME.green, cursor: "pointer", fontWeight: 700 }}>✉️ {s.email}</span>
-        </div>
+        </div>}
+        {(() => { const soon = [["tiktok", "TikTok"], ["telegram", "Telegram"], ["whatsapp", "WhatsApp"], ["phone", "Viber / Phone"]].filter(([m]) => !on(m)).map(([, n]) => n);
+          return soon.length ? <div style={{ textAlign: "center", fontSize: 11, color: "#888", marginTop: 6 }}>{lang === "mm" ? `${soon.join("၊ ")} ဖြင့် ဝင်ရောက်ခြင်း မကြာမီ လာပါမည်` : `${soon.join(", ")} sign-in coming soon`}</div> : null; })()}
         {note && <div style={{ background: THEME.greenSoft, borderRadius: 10, padding: 10, fontSize: 12, color: THEME.greenText, marginTop: 10 }}>{note}</div>}
       </>}
 
