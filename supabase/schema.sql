@@ -266,3 +266,65 @@ drop policy if exists "read fx" on public.fx_settings;
 create policy "read fx" on public.fx_settings for select using (true);
 drop policy if exists "admins set fx" on public.fx_settings;
 create policy "admins set fx" on public.fx_settings for update using (public.is_admin()) with check (public.is_admin());
+
+-- ---------- v3.5: visitor counter (no names, no IP addresses stored) ----------
+create table if not exists public.page_views (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  visitor text not null default '',   -- random id kept in the visitor's browser, not linked to a person
+  section text not null default '',
+  country text not null default '',
+  city text not null default '',
+  source text not null default '',
+  referrer text not null default '',
+  device text not null default ''
+);
+create index if not exists page_views_time on public.page_views (created_at desc);
+alter table public.page_views enable row level security;
+drop policy if exists "admins read views" on public.page_views;
+create policy "admins read views" on public.page_views for select using (public.is_admin());
+
+create or replace function public.track_visit(p_visitor text, p_section text, p_country text, p_city text, p_source text, p_referrer text, p_device text)
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  insert into public.page_views (visitor, section, country, city, source, referrer, device)
+  values (left(coalesce(p_visitor,''),40), left(coalesce(p_section,''),30), left(coalesce(p_country,''),4),
+          left(coalesce(p_city,''),60), left(coalesce(p_source,''),20), left(coalesce(p_referrer,''),200), left(coalesce(p_device,''),10));
+end $$;
+revoke all on function public.track_visit(text,text,text,text,text,text,text) from public;
+grant execute on function public.track_visit(text,text,text,text,text,text,text) to anon, authenticated;
+
+create or replace function public.admin_stats(p_days int default 7)
+returns json language plpgsql security definer set search_path = public as $$
+declare since timestamptz := now() - make_interval(days => greatest(1, least(p_days, 365)));
+begin
+  if not public.is_admin() then raise exception 'Admins only'; end if;
+  return json_build_object(
+    'views', (select count(*) from page_views where created_at >= since),
+    'visitors', (select count(distinct visitor) from page_views where created_at >= since),
+    'members', (select count(*) from profiles),
+    'new_members', (select count(*) from profiles where created_at >= since),
+    'listings', (select count(*) from listings),
+    'new_listings', (select count(*) from listings where created_at >= since),
+    'daily', (select coalesce(json_agg(x order by x.day), '[]') from (
+        select (created_at at time zone 'America/New_York')::date as day, count(*) as views, count(distinct visitor) as visitors
+        from page_views where created_at >= since group by 1) x),
+    'countries', (select coalesce(json_agg(x order by x.visitors desc), '[]') from (
+        select nullif(country,'') as country, count(distinct visitor) as visitors, count(*) as views
+        from page_views where created_at >= since group by 1 order by 2 desc limit 15) x),
+    'cities', (select coalesce(json_agg(x order by x.visitors desc), '[]') from (
+        select nullif(city,'') as city, nullif(country,'') as country, count(distinct visitor) as visitors
+        from page_views where created_at >= since and city <> '' group by 1,2 order by 3 desc limit 15) x),
+    'sources', (select coalesce(json_agg(x order by x.visitors desc), '[]') from (
+        select nullif(source,'') as source, count(distinct visitor) as visitors, count(*) as views
+        from page_views where created_at >= since group by 1 order by 2 desc) x),
+    'sections', (select coalesce(json_agg(x order by x.views desc), '[]') from (
+        select nullif(section,'') as section, count(*) as views
+        from page_views where created_at >= since group by 1 order by 2 desc) x),
+    'devices', (select coalesce(json_agg(x order by x.visitors desc), '[]') from (
+        select nullif(device,'') as device, count(distinct visitor) as visitors
+        from page_views where created_at >= since group by 1) x)
+  );
+end $$;
+revoke all on function public.admin_stats(int) from public, anon;
+grant execute on function public.admin_stats(int) to authenticated;

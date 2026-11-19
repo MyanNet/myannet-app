@@ -136,6 +136,17 @@ export default function App(){
 
   // Auth (real Supabase sign-in once keys are set; demo sign-in until then)
   const [user,setUser]=useState(null);
+  // Visitor counter: one count per section opened (no names stored). The admin's own visits are skipped.
+  useEffect(()=>{
+    try{
+      if(user?.is_admin||localStorage.getItem("mn_is_admin"))return;
+      let v=localStorage.getItem("mn_vid"); if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("mn_vid",v);}
+      const first=!sessionStorage.getItem("mn_seen"); sessionStorage.setItem("mn_seen","1");
+      fetch("/api/track",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({v,s:tab,r:first?document.referrer:"",q:first?window.location.search:""})}).catch(()=>{});
+    }catch{}
+  },[tab]);
+  useEffect(()=>{try{if(user?.is_admin)localStorage.setItem("mn_is_admin","1");}catch{}},[user]);
   const [loginModal,setLoginModal]=useState(false);
   const [postType,setPostType]=useState(null); // null = closed, "" = choose type
   const [mineOpen,setMineOpen]=useState(false);

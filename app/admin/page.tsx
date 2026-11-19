@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import * as store from "@/lib/store";
+import Stats from "@/components/Stats";
 import { LIVE } from "@/lib/supabase";
 
 // Admin page: reported listings and reviews, with remove / dismiss buttons.
@@ -59,6 +60,7 @@ export default function Admin() {
       <div style={{ maxWidth: 760, margin: "0 auto" }}>
         <a href="/" style={{ color: "#1b5e20", fontWeight: 900, textDecoration: "none" }}>← MyanNet</a>
         <h1 style={{ color: "#1b5e20" }}>Admin</h1>
+        {user?.is_admin && <Stats />}
         {user?.is_admin && <FxForm />}
         <h2 style={{ color: "#1b5e20", fontSize: 18 }}>Reports</h2>
         {!LIVE && <p style={{ fontSize: 13, color: "#7a5b00" }}>Demo mode: showing reports made in this browser only.</p>}

@@ -324,3 +324,11 @@ export async function setFx(market: number | null, hundi: number | null, note: s
   const { error } = await supabase!.from("fx_settings").update(row).eq("id", 1);
   if (error) throw error;
 }
+
+// ---------- visitor stats (admin) ----------
+export async function adminStats(days: number) {
+  if (!LIVE) return null;
+  const { data, error } = await supabase!.rpc("admin_stats", { p_days: days });
+  if (error) throw new Error(error.message);
+  return data as any;
+}

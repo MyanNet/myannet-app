@@ -4,14 +4,15 @@ export const metadata = { title: "Privacy Policy | MyanNet" };
 
 export default function Privacy() {
   return (
-    <LegalPage title="Privacy Policy · ကိုယ်ရေးလုံခြုံမှုမူဝါဒ" updated="November 3, 2026">
+    <LegalPage title="Privacy Policy · ကိုယ်ရေးလုံခြုံမှုမူဝါဒ" updated="November 19, 2026">
       <p>MyanNet (www.myannet.app) is a community platform for people of Myanmar living anywhere. This page explains what we collect and how we use it.</p>
 
       <h2>What we collect</h2>
       <ul>
-        <li><b>Sign-in details.</b> When you sign in with Facebook, TikTok, Telegram, WhatsApp, phone or email, we receive your name, profile photo and the phone number or email address you use. We do not receive your passwords.</li>
+        <li><b>Sign-in details.</b> When you sign in with Google, Facebook or another method we offer, we receive your name, profile photo and the phone number or email address you use. We do not receive your passwords.</li>
         <li><b>What you post.</b> Listings, contact details you choose to show, comments, star ratings and reports.</li>
-        <li><b>Basic technical data.</b> Pages visited and error logs, used to keep the site running.</li>
+        <li><b>Visit counts.</b> Which sections are opened, the country and city a visit comes from (worked out by our host from the connection, not stored as an IP address), the site that linked to us (for example Facebook), and whether it is a phone or computer. A random number kept in your browser lets us count unique visitors; it is not linked to your name. We use this only to see how MyanNet is used and where to improve it.</li>
+        <li><b>Basic technical data.</b> Error logs, used to keep the site running.</li>
       </ul>
 
       <h2>How we use it</h2>
@@ -23,7 +24,7 @@ export default function Privacy() {
       <p>We do not sell your data. We do not post to your Facebook, TikTok or Telegram account.</p>
 
       <h2>Who processes it</h2>
-      <p>Our service providers store and deliver data for us: Supabase (database and sign-in), Vercel (hosting), Twilio (text and WhatsApp codes), and the sign-in provider you choose (Meta, TikTok, Telegram).</p>
+      <p>Our service providers store and deliver data for us: Supabase (database and sign-in), Vercel (hosting), and the sign-in provider you choose (Google or Meta).</p>
 
       <h2>Deleting your data</h2>
       <p>You can delete your own posts and reviews at any time from “My listings”. To delete your whole account and everything linked to it, email <a href="mailto:hello@myannet.app">hello@myannet.app</a> from the address or with the phone number you used, and we will delete it within 30 days. This also applies to data received through Facebook Login.</p>
