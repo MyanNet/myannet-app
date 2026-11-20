@@ -5,7 +5,7 @@ import { flag, nameOf } from "@/lib/countries";
 
 // Admin: who visits MyanNet, from where, how they found it, and what they look at.
 const SRC: Record<string, string> = { facebook: "📘 Facebook", direct: "⌨️ Typed / app / no link", google: "🔍 Google", search: "🔍 Other search", telegram: "✈️ Telegram", viber: "📱 Viber", whatsapp: "🟢 WhatsApp", instagram: "📷 Instagram", tiktok: "🎵 TikTok", other: "🔗 Other sites" };
-const SEC: Record<string, string> = { home: "🏠 Home", jobs: "💼 Help Wanted", hundi: "💸 Hundi / rates", rent: "🏠 Rent", cargo: "✈️ Cargo", goods: "🛍️ Buy / Sell", biz: "🏪 Businesses", zayat: "💬 Podium" };
+const SEC: Record<string, string> = { home: "🏠 Home", jobs: "💼 Help Wanted", hundi: "💸 Hundi / rates", rent: "🏠 Rent", cargo: "✈️ Cargo", goods: "🛍️ Buy / Sell", biz: "🏪 Businesses", zayat: "💬 Podium", rates: "💱 Rates page" };
 
 function Bars({ rows, label, value }: { rows: any[]; label: (r: any) => string; value: (r: any) => number }) {
   const max = Math.max(1, ...rows.map(value));
