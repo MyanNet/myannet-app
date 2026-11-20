@@ -4,7 +4,7 @@ import { useEffect } from "react";
 export default function Track({ section }: { section: string }) {
   useEffect(() => {
     try {
-      if (localStorage.getItem("mn_is_admin")) return;
+      if (localStorage.getItem("mn_is_admin") || navigator.webdriver) return;
       let v = localStorage.getItem("mn_vid");
       if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem("mn_vid", v); }
       fetch("/api/track", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" },

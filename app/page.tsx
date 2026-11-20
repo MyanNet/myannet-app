@@ -139,7 +139,7 @@ export default function App(){
   // Visitor counter: one count per section opened (no names stored). The admin's own visits are skipped.
   useEffect(()=>{
     try{
-      if(user?.is_admin||localStorage.getItem("mn_is_admin"))return;
+      if(user?.is_admin||localStorage.getItem("mn_is_admin")||navigator.webdriver)return;
       let v=localStorage.getItem("mn_vid"); if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("mn_vid",v);}
       const first=!sessionStorage.getItem("mn_seen"); sessionStorage.setItem("mn_seen","1");
       fetch("/api/track",{method:"POST",keepalive:true,headers:{"Content-Type":"application/json"},

@@ -21,6 +21,8 @@ function sourceOf(ref: string, qs: string) {
   return "other";
 }
 
+const META_DC = new Set(["prineville","forest city","altoona","boardman","clonee","luleå","lulea","odense","los lunas","papillion","henrico","new albany","eagle mountain","gallatin","stanton springs","dekalb","sarpy","council bluffs","the dalles","quincy"]);
+
 export async function POST(req: NextRequest) {
   const ua = req.headers.get("user-agent") || "";
   if (/bot|crawl|spider|preview|facebookexternalhit|slurp|headless/i.test(ua) || !supabase) return new NextResponse(null, { status: 204 });
@@ -29,12 +31,16 @@ export async function POST(req: NextRequest) {
   const country = req.headers.get("x-vercel-ip-country") || "";
   let city = req.headers.get("x-vercel-ip-city") || "";
   try { city = decodeURIComponent(city); } catch {}
+  // Facebook/Meta checks every shared link from its own data centers with a real browser.
+  // Those are not people, so skip visits from Meta data-center towns on a computer.
+  const device = /mobi|android|iphone|ipad/i.test(ua) ? "phone" : "computer";
+  if (device === "computer" && META_DC.has(city.toLowerCase())) return new NextResponse(null, { status: 204 });
   const ref = (b.r || "").slice(0, 300);
   let refHost = "";
   try { refHost = ref ? new URL(ref).host : ""; } catch {}
   await supabase.rpc("track_visit", {
     p_visitor: (b.v || "").slice(0, 40), p_section: (b.s || "home").slice(0, 30), p_country: country, p_city: city,
-    p_source: sourceOf(ref, b.q || ""), p_referrer: refHost, p_device: /mobi|android|iphone|ipad/i.test(ua) ? "phone" : "computer",
+    p_source: sourceOf(ref, b.q || ""), p_referrer: refHost, p_device: device,
   });
   return new NextResponse(null, { status: 204 });
 }
