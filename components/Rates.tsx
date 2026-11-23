@@ -31,7 +31,7 @@ export function RatesTicker({ lang, onOpen }: { lang: string; onOpen: () => void
     <div onClick={onOpen} style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", fontSize: 12, color: "#4c1d95", background: "#f5f3ff", border: "1px solid #ddd6fe", borderRadius: 12, padding: "6px 12px", marginBottom: 10, cursor: "pointer" }}>
       <b>💱 {label}</b>
       {["USD", "THB", "MYR", "SGD", "KRW", "JPY", "AED"].map((c) => { const v = best(d.rows.find((x) => x.code === c)); return v ? <span key={c}>{flag(META[c][0])} 1 {c} = <b>{fmt(v)}</b> K</span> : null; })}
-      <span style={{ color: "#888" }}>· {ago(d.set.updated_at, lang)} ›</span>
+      <span style={{ color: "#888" }}>· {lang === "mm" ? `ငွေလဲနှုန်းများ ယနေ့ အပ်ဒိတ် · USD ပြင်ပဈေး ${new Date(d.set.updated_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}` : `Rates updated today · USD street rate as of ${new Date(d.set.updated_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}`} ›</span>
     </div>
   );
 }
@@ -52,7 +52,7 @@ export function RatesBoard({ lang }: { lang: string }) {
       <div style={{ fontWeight: 900, fontSize: 17, color: "#7c3aed", marginBottom: 4 }}>💱 {mm ? "မြန်မာကျပ် ငွေလဲနှုန်း" : "Myanmar kyat exchange rates"}</div>
       <div style={{ fontSize: 12, color: "#666", marginBottom: 12, lineHeight: 1.6 }}>
         {mm ? "ပြင်ပဈေးနှုန်း (ဟွန်ဒီ နှုန်းနှင့် နီးစပ်သည်) — ငွေလွှဲရာတွင် တကယ်ရရှိမည့် နှုန်း။ တရားဝင် (နေပြည်တော် ဗဟိုဘဏ်) နှုန်းကို ရည်ညွှန်းရန်သာ ပြထားသည်။ " : "Market rate (close to the hundi rate) — what you actually get when sending money home. The official Central Bank (Naypyitaw) rate is shown for reference only. "}
-        {d.set ? (mm ? `${ago(d.set.updated_at, lang)} က မြန်နက်မှ အပ်ဒိတ်လုပ်ခဲ့သည်။ ` : `Updated by MyanNet ${ago(d.set.updated_at, lang).toLowerCase()}. `) : ""}
+        {d.set ? (mm ? `USD ပြင်ပဈေးကို ${new Date(d.set.updated_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })} တွင် နောက်ဆုံး အပ်ဒိတ်လုပ်ခဲ့သည် (သတင်းထဲ ဈေးအသစ် ပေါ်လာသည်နှင့် အပ်ဒိတ်လုပ်ပါမည်)။ ` : `USD street rate last set ${new Date(d.set.updated_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })} (MyanNet checks the news every morning and updates it when a new rate is reported). `) : ""}
         {mm ? "အခြားငွေကြေးများကို ကမ္ဘာ့ငွေလဲနှုန်းဖြင့် နာရီတိုင်း တွက်ချက်သည်။" : "Other currencies are worked out from world rates, refreshed every hour."}
         {d.set?.note ? " " + d.set.note : ""}
       </div>
