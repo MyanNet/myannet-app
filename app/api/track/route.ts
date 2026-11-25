@@ -21,7 +21,7 @@ function sourceOf(ref: string, qs: string) {
   return "other";
 }
 
-const META_DC = new Set(["prineville","forest city","altoona","boardman","clonee","luleå","lulea","odense","los lunas","papillion","henrico","new albany","eagle mountain","gallatin","stanton springs","dekalb","sarpy","council bluffs","the dalles","quincy"]);
+const META_DC = new Set(["prineville","forest city","altoona","boardman","clonee","luleå","lulea","odense","los lunas","papillion","henrico","new albany","eagle mountain","gallatin","stanton springs","dekalb","sarpy","council bluffs","the dalles","quincy","fort worth"]);
 
 export async function POST(req: NextRequest) {
   const ua = req.headers.get("user-agent") || "";
