@@ -4,7 +4,7 @@ import Track from "@/components/Track";
 
 // Shareable rates page. The og:image is the latest rates picture, so a link
 // to www.myannet.app/rates shows the picture as a big preview on Facebook.
-const IMG = "/share/rates-2026-11-24.jpg";
+const IMG = "/share/rates-2026-11-24b.jpg";
 
 export const metadata: Metadata = {
   title: "ယနေ့ ကျပ်ငွေလဲနှုန်း · Kyat market rates | MyanNet မြန်နက်",
