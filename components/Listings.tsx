@@ -51,6 +51,9 @@ export function ListingCard({ l, color }: { l: store.Listing; color: string }) {
           <a key={label} href={href} target="_blank" rel="noreferrer noopener" style={{ background: bg, color: "#fff", borderRadius: 10, padding: "7px 12px", fontSize: 12, fontWeight: 700, textDecoration: "none" }}>{label}</a>
         ))}
       </div>
+      {l.pillar === "services" && <div style={{ marginTop: 10, background: "#fef9c3", color: "#854d0e", borderRadius: 10, padding: "6px 10px", fontSize: 12, fontWeight: 700 }}>
+        ⭐ {lang === "mm" ? "ဝန်ဆောင်မှု သုံးပြီးရင် ကြယ်ပေးပြီး သုံးသပ်ချက် ရေးပေးပါ — အခြားသူတွေ အတွက် အထောက်အကူ ဖြစ်ပါတယ်" : "Used this service? Please rate it with stars — it helps others choose"}
+      </div>}
       <ReviewBar id={l.id} title={l.title} />
     </div>
   );
