@@ -9,7 +9,7 @@ import { THEME } from "./ui";
 const SEC: Record<string, [string, string, string, string]> = {
   jobs: ["💼", "Help Wanted", "အလုပ်အကိုင်", "#c0392b"], services: ["🛠️", "Services", "ဝန်ဆောင်မှု", "#7c3aed"], events: ["🎉", "Event", "ပွဲလမ်း", "#4d7c0f"],
   rent: ["🏠", "Rent", "အိမ်ငှား", "#0891b2"], cargo: ["✈️", "Cargo", "ကုန်တင်ဆောင်", "#d97706"],
-  goods: ["🛍️", "Buy / Sell", "ဝယ်/ရောင်း", "#16a34a"], biz: ["🏪", "Business", "လုပ်ငန်း", "#9d174d"],
+  goods: ["🛍️", "Buy / Sell", "ဝယ်/ရောင်း", "#9d174d"], biz: ["🏪", "Buy, Sell & Business", "ဝယ်ရောင်း/လုပ်ငန်း", "#9d174d"],
 };
 const BROWN = "#8d5a2b";
 
@@ -36,7 +36,7 @@ export default function Latest({ onOpen }: { onOpen: (tab: string) => void }) {
         {!items.length && <div style={{ fontSize: 13, color: "#888", padding: 10 }}>{mm ? "ပို့စ် မရှိသေးပါ။" : "No posts yet."}</div>}
         <div className="mn-latest-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: 6 }}>
           {items.map((l) => {
-            const s = SEC[l.pillar] || ["📌", l.pillar, l.pillar, THEME.green];
+            const s = (l.pillar === "biz" && l.kind === "goods" ? SEC.goods : SEC[l.pillar]) || ["📌", l.pillar, l.pillar, THEME.green];
             return (
               <div key={l.id} onClick={() => onOpen(l.pillar)} style={{ borderLeft: `3px solid ${s[3]}`, background: "#fafcfa", borderRadius: 8, padding: "6px 9px", cursor: "pointer", minWidth: 0, overflow: "hidden" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", gap: 6, fontSize: 10.5 }}>

@@ -22,9 +22,9 @@ const T = {
     tagline:"The all-in-one platform for Burmese/Myanmar communities worldwide — find work, find services, rent a room, ship goods, buy & sell, and share community events — all in one trusted place.",
     vision:"Connecting Myanmar/Burmese communities living and working abroad with their loved ones at home, and vice versa.",
     visionTitle:"🌏 Our Vision", whoTitle:"Who MyanNet Serves",
-    pillars:["Help Wanted","Services","Rent","Cargo / Hand Carry","Buy / Sell Goods","Businesses","Community / Events"],
-    pillarIcons:["💼","🛠️","🏠","✈️","🛍️","🏪","🎉"],
-    pillarDesc:["Find work or post openings across all countries","Tax, law, notary, office paperwork, translation & more","Find or offer housing in the Burmese community","Hand-carry goods between countries — trusted travelers","Buy & sell within the trusted Burmese community","Find Burmese-owned businesses, shops & services","Festivals, temple & community events, meetups and classes"],
+    pillars:["Help Wanted","Services","Rent","Cargo / Hand Carry","Buy, Sell & Business","Community / Events"],
+    pillarIcons:["💼","🛠️","🏠","✈️","🏪","🎉"],
+    pillarDesc:["Find work or post openings across all countries","Tax, law, notary, office paperwork, translation & more","Find or offer housing in the Burmese community","Hand-carry goods between countries — trusted travelers","Buy & sell items, and find Burmese-owned businesses & shops","Festivals, temple & community events, meetups and classes"],
     who:[{e:"🍣",t:"Burmese Sushi Workers",d:"In US restaurants, grocery stores & catering"},{e:"🏭",t:"Factory & Construction Workers",d:"In Thailand, Malaysia, Korea & Japan"},{e:"🏪",t:"Small Business Owners",d:"Restaurants, shops & services in diaspora"},{e:"✈️",t:"New Arrivals",d:"Need housing, work & community fast"},{e:"💰",t:"Families Back Home",d:"Staying connected with loved ones abroad"},{e:"🌏",t:"Cross-Border Travelers",d:"Hand-carrying goods between countries"}],
     findWork:"Find Work", hireWorkers:"Hire Workers", allPosts:"All", jobsAvail:"🏪 Jobs Available", seekWork:"👷 Seeking Work",
     allRooms:"All", roomsAvail:"🏠 Available", seekRoom:"🔍 Seeking",
@@ -50,9 +50,9 @@ const T = {
     tagline:"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ/ဗမာ လူ့အဖွဲ့အစည်းများအတွက် စုံလင်သောပလက်ဖောင်း — အလုပ်ရှာ၊ ဝန်ဆောင်မှုရှာ၊ အခန်းငှား၊ ကုန်ပို့၊ အသိုင်းအဝိုင်း ပွဲလမ်းများနှင့် ယုံကြည်စိတ်ချရသော အသိုင်းအဝိုင်းအတွင်း ဝယ်/ရောင်း နိုင်ပါတယ်။",
     vision:"နိုင်ငံခြားတွင် အလုပ်လုပ်/နေထိုင်နေသော မြန်မာများနှင့် ဒေသတွင်းရှိ မိသားစု မိတ်ဆွေများအတွက်/ကို  ချိတ်ဆက်ပေးမည့် — နှစ်ဦးနှစ်ဖက်/အပြန်အလှန် အကျိုးတူ",
     visionTitle:"🌏 ကျွန်ုပ်တို့၏ မျှော်မှန်းချက်", whoTitle:"မြန်နက် မည်သူမဆို",
-    pillars:["အလုပ်အကိုင်","ဝန်ဆောင်မှု","အိမ်ငှား","ကုန်တင်ဆောင်","ဝယ်/ရောင်း ပစ္စည်းများ","လုပ်ငန်းများ","ပွဲလမ်း / အသိုင်းအဝိုင်း"],
-    pillarIcons:["💼","🛠️","🏠","✈️","🛍️","🏪","🎉"],
-    pillarDesc:["နိုင်ငံတကာတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","အခွန်၊ ဥပဒေ၊ နိုတာရီ၊ ရုံးစာရွက်စာတမ်း၊ ဘာသာပြန် စသည်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းရန်","မြန်မာလုပ်ငန်းများ၊ ဆိုင်များနှင့် ဝန်ဆောင်မှုများ ရှာဖွေရန်","ပွဲတော်များ၊ ဘုန်းကြီးကျောင်းနှင့် အသိုင်းအဝိုင်း ပွဲများ၊ တွေ့ဆုံပွဲ၊ သင်တန်းများ"],
+    pillars:["အလုပ်အကိုင်","ဝန်ဆောင်မှု","အိမ်ငှား","ကုန်တင်ဆောင်","ဝယ်ရောင်း နှင့် လုပ်ငန်း","ပွဲလမ်း / အသိုင်းအဝိုင်း"],
+    pillarIcons:["💼","🛠️","🏠","✈️","🏪","🎉"],
+    pillarDesc:["နိုင်ငံတကာတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","အခွန်၊ ဥပဒေ၊ နိုတာရီ၊ ရုံးစာရွက်စာတမ်း၊ ဘာသာပြန် စသည်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ပစ္စည်း ဝယ်ရောင်းရန်နှင့် မြန်မာလုပ်ငန်း၊ ဆိုင်များ ရှာဖွေရန်","ပွဲတော်များ၊ ဘုန်းကြီးကျောင်းနှင့် အသိုင်းအဝိုင်း ပွဲများ၊ တွေ့ဆုံပွဲ၊ သင်တန်းများ"],
     who:[{e:"🍣",t:"ဆူရှီ သမားများအတွက်",d:"အမေရိကန်ရှိ စားသောက်ဆိုင်နှင့်လိုအပ်တာများ"},{e:"🏭",t:"စက်ရုံနှင့် ဆောက်လုပ်ရေး",d:"ထိုင်း၊ မလေးရှား၊ ကိုရီးယား၊ ဂျပန်တွင်"},{e:"🏪",t:"လုပ်ငန်းရှင်များ",d:"ပြည်ပရှိ စားသောက်ဆိုင်၊ ဆိုင်ခန်းနှင့် ဝန်ဆောင်မှုများ"},{e:"✈️",t:"အသစ်ရောက်ရှိသူများ",d:"အိမ်ရာ၊ အလုပ်နှင့် အသိုင်းအဝိုင်း လိုအပ်သူများ"},{e:"💰",t:"မြန်မာပြည်ရှိ မိသားစု",d:"ပြည်ပရှိ ချစ်ရသူများနှင့် ဆက်သွယ်နေသူများ"},{e:"🌏",t:"နိုင်ငံဖြတ်ကျော်ခရီးသည်",d:"နိုင်ငံများကြားတွင် ကုန်ပစ္စည်းဆောင်ဆောင်သူများ"}],
     findWork:"အလုပ်ရှာ", hireWorkers:"အလုပ်သမားခေါ်", allPosts:"အားလုံး", jobsAvail:"🏪 အလုပ်ရှိသည်", seekWork:"👷 အလုပ်ရှာနေသည်",
     allRooms:"အားလုံး", roomsAvail:"🏠 ငှားရမ်းရန်ရှိ", seekRoom:"🔍 အိမ်ရှာနေသည်",
@@ -98,18 +98,7 @@ const CARGO=[
   {id:4,type:"carry",name:"Ko Nay Lin",route:"Tokyo → Yangon",date:"Sep 3, 2025",space:"8 kg",price:"$10/kg",contact:"+81-90-555-0404",desc:"Electronics, medicine, clothes. No liquids.",descMM:"အီလက်ထရောနစ်၊ ဆေး၊ အဝတ်အထည်။ အရည်မဆောင်ပါ။"},
   {id:5,type:"need",name:"Daw Khin",route:"USA → Yangon",date:"Before Sep",items:"Documents, baby items",contact:"+1-323-555-0202",desc:"Urgent: documents + baby formula.",descMM:"အရေးပေါ်: စာရွက်စာတမ်းနှင့် ကလေးနို့မှုန့်"},
 ];
-const GOODS=[
-  {id:1,title:"Toyota Camry 2018",titleMM:"တိုယိုတာ ကမ်ရီ ၂၀၁၈",cat:"🚗 Vehicles",price:"$12,500",loc:"Houston 🇺🇸",seller:"Ko Aung",img:"🚗",desc:"Clean title, 85k miles.",descMM:"မှတ်ပုံတင်သန့်၊ ၈၅,၀၀၀ မိုင်"},
-  {id:2,title:"iPhone 14 Pro 256GB",titleMM:"အိုင်ဖုန်း ၁၄ ပရို",cat:"📱 Electronics",price:"$650",loc:"LA 🇺🇸",seller:"Ma Thida",img:"📱",desc:"Unlocked, excellent condition.",descMM:"ကိုမဆိုသုံးနိုင်၊ အခြေအနေကောင်းသည်"},
-  {id:3,title:"Sushi Equipment Full Set",titleMM:"ဆူရှီ ကိရိယာ အစုံ",cat:"🔪 Equipment",price:"$3,200",loc:"Chicago 🇺🇸",seller:"U Kyaw",img:"🔪",desc:"Rice cooker, display case, full tools.",descMM:"ထမင်းပေါင်း၊ ပြသသောသေတ္တာ၊ ကိရိယာအစုံ"},
-  {id:4,title:"Honda Jazz 2016",titleMM:"ဟွန်ဒါ ဂျက် ၂၀၁၆",cat:"🚗 Vehicles",price:"RM 28,000",loc:"KL 🇲🇾",seller:"Ko Myo",img:"🚙",desc:"Good condition, service record.",descMM:"အခြေအနေကောင်း၊ ပြုပြင်မှတ်တမ်းရှိ"},
-  {id:5,title:"Gold Necklace 2 Baht",titleMM:"ရွှေလည်ဆွဲ ၂ ဘာတ်",cat:"💍 Jewelry",price:"฿28,000",loc:"Bangkok 🇹🇭",seller:"Ma Hnin",img:"💍",desc:"Myanmar gold, genuine.",descMM:"မြန်မာ ရွှေစစ်စစ်"},
-  {id:6,title:"Burmese Cooking Pots Set",titleMM:"မြန်မာ ချက်ပြုတ်ရေး အိုးစုံ",cat:"🍳 Household",price:"$80",loc:"Atlanta 🇺🇸",seller:"Daw Khin",img:"🍳",desc:"Large set, great for restaurant.",descMM:"ကြီးသောအစုံ၊ စားသောက်ဆိုင်အတွက် သင့်တော်"},
-  {id:7,title:"Samsung Galaxy S23",titleMM:"ဆမ်ဆောင်း ဂလက်ဆီ S23",cat:"📱 Electronics",price:"¥45,000",loc:"Tokyo 🇯🇵",seller:"Ko Nay",img:"📱",desc:"Like new, unlocked.",descMM:"အသစ်နှင့်တူ၊ ကိုမဆိုသုံးနိုင်"},
-  {id:8,title:"Sewing Machine — Singer",titleMM:"ဆင်ဂျာ ချုပ်စက်",cat:"🪡 Equipment",price:"RM 350",loc:"Penang 🇲🇾",seller:"Ma Win",img:"🧵",desc:"Works perfectly, moving sale.",descMM:"ကောင်းစွာအလုပ်လုပ်သည်"},
-];
-
-const PILLARS=["jobs","services","rent","cargo","goods","biz","events"];
+const PILLARS=["jobs","services","rent","cargo","biz","events"];
 const COLORS={jobs:"#c0392b",services:"#7c3aed",events:"#4d7c0f",rent:"#0891b2",cargo:"#d97706",goods:"#16a34a",biz:"#9d174d"};
 const avCol=a=>a==="Available Now"?"#16a34a":a==="Available This Week"?"#d97706":"#6366f1";
 const Tag=({bg="#f3f4f6",c="#374151",children})=><span style={{background:bg,color:c,borderRadius:20,padding:"3px 10px",fontSize:11,fontWeight:700,display:"inline-block",margin:"2px"}}>{children}</span>;
@@ -123,8 +112,7 @@ export default function App(){
   const [modal,setModal]=useState(null);
   const [sendAmt,setSendAmt]=useState("500");
   const [fromC,setFromC]=useState("🇺🇸 USA");
-  const [goodsCat,setGoodsCat]=useState("All");
-  const [profileOpen,setProfileOpen]=useState(false);
+    const [profileOpen,setProfileOpen]=useState(false);
 
   // Auth (real Supabase sign-in once keys are set; demo sign-in until then)
   const [user,setUser]=useState(null);
@@ -379,34 +367,6 @@ export default function App(){
           ))}
         </div>
       </div>}
-
-      {/* GOODS */}
-      {tab==="goods"&&<div style={{maxWidth:1000,margin:"0 auto",padding:"18px 16px"}}>
-        <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:18}}>
-          {["All","🚗 Vehicles","📱 Electronics","🔪 Equipment","💍 Jewelry","🍳 Household"].map(c=>(
-            <button key={c} onClick={()=>setGoodsCat(c)} style={{padding:"7px 14px",borderRadius:20,border:`2px solid ${goodsCat===c?"#16a34a":"#ddd"}`,background:goodsCat===c?"#16a34a":"#fff",color:goodsCat===c?"#fff":"#555",fontWeight:700,cursor:"pointer",fontSize:12}}>{c}</button>
-          ))}
-        </div>
-        <CommunityListings pillar="goods" color={COLORS.goods}/>
-        <div style={{background:"#f3f4f6",borderRadius:10,padding:"9px 12px",margin:"6px 0 12px",fontSize:12,color:"#555"}}>{t.examplesNote}</div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:14}}>
-          {GOODS.filter(g=>goodsCat==="All"||g.cat===goodsCat).map(g=>(
-            <div key={g.id} style={{background:"#fff",borderRadius:16,padding:16,boxShadow:"0 4px 14px rgba(0,0,0,0.07)"}}>
-              <div style={{background:"#f0fdf4",borderRadius:12,height:80,display:"flex",alignItems:"center",justifyContent:"center",fontSize:44,marginBottom:10}}>{g.img}</div>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:4}}>
-                <div style={{fontWeight:800,fontSize:13,flex:1}}>{tx(g.title,g.titleMM)}</div>
-                <div style={{fontWeight:900,fontSize:15,color:"#16a34a",marginLeft:6}}>{g.price}</div>
-              </div>
-              <Tag bg="#e5e7eb" c="#374151">{t.example}</Tag><Tag bg="#f0fdf4" c="#16a34a">{g.cat}</Tag>
-              <div style={{fontSize:11,color:"#555",margin:"6px 0 3px",lineHeight:1.5}}>{tx(g.desc,g.descMM)}</div>
-              <div style={{fontSize:10,color:"#aaa",marginBottom:8}}>📍 {g.loc} · 👤 {g.seller}</div>
-              <FbBtn label={t.msgSeller}/>
-            </div>
-          ))}
-        </div>
-      </div>}
-
-      {nameOpen&&user&&<Profile user={user} lang={lang} onClose={()=>setNameOpen(false)} onSaved={u=>{setUser(u);setVersion(v=>v+1);}}/>}
 
       {/* ZAYAT */}
       {tab==="zayat"&&<Zayat/>}
