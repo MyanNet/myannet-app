@@ -6,8 +6,8 @@ const URL_ = "https://www.myannet.app";
 export default function Share({ lang }: { lang: string }) {
   const [copied, setCopied] = useState(false);
   const text = lang === "mm"
-    ? "မြန်နက် — မည်သည့်နေရာမဆို မြန်မာများအတွက် အခမဲ့ ဝန်ဆောင်မှုများ (အလုပ်၊ ငွေလွှဲ၊ အခန်းငှား၊ ပစ္စည်းသယ်၊ အရောင်းအဝယ်)"
-    : "MyanNet — free all-in-one services for Myanmar and Burmese people anywhere (jobs, send money, rooms, hand-carry, buy & sell)";
+    ? "မြန်နက် — မည်သည့်နေရာမဆို မြန်မာများအတွက် အခမဲ့ ဝန်ဆောင်မှုများ (အလုပ်၊ ဝန်ဆောင်မှု၊ အခန်းငှား၊ ပစ္စည်းသယ်၊ အရောင်းအဝယ်၊ ပွဲလမ်း)"
+    : "MyanNet — free all-in-one services for Myanmar and Burmese people anywhere (jobs, services, rooms, hand-carry, buy & sell, events)";
   const enc = encodeURIComponent;
   const links: [string, string, string][] = [
     ["Facebook", "#1877f2", `https://www.facebook.com/sharer/sharer.php?u=${enc(URL_)}`],

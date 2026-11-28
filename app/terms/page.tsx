@@ -17,7 +17,6 @@ export default function Terms() {
       <h2>Money, jobs and deals</h2>
       <ul>
         <li>MyanNet is a notice board. We do not hold, send or receive money, and we are not part of any deal between users.</li>
-        <li>Hundi and other informal transfers carry real risk. Only use agents you know or who are well reviewed, and follow the laws where you live.</li>
         <li>Check every job offer, agency, landlord and seller yourself. Never pay a fee to get a job before you have checked the employer.</li>
       </ul>
 

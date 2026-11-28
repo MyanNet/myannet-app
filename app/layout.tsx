@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 
 const description =
-  "The all-in-one platform for Burmese/Myanmar communities worldwide — find work, send money home, rent a room, ship goods, and buy & sell within a trusted community.";
+  "The all-in-one platform for Burmese/Myanmar communities worldwide — find work, find services, rent a room, ship goods, buy & sell, and share community events — all in one trusted place.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.myannet.app"),
@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   applicationName: "MyanNet",
   keywords: [
     "MyanNet", "မြန်နက်", "myannet.app", "Burmese community", "sushi jobs",
-    "hundi", "Burma migrant workers", "Myanmar remittance", "Burmese business directory",
+    "Burmese services", "Burma migrant workers", "Myanmar community events", "Burmese business directory",
   ],
   appleWebApp: { capable: true, title: "MyanNet", statusBarStyle: "default" },
   openGraph: {
     title: "MyanNet | မြန်နက်",
-    description: "Work · Hundi · Rent · Cargo · Trade · Businesses",
+    description: "Jobs · Services · Rent · Cargo · Buy/Sell · Businesses · Events",
     url: "https://www.myannet.app",
     type: "website",
   },

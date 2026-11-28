@@ -8,9 +8,9 @@ import { Modal, Btn, inputStyle, THEME } from "./ui";
 
 // Each post type maps to one of the site's sections ("pillars").
 export const TYPE_TO_PILLAR: Record<string, string> = {
-  biz: "biz", ad: "biz", card: "biz", jobs: "jobs", rent: "rent", hundi: "hundi", cargo: "cargo", goods: "goods",
+  biz: "biz", ad: "biz", card: "biz", jobs: "jobs", rent: "rent", services: "services", cargo: "cargo", goods: "goods", events: "events",
 };
-const TYPE_ORDER = ["biz", "ad", "card", "jobs", "rent", "hundi", "cargo", "goods"];
+const TYPE_ORDER = ["biz", "ad", "card", "jobs", "services", "rent", "cargo", "goods", "events"];
 const CONTACT_FIELDS: [keyof store.Contact, string][] = [
   ["facebook", "cFacebook"], ["tiktok", "cTiktok"], ["telegram", "cTelegram"],
   ["viber", "cViber"], ["whatsapp", "cWhatsapp"], ["phone", "cPhone"],

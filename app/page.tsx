@@ -13,26 +13,25 @@ import Zayat from "@/components/Zayat";
 import Share from "@/components/Share";
 import Profile from "@/components/Profile";
 import Latest, { NewBanner } from "@/components/Latest";
-import { RatesBoard, RatesTicker } from "@/components/Rates";
 import { THEME } from "@/components/ui";
 import { countryOptions, flag, nameOf } from "@/lib/countries";
 
 const T = {
   en: {
     appName:"MyanNet", appSub:"မြန်နက် · All-in-one services, anywhere, for Myanmar and Burmese people", beta:"BETA",
-    tagline:"The all-in-one platform for Burmese/Myanmar communities worldwide — find work, send money home, rent a room, ship goods, and buy & sell within a trusted community.",
+    tagline:"The all-in-one platform for Burmese/Myanmar communities worldwide — find work, find services, rent a room, ship goods, buy & sell, and share community events — all in one trusted place.",
     vision:"Connecting Myanmar/Burmese communities living and working abroad with their loved ones at home, and vice versa.",
     visionTitle:"🌏 Our Vision", whoTitle:"Who MyanNet Serves",
-    pillars:["Help Wanted","Hundi / Send Money","Rent","Cargo / Hand Carry","Buy / Sell Goods","Businesses"],
-    pillarIcons:["💼","💸","🏠","✈️","🛍️","🏪"],
-    pillarDesc:["Find work or post openings across all countries","Send money home through trusted community agents","Find or offer housing in the Burmese community","Hand-carry goods between countries — trusted travelers","Buy & sell within the trusted Burmese community","Find Burmese-owned businesses, shops & services"],
-    who:[{e:"🍣",t:"Burmese Sushi Workers",d:"In US restaurants, grocery stores & catering"},{e:"🏭",t:"Factory & Construction Workers",d:"In Thailand, Malaysia, Korea & Japan"},{e:"🏪",t:"Small Business Owners",d:"Restaurants, shops & services in diaspora"},{e:"✈️",t:"New Arrivals",d:"Need housing, work & community fast"},{e:"💰",t:"Families Back Home",d:"Receiving remittances from abroad"},{e:"🌏",t:"Cross-Border Travelers",d:"Hand-carrying goods between countries"}],
+    pillars:["Help Wanted","Services","Rent","Cargo / Hand Carry","Buy / Sell Goods","Businesses","Community / Events"],
+    pillarIcons:["💼","🛠️","🏠","✈️","🛍️","🏪","🎉"],
+    pillarDesc:["Find work or post openings across all countries","Translators, documents, tax, phone, travel, repairs & more","Find or offer housing in the Burmese community","Hand-carry goods between countries — trusted travelers","Buy & sell within the trusted Burmese community","Find Burmese-owned businesses, shops & services","Festivals, temple & community events, meetups and classes"],
+    who:[{e:"🍣",t:"Burmese Sushi Workers",d:"In US restaurants, grocery stores & catering"},{e:"🏭",t:"Factory & Construction Workers",d:"In Thailand, Malaysia, Korea & Japan"},{e:"🏪",t:"Small Business Owners",d:"Restaurants, shops & services in diaspora"},{e:"✈️",t:"New Arrivals",d:"Need housing, work & community fast"},{e:"💰",t:"Families Back Home",d:"Staying connected with loved ones abroad"},{e:"🌏",t:"Cross-Border Travelers",d:"Hand-carrying goods between countries"}],
     findWork:"Find Work", hireWorkers:"Hire Workers", allPosts:"All", jobsAvail:"🏪 Jobs Available", seekWork:"👷 Seeking Work",
     allRooms:"All", roomsAvail:"🏠 Available", seekRoom:"🔍 Seeking",
     allCargo:"All", canCarry:"✈️ Can Carry", needCarry:"📦 Need Carry",
-    postJob:"Post Job", postAgent:"Register as Agent", postRental:"Post Rental", postCarry:"Post Carry Offer", postItem:"Post Item",
+    postJob:"Post Job", postAgent:"Post a Service", postEvent:"Post an Event", postRental:"Post Rental", postCarry:"Post Carry Offer", postItem:"Post Item",
     contactFb:"💬 Contact on Facebook", contactViber:"📱 WhatsApp / Viber", msgSeller:"💬 Message Seller",
-    hundiNotice:"⚠️ Community Notice: Hundi is an informal trust-based transfer system widely used by Myanmar migrants. Agents are community-verified. Always use known, reviewed agents. MyanNet does not handle funds directly.",
+    servicesNotice:"🛠️ Find Burmese-speaking help — translators, document & form help, tax preparers, phone shops, travel agents, repairs and more. Check reviews and agree on the price first. MyanNet does not handle money.", eventsNotice:"🎉 Festivals, temple and community events, meetups, classes and sports in Myanmar communities abroad. Share your event free.",
     cargoNotice:"✈️ Hand Carry Network: Travelers with spare baggage space offer to carry goods between countries. Always meet in person. Community trust is everything.",
     rateCalc:"💱 Quick Rate Calculator", from:"From", amount:"Amount", communityAgents:"🤝 Community Agents",
     example:"📌 Example",examplesNote:"📌 Examples below show what posts look like — they are not real people or businesses. Real community posts appear above.",verified:"✅ Verified", pending:"⏳ Pending", reviews:"reviews", rate:"Rate", fee:"Fee", dailyLimit:"Daily Limit",
@@ -43,24 +42,24 @@ const T = {
     joinFb:"Follow MyanNet on Facebook", comingSoon:"Full posting system coming soon! For now, join our Facebook group:",
     goFb:"🌐 Go to Facebook Group", close:"Close", services:"Services", countries:"Countries", contact:"Contact & Community", privacy:"Privacy Policy", terms:"Terms of Use", about:"About",
     signIn:"Sign in to your account", continueWithFb:"Continue with Facebook", or:"or", phone:"Phone Number", sendOTP:"Send OTP Code", verifyCode:"Verify Code", changePhone:"Change phone number", emailAddr:"Email Address", password:"Password", signingIn:"Signing in…", sending:"Sending…", verifying:"Verifying…", connecting:"Connecting…",
-    iAm:"I am a…", worker:"👷 Worker / Job Seeker", business:"🏪 Business Owner", hundiAgent:"💸 Hundi Agent", other:"🌏 Other", country:"Country", registerNow:"Register Now", noSpam:"We never share your info. No spam, ever.",
+    iAm:"I am a…", worker:"👷 Worker / Job Seeker", business:"🏪 Business Owner", hundiAgent:"🛠️ Service Provider", other:"🌏 Other", country:"Country", registerNow:"Register Now", noSpam:"We never share your info. No spam, ever.",
     registered:"You're registered!", thankyou:"Thank you for joining MyanNet. We'll be in touch soon with updates!", bySigningIn:"By signing in, you agree to our Terms of Use and Privacy Policy",
   },
   mm: {
     appName:"မြန်နက်", appSub:"MyanNet · မည်သည့်နေရာမဆို မြန်မာပြည်သူများအတွက် ဝန်ဆောင်မှုများ", beta:"ဘီတာ",
-    tagline:"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ/ဗမာ လူ့အဖွဲ့အစည်းများအတွက် စုံလင်သောပလက်ဖောင်း — အလုပ်ရှာ၊ အိမ်သို့ငွေလွှဲ၊ အခန်းငှား၊ ကုန်ပို့နှင့် ယုံကြည်စိတ်ချရသော အသိုင်းအဝိုင်းအတွင်း ဝယ်/ရောင်း နိုင်ပါတယ်။",
+    tagline:"ကမ္ဘာတစ်ဝှမ်းရှိ မြန်မာ/ဗမာ လူ့အဖွဲ့အစည်းများအတွက် စုံလင်သောပလက်ဖောင်း — အလုပ်ရှာ၊ ဝန်ဆောင်မှုရှာ၊ အခန်းငှား၊ ကုန်ပို့၊ အသိုင်းအဝိုင်း ပွဲလမ်းများနှင့် ယုံကြည်စိတ်ချရသော အသိုင်းအဝိုင်းအတွင်း ဝယ်/ရောင်း နိုင်ပါတယ်။",
     vision:"နိုင်ငံခြားတွင် အလုပ်လုပ်/နေထိုင်နေသော မြန်မာများနှင့် ဒေသတွင်းရှိ မိသားစု မိတ်ဆွေများအတွက်/ကို  ချိတ်ဆက်ပေးမည့် — နှစ်ဦးနှစ်ဖက်/အပြန်အလှန် အကျိုးတူ",
     visionTitle:"🌏 ကျွန်ုပ်တို့၏ မျှော်မှန်းချက်", whoTitle:"မြန်နက် မည်သူမဆို",
-    pillars:["အလုပ်အကိုင်","ဟွန်ဒီ / ငွေလွှဲ","အိမ်ငှား","ကုန်တင်ဆောင်","ဝယ်/ရောင်း ပစ္စည်းများ","လုပ်ငန်းများ"],
-    pillarIcons:["💼","💸","🏠","✈️","🛍️","🏪"],
-    pillarDesc:["နိုင်ငံတကာတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","ယုံကြည်ရသော ကိုယ်စားလှယ်များ/agentများ မှတစ်ဆင့် ငွေလွှဲပေးပို့ရန်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းရန်","မြန်မာလုပ်ငန်းများ၊ ဆိုင်များနှင့် ဝန်ဆောင်မှုများ ရှာဖွေရန်"],
-    who:[{e:"🍣",t:"ဆူရှီ သမားများအတွက်",d:"အမေရိကန်ရှိ စားသောက်ဆိုင်နှင့်လိုအပ်တာများ"},{e:"🏭",t:"စက်ရုံနှင့် ဆောက်လုပ်ရေး",d:"ထိုင်း၊ မလေးရှား၊ ကိုရီးယား၊ ဂျပန်တွင်"},{e:"🏪",t:"လုပ်ငန်းရှင်များ",d:"ပြည်ပရှိ စားသောက်ဆိုင်၊ ဆိုင်ခန်းနှင့် ဝန်ဆောင်မှုများ"},{e:"✈️",t:"အသစ်ရောက်ရှိသူများ",d:"အိမ်ရာ၊ အလုပ်နှင့် အသိုင်းအဝိုင်း လိုအပ်သူများ"},{e:"💰",t:"မြန်မာပြည်ရှိ မိသားစု",d:"ပြည်ပမှ ငွေလွှဲလက်ခံသူများ"},{e:"🌏",t:"နိုင်ငံဖြတ်ကျော်ခရီးသည်",d:"နိုင်ငံများကြားတွင် ကုန်ပစ္စည်းဆောင်ဆောင်သူများ"}],
+    pillars:["အလုပ်အကိုင်","ဝန်ဆောင်မှု","အိမ်ငှား","ကုန်တင်ဆောင်","ဝယ်/ရောင်း ပစ္စည်းများ","လုပ်ငန်းများ","ပွဲလမ်း / အသိုင်းအဝိုင်း"],
+    pillarIcons:["💼","🛠️","🏠","✈️","🛍️","🏪","🎉"],
+    pillarDesc:["နိုင်ငံတကာတွင် အလုပ်ရှာဖွေ သို့မဟုတ် ဖော်ပြရန်","ဘာသာပြန်၊ စာရွက်စာတမ်း၊ အခွန်၊ ဖုန်း၊ ခရီးသွား၊ ပြုပြင်ရေး စသည်","မြန်မာ့လူ့အဖွဲ့အစည်းအတွင်း အိမ်ရှာဖွေ သို့မဟုတ် ငှားရမ်းရန်","နိုင်ငံများကြားတွင် ကိုယ်ထည်ဆောင်ပေးသောဝန်ဆောင်မှု","ယုံကြည်ရသောအသိုင်းအဝိုင်းအတွင်း ဝယ်ရောင်းရန်","မြန်မာလုပ်ငန်းများ၊ ဆိုင်များနှင့် ဝန်ဆောင်မှုများ ရှာဖွေရန်","ပွဲတော်များ၊ ဘုန်းကြီးကျောင်းနှင့် အသိုင်းအဝိုင်း ပွဲများ၊ တွေ့ဆုံပွဲ၊ သင်တန်းများ"],
+    who:[{e:"🍣",t:"ဆူရှီ သမားများအတွက်",d:"အမေရိကန်ရှိ စားသောက်ဆိုင်နှင့်လိုအပ်တာများ"},{e:"🏭",t:"စက်ရုံနှင့် ဆောက်လုပ်ရေး",d:"ထိုင်း၊ မလေးရှား၊ ကိုရီးယား၊ ဂျပန်တွင်"},{e:"🏪",t:"လုပ်ငန်းရှင်များ",d:"ပြည်ပရှိ စားသောက်ဆိုင်၊ ဆိုင်ခန်းနှင့် ဝန်ဆောင်မှုများ"},{e:"✈️",t:"အသစ်ရောက်ရှိသူများ",d:"အိမ်ရာ၊ အလုပ်နှင့် အသိုင်းအဝိုင်း လိုအပ်သူများ"},{e:"💰",t:"မြန်မာပြည်ရှိ မိသားစု",d:"ပြည်ပရှိ ချစ်ရသူများနှင့် ဆက်သွယ်နေသူများ"},{e:"🌏",t:"နိုင်ငံဖြတ်ကျော်ခရီးသည်",d:"နိုင်ငံများကြားတွင် ကုန်ပစ္စည်းဆောင်ဆောင်သူများ"}],
     findWork:"အလုပ်ရှာ", hireWorkers:"အလုပ်သမားခေါ်", allPosts:"အားလုံး", jobsAvail:"🏪 အလုပ်ရှိသည်", seekWork:"👷 အလုပ်ရှာနေသည်",
     allRooms:"အားလုံး", roomsAvail:"🏠 ငှားရမ်းရန်ရှိ", seekRoom:"🔍 အိမ်ရှာနေသည်",
     allCargo:"အားလုံး", canCarry:"✈️ ဆောင်ပေးနိုင်", needCarry:"📦 ဆောင်ပေးမည့်သူရှာ",
-    postJob:"အလုပ်ဖော်ပြ", postAgent:"ကိုယ်စားလှယ်မှတ်ပုံတင်", postRental:"အိမ်ငှားဖော်ပြ", postCarry:"ဆောင်ဆောင်ဖော်ပြ", postItem:"ပစ္စည်းရောင်းဖော်ပြ",
+    postJob:"အလုပ်ဖော်ပြ", postAgent:"ဝန်ဆောင်မှု တင်ရန်", postEvent:"ပွဲ တင်ရန်", postRental:"အိမ်ငှားဖော်ပြ", postCarry:"ဆောင်ဆောင်ဖော်ပြ", postItem:"ပစ္စည်းရောင်းဖော်ပြ",
     contactFb:"💬 Facebook မှ ဆက်သွယ်", contactViber:"📱 WhatsApp / Viber", msgSeller:"💬 ရောင်းသူကို မက်ဆေ့ပို့",
-    hundiNotice:"⚠️ ဟွန်ဒီသည် မြန်မာ့ရွှေ့ပြောင်းသူများ အကြားတွင် ကျယ်ကျယ်ပြန့်ပြန့် အသုံးပြုသော ယုံကြည်မှုအခြေခံ ငွေလွှဲစနစ်ဖြစ်သည်။ ကိုယ်စားလှယ်များကို/agentများ စစ်ဆေးအတည်ပြုမည့်။",
+    servicesNotice:"🛠️ မြန်မာလို ပြောနိုင်သော ဝန်ဆောင်မှုများ — ဘာသာပြန်၊ စာရွက်စာတမ်း/ဖောင်ဖြည့်၊ အခွန်၊ ဖုန်းဆိုင်၊ ခရီးသွား၊ ပြုပြင်ရေး စသည်။ သုံးသပ်ချက်များ စစ်ပြီး ဈေးနှုန်းကို ကြိုတင် သဘောတူပါ။ မြန်နက်သည် ငွေကြေး မကိုင်တွယ်ပါ။", eventsNotice:"🎉 ပြည်ပရှိ မြန်မာ အသိုင်းအဝိုင်း၏ ပွဲတော်များ၊ ဘုန်းကြီးကျောင်း ပွဲများ၊ တွေ့ဆုံပွဲ၊ သင်တန်းနှင့် အားကစားများ။ သင့်ပွဲကို အခမဲ့ တင်ပါ။",
     cargoNotice:"✈️ ကိုယ်ထည်ဆောင်ကွန်ရက်: ခရီးသွားများသည် ထားခဲ့သောဘက်ဂေ့နေရာကို ကုန်ပစ္စည်းများ ဆောင်ဆောင်ပေးရန် ကမ်းလှမ်းသည်။",
     rateCalc:"💱 နှုန်းထားတွက်ချက်မှု", from:"မှ", amount:"ပမာဏ", communityAgents:"🤝 အသိုင်းအဝိုင်း ကိုယ်စားလှယ်များ",
     example:"📌 နမူနာ",examplesNote:"📌 အောက်ပါတို့သည် ပို့စ်ပုံစံ နမူနာများသာ ဖြစ်ပြီး လူ သို့မဟုတ် လုပ်ငန်း အစစ်အမှန် မဟုတ်ပါ။ အသိုင်းအဝိုင်းမှ တကယ့်ပို့စ်များကို အပေါ်တွင် ပြသထားသည်။",verified:"✅ အတည်ပြုပြီး", pending:"⏳ စောင့်ဆိုင်းဆဲ", reviews:"သုံးသပ်ချက်", rate:"နှုန်းထား", fee:"ကြေးငွေ", dailyLimit:"နေ့စဉ်ကန့်သတ်",
@@ -71,7 +70,7 @@ const T = {
     joinFb:"Facebook တွင် မြန်နက်ကို Follow လုပ်ပါ", comingSoon:"မကြာမီ ဖော်ပြနိုင်သောစနစ် ရောက်ရှိလာမည်! ယခုအချိန်တွင် Facebook အုပ်စုမှတစ်ဆင့် ဖော်ပြပါ:",
     goFb:"🌐 Facebook အုပ်စုသို့သွား", close:"ပိတ်", services:"ဝန်ဆောင်မှုများ", countries:"နိုင်ငံများ", contact:"ဆက်သွယ်ရန်", privacy:"မူဝါဒ", terms:"အသုံးပြုသည့်စည်းမျဉ်း", about:"အကြောင်း",
     signIn:"သင်၏အကောင့်သို့ ဝင်ရောက်ပါ", continueWithFb:"Facebook ဖြင့် ဆက်လက်မည်", or:"သို့မဟုတ်", phone:"ဖုန်းနံပါတ် (WhatsApp / Viber)", sendOTP:"OTP ကုဒ် ပို့မည်", verifyCode:"အတည်ပြုမည်", changePhone:"ဖုန်းနံပါတ် ပြောင်းမည်", emailAddr:"အီးမေးလ် လိပ်စာ", password:"စကားဝှက်", signingIn:"ဝင်နေသည်…", sending:"ပို့နေသည်…", verifying:"စစ်ဆေးနေသည်…", connecting:"ချိတ်ဆက်နေသည်…",
-    iAm:"သင်သည် ဘာလုပ်သနည်း?", worker:"👷 အလုပ်သမား", business:"🏪 လုပ်ငန်းရှင်", hundiAgent:"💸 ဟွန်ဒီ ကိုယ်စားလှယ်", other:"🌏 အခြား", country:"နိုင်ငံ", registerNow:"မှတ်ပုံတင်မည်", noSpam:"သင့်အချက်အလက်ကို ကျွန်ုပ်တို့ မျှဝေမည်မဟုတ်ပါ",
+    iAm:"သင်သည် ဘာလုပ်သနည်း?", worker:"👷 အလုပ်သမား", business:"🏪 လုပ်ငန်းရှင်", hundiAgent:"🛠️ ဝန်ဆောင်မှုပေးသူ", other:"🌏 အခြား", country:"နိုင်ငံ", registerNow:"မှတ်ပုံတင်မည်", noSpam:"သင့်အချက်အလက်ကို ကျွန်ုပ်တို့ မျှဝေမည်မဟုတ်ပါ",
     registered:"မှတ်ပုံတင်ပြီးပါပြီ!", thankyou:"မြန်နက်တွင် ပါဝင်ကြောင်း ကျေးဇူးတင်ပါသည်။", bySigningIn:"ဝင်ရောက်ခြင်းဖြင့် ကျွန်ုပ်တို့၏ အသုံးပြုသည့်စည်းမျဉ်းများကို သဘောတူသည်",
   }
 };
@@ -83,13 +82,6 @@ const JOBS=[
   {id:4,type:"seek",title:"Any Kitchen Work Available",titleMM:"မီးဖိုချောင်အလုပ် မည်သည်မဆို",name:"Ei Ei Phyu",location:"Kuala Lumpur 🇲🇾",pay:"Negotiable",avail:"Available This Week",skills:["Cleaning","Prep","Delivery"],desc:"New arrival, hardworking, need work urgently.",descMM:"အသစ်ရောက်ရှိသူ၊ ကြိုးစားသော၊ အလုပ်အမြန်လိုအပ်သည်။"},
   {id:5,type:"offer",title:"Sushi Counter Helper x2",titleMM:"ဆူရှီ လုပ်ငန်းအကူ x2",employer:"Sakura Market",location:"Tokyo 🇯🇵",pay:"¥1,200/hr",urgent:true,skills:["Rolling","Cashier","Packaging"],desc:"Grocery counter, part-time ok.",descMM:"ကြယ်မှတ်ဆိုင်ကောင်တာ၊ အချိန်ပိုင်းလက်ခံသည်။"},
   {id:6,type:"seek",title:"Factory or Construction Work",titleMM:"စက်ရုံ သို့ ဆောက်လုပ်ရေးအလုပ်",name:"Zaw Lin",location:"Penang 🇲🇾",pay:"RM 1,500+/mo",avail:"Available Now",skills:["Construction","Driving","Loading"],desc:"Strong worker, 5 years factory experience.",descMM:"ကြံ့ခိုင်သောအလုပ်သမား၊ စက်ရုံတွင် ၅ နှစ်အတွေ့အကြုံ။"},
-];
-const HUNDI=[
-  {id:1,agent:"Ko Thura (Trusted Agent)",from:"🇺🇸 USA",to:"🇲🇲 Myanmar",rate:"2,100 MMK",fee:"2%",limit:"$5,000/day",phone:"+1-713-555-0101",verified:true,reviews:142,desc:"15 years in Houston. Same-day delivery.",descMM:"Houston တွင် ၁၅ နှစ်ရှိ။ တူညီသောနေ့ ငွေရောက်သည်။"},
-  {id:2,agent:"Ma Myat Noe",from:"🇹🇭 Thailand",to:"🇲🇲 Myanmar",rate:"870 MMK per ฿",fee:"1.5%",limit:"฿50,000/day",phone:"+66-81-555-0202",verified:true,reviews:89,desc:"Bangkok agent, 8 years trusted.",descMM:"Bangkok ကိုယ်စားလှယ်၊ ၈ နှစ်ကြာ ယုံကြည်ရသည်။"},
-  {id:3,agent:"Ko Zaw Win",from:"🇲🇾 Malaysia",to:"🇲🇲 Myanmar",rate:"450 MMK per RM",fee:"2%",limit:"RM 10,000/day",phone:"+60-12-555-0303",verified:true,reviews:67,desc:"KL & Penang. Community vouched.",descMM:"KL နှင့် Penang။ အသိုင်းအဝိုင်းမှ အထောက်အကူပြု။"},
-  {id:4,agent:"Daw Khin Khin",from:"🇯🇵 Japan",to:"🇲🇲 Myanmar",rate:"13.5 MMK per ¥",fee:"2.5%",limit:"¥200,000/day",phone:"+81-90-555-0404",verified:false,reviews:23,desc:"Tokyo agent, review pending.",descMM:"Tokyo ကိုယ်စားလှယ်၊ စစ်ဆေးနေဆဲ။"},
-  {id:5,agent:"Ko Naing (Singapore)",from:"🇸🇬 Singapore",to:"🇲🇲 Myanmar",rate:"1,550 MMK per S$",fee:"1.8%",limit:"S$8,000/day",phone:"+65-9555-0505",verified:true,reviews:55,desc:"Fast, discreet, reliable.",descMM:"မြန်ဆန်၊ ယုံကြည်ရနိုင်သည်။"},
 ];
 const RENTALS=[
   {id:1,type:"offer",title:"Shared Room Available",titleMM:"အခန်းရှယ်ရန် ရှိသည်",location:"Houston, TX 🇺🇸",price:"$450/mo",rooms:"1 bed in shared house",burmese:true,desc:"Bills included. Sushi workers welcome.",descMM:"ဘီလ်ပါဝင်သည်။ ဆူရှီအလုပ်သမားများကြိုဆိုသည်။"},
@@ -117,8 +109,8 @@ const GOODS=[
   {id:8,title:"Sewing Machine — Singer",titleMM:"ဆင်ဂျာ ချုပ်စက်",cat:"🪡 Equipment",price:"RM 350",loc:"Penang 🇲🇾",seller:"Ma Win",img:"🧵",desc:"Works perfectly, moving sale.",descMM:"ကောင်းစွာအလုပ်လုပ်သည်"},
 ];
 
-const PILLARS=["jobs","hundi","rent","cargo","goods","biz"];
-const COLORS={jobs:"#c0392b",hundi:"#7c3aed",rent:"#0891b2",cargo:"#d97706",goods:"#16a34a",biz:"#9d174d"};
+const PILLARS=["jobs","services","rent","cargo","goods","biz","events"];
+const COLORS={jobs:"#c0392b",services:"#7c3aed",events:"#4d7c0f",rent:"#0891b2",cargo:"#d97706",goods:"#16a34a",biz:"#9d174d"};
 const avCol=a=>a==="Available Now"?"#16a34a":a==="Available This Week"?"#d97706":"#6366f1";
 const Tag=({bg="#f3f4f6",c="#374151",children})=><span style={{background:bg,color:c,borderRadius:20,padding:"3px 10px",fontSize:11,fontWeight:700,display:"inline-block",margin:"2px"}}>{children}</span>;
 const FbBtn=({label,style:s})=><button style={{width:"100%",background:"#1877f2",color:"#fff",border:"none",borderRadius:10,padding:"9px",fontWeight:700,cursor:"pointer",fontSize:13,marginTop:8,...s}}>{label}</button>;
@@ -271,7 +263,6 @@ export default function App(){
               <span style={{fontWeight:800,fontSize:12,color:"#8d5a2b",lineHeight:1.2}}>{lang==="mm"?"ဟစ်တိုင် (ဆွေးနွေးရာ)":"Podium (discussion)"}</span>
             </div>
           </div>
-          <RatesTicker lang={lang} onOpen={()=>{setTab("hundi");window.scrollTo(0,0);}}/>
           <div id="mn-latest"><Latest onOpen={p=>{setTab(p);setFilter("all");window.scrollTo(0,0);}}/></div>
           <div style={{textAlign:"center",fontSize:12,color:"#6b7a6c",marginTop:8}}>
             {t.vision} · <a onClick={()=>setEmailModal(true)} style={{color:THEME.red,fontWeight:700,cursor:"pointer"}}>✅ {t.registerInterest}</a> · <a href="https://www.facebook.com/profile.php?id=61595978411240" target="_blank" rel="noreferrer" style={{color:"#1877f2",fontWeight:700}}>👥 {t.joinFb}</a>
@@ -287,7 +278,7 @@ export default function App(){
             <div style={{opacity:.85,fontSize:13,marginTop:2}}>{t.pillarDesc[pillarIdx]}</div>
           </div>
           <button onClick={()=>openPost(tab)} style={{background:"rgba(255,255,255,0.22)",color:"#fff",border:"2px solid rgba(255,255,255,0.45)",borderRadius:22,padding:"9px 20px",fontWeight:800,cursor:"pointer",fontSize:13}}>
-            + {tab==="jobs"?t.postJob:tab==="hundi"?t.postAgent:tab==="rent"?t.postRental:tab==="cargo"?t.postCarry:tab==="biz"?s3.postFree.replace("+ ",""):t.postItem}
+            + {tab==="jobs"?t.postJob:tab==="services"?t.postAgent:tab==="events"?t.postEvent:tab==="rent"?t.postRental:tab==="cargo"?t.postCarry:tab==="biz"?s3.postFree.replace("+ ",""):t.postItem}
           </button>
         </div>
       )}
@@ -321,34 +312,16 @@ export default function App(){
         </div>
       </div>}
 
-      {/* HUNDI */}
-      {tab==="hundi"&&<div style={{maxWidth:900,margin:"0 auto",padding:"18px 16px"}}>
-        <div style={{background:"#fef3c7",borderRadius:12,padding:13,marginBottom:18,border:"1px solid #f59e0b",fontSize:12,color:"#92400e"}}>{t.hundiNotice}</div>
-        <RatesBoard lang={lang}/>
-        <CommunityListings pillar="hundi" color={COLORS.hundi}/>
-        <div style={{background:"#f3f4f6",borderRadius:10,padding:"9px 12px",margin:"6px 0 12px",fontSize:12,color:"#555"}}>{t.examplesNote}</div>
-        <div style={{fontWeight:800,fontSize:15,marginBottom:12}}>{t.communityAgents}</div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(270px,1fr))",gap:14}}>
-          {HUNDI.map(h=>(
-            <Card key={h.id} topColor="#ddd">
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
-                <div style={{fontWeight:800,fontSize:14}}>{h.agent}</div>
-                <Tag bg="#e5e7eb" c="#374151">{t.example}</Tag>
-              </div>
-              <div style={{fontSize:12,color:"#888",marginBottom:8}}>{h.from} → {h.to}</div>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:10}}>
-                {[[t.rate,h.rate+" MMK"],[t.fee,h.fee],[t.dailyLimit,h.limit]].map(([l,v])=>(
-                  <div key={l} style={{background:"#faf5ff",borderRadius:8,padding:"7px",textAlign:"center"}}>
-                    <div style={{fontSize:9,color:"#888"}}>{l}</div>
-                    <div style={{fontWeight:700,fontSize:11,color:"#5b21b6"}}>{v}</div>
-                  </div>
-                ))}
-              </div>
-              <div style={{fontSize:12,color:"#555",marginBottom:6,lineHeight:1.5}}>{tx(h.desc,h.descMM)}</div>
-                            <ViberBtn label={t.contactViber}/>
-            </Card>
-          ))}
-        </div>
+      {/* SERVICES */}
+      {tab==="services"&&<div style={{maxWidth:1000,margin:"0 auto",padding:"18px 16px"}}>
+        <div style={{background:"#f5f3ff",borderRadius:12,padding:13,marginBottom:18,border:"1px solid #ddd6fe",fontSize:12,color:"#5b21b6"}}>{t.servicesNotice}</div>
+        <CommunityListings pillar="services" color={COLORS.services}/>
+      </div>}
+
+      {/* EVENTS */}
+      {tab==="events"&&<div style={{maxWidth:1000,margin:"0 auto",padding:"18px 16px"}}>
+        <div style={{background:"#f7fee7",borderRadius:12,padding:13,marginBottom:18,border:"1px solid #d9f99d",fontSize:12,color:"#3f6212"}}>{t.eventsNotice}</div>
+        <CommunityListings pillar="events" color={COLORS.events}/>
       </div>}
 
       {/* RENT */}

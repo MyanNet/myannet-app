@@ -44,7 +44,7 @@ create trigger on_auth_user_created after insert on auth.users
 create table if not exists public.listings (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null default auth.uid() references auth.users on delete cascade,
-  pillar text not null check (pillar in ('jobs','hundi','rent','cargo','goods','biz')),
+  pillar text not null check (pillar in ('jobs','services','rent','cargo','goods','biz','events')),
   kind text not null default 'offer',
   title text not null check (char_length(title) between 3 and 120),
   description text not null default '' check (char_length(description) <= 2000),

@@ -11,7 +11,7 @@ const KIND_LABEL: Record<string, [string, string]> = {
   offer: ["Offering", "ပေးဆောင်သည်"], seek: ["Looking for", "ရှာဖွေနေသည်"],
   carry: ["Can carry", "သယ်ပေးနိုင်"], need: ["Need carry", "သယ်ပေးသူလို"],
   biz: ["Business", "လုပ်ငန်း"], ad: ["Promotion", "ကြော်ငြာ"], card: ["Contact card", "ဆက်သွယ်ရန်ကတ်"],
-  hundi: ["Agent", "ကိုယ်စားလှယ်"], goods: ["For sale", "ရောင်းရန်"],
+  goods: ["For sale", "ရောင်းရန်"],
 };
 
 const digits = (v: string) => v.replace(/[^\d+]/g, "");
@@ -29,7 +29,7 @@ function contactLinks(c: store.Contact) {
 
 export function ListingCard({ l, color }: { l: store.Listing; color: string }) {
   const { lang } = useApp();
-  const k = KIND_LABEL[l.kind];
+  const k: [string, string] | undefined = l.pillar === "events" ? ["🎉 Event", "🎉 ပွဲ"] : KIND_LABEL[l.kind];
   const [more, setMore] = useState(false);
   const long = (l.description || "").length > 280;
   return (

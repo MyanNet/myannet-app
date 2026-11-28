@@ -24,7 +24,7 @@ export const S = {
     types: {
       biz: ["🏪", "My business or shop"], ad: ["📣", "An ad or promotion"], card: ["📇", "My contact card"],
       jobs: ["💼", "A job opening or I need work"], rent: ["🏠", "A room or house"],
-      hundi: ["💸", "I'm a money transfer agent"], cargo: ["✈️", "Hand-carry offer or request"], goods: ["🛍️", "Item to buy or sell"],
+      services: ["🛠️", "A service I offer (translation, tax, repairs…)"], events: ["🎉", "A community event"], cargo: ["✈️", "Hand-carry offer or request"], goods: ["🛍️", "Item to buy or sell"],
     } as Record<string, [string, string]>,
     kindOffer: "Offering", kindSeek: "Looking for",
     title: "Title", titlePh: "e.g. Golden Myanmar Restaurant", desc: "Description", descPh: "What you offer, hours, details…",
@@ -66,7 +66,7 @@ export const S = {
     types: {
       biz: ["🏪", "ကျွန်ုပ်၏ လုပ်ငန်း / ဆိုင်"], ad: ["📣", "ကြော်ငြာ / ပရိုမိုးရှင်း"], card: ["📇", "ဆက်သွယ်ရန်ကတ်"],
       jobs: ["💼", "အလုပ်ခေါ်ခြင်း / အလုပ်ရှာခြင်း"], rent: ["🏠", "အခန်း / အိမ်"],
-      hundi: ["💸", "ငွေလွှဲ ကိုယ်စားလှယ်"], cargo: ["✈️", "ပစ္စည်းသယ်ပေးခြင်း / တောင်းဆိုခြင်း"], goods: ["🛍️", "ဝယ်/ရောင်း ပစ္စည်း"],
+      services: ["🛠️", "ဝန်ဆောင်မှု (ဘာသာပြန်၊ အခွန်၊ ပြုပြင်ရေး…)"], events: ["🎉", "အသိုင်းအဝိုင်း ပွဲ / အစီအစဉ်"], cargo: ["✈️", "ပစ္စည်းသယ်ပေးခြင်း / တောင်းဆိုခြင်း"], goods: ["🛍️", "ဝယ်/ရောင်း ပစ္စည်း"],
     } as Record<string, [string, string]>,
     kindOffer: "ပေးဆောင်သည်", kindSeek: "ရှာဖွေနေသည်",
     title: "ခေါင်းစဉ်", titlePh: "ဥပမာ — ရွှေမြန်မာ စားသောက်ဆိုင်", desc: "အသေးစိတ်", descPh: "ဝန်ဆောင်မှု၊ ဖွင့်ချိန်၊ အသေးစိတ်…",

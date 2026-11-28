@@ -6,30 +6,6 @@ import { LIVE } from "@/lib/supabase";
 
 // Admin page: reported listings and reviews, with remove / dismiss buttons.
 // Only people with is_admin = true in Supabase can read reports (enforced by the database).
-// Admin: set today's kyat rates per US dollar (other currencies are worked out automatically).
-function FxForm() {
-  const [market, setMarket] = useState("");
-  const [hundi, setHundi] = useState("");
-  const [note, setNote] = useState("");
-  const [msg, setMsg] = useState("");
-  const [when, setWhen] = useState("");
-  useEffect(() => { store.getFx().then((f) => { if (f) { setMarket(f.usd_mmk_market ? String(f.usd_mmk_market) : ""); setHundi(f.usd_mmk_hundi ? String(f.usd_mmk_hundi) : ""); setNote(f.note || ""); setWhen(new Date(f.updated_at).toLocaleString()); } }); }, []);
-  const inp: React.CSSProperties = { padding: "8px 10px", borderRadius: 8, border: "1px solid #ccc", fontSize: 15, width: 130 };
-  return (
-    <div style={{ background: "#faf5ff", border: "1px solid #ddd6fe", borderRadius: 12, padding: 14, marginBottom: 18 }}>
-      <div style={{ fontWeight: 800, color: "#5b21b6", marginBottom: 6 }}>💱 Kyat rates — 1 US dollar = ? kyat</div>
-      <div style={{ fontSize: 12, color: "#666", marginBottom: 10 }}>Update once a day. The official Central Bank rate updates by itself. Last saved: {when || "never"}</div>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "flex-end" }}>
-        <label style={{ fontSize: 12, fontWeight: 700 }}>Market rate<br /><input style={inp} type="number" value={market} onChange={(e) => setMarket(e.target.value)} placeholder="e.g. 4900" /></label>
-        <label style={{ fontSize: 12, fontWeight: 700, flex: 1, minWidth: 200 }}>Note (optional)<br /><input style={{ ...inp, width: "100%" }} value={note} onChange={(e) => setNote(e.target.value)} placeholder="e.g. Yangon market, morning" /></label>
-        <button style={{ background: "#7c3aed", color: "#fff", border: "none", borderRadius: 8, padding: "10px 16px", fontWeight: 800, cursor: "pointer" }}
-          onClick={async () => { try { await store.setFx(market ? +market : null, null, note); setMsg("✓ Saved — live on the site within an hour"); setWhen(new Date().toLocaleString()); } catch (e) { setMsg((e as Error).message); } }}>Save rates</button>
-      </div>
-      {msg && <div style={{ fontSize: 12, marginTop: 8, color: "#2e7d32" }}>{msg}</div>}
-    </div>
-  );
-}
-
 export default function Admin() {
   const [user, setUser] = useState<store.AppUser | null | undefined>(undefined);
   const [reports, setReports] = useState<store.Report[]>([]);
@@ -61,7 +37,6 @@ export default function Admin() {
         <a href="/" style={{ color: "#1b5e20", fontWeight: 900, textDecoration: "none" }}>← MyanNet</a>
         <h1 style={{ color: "#1b5e20" }}>Admin</h1>
         {user?.is_admin && <Stats />}
-        {user?.is_admin && <FxForm />}
         <h2 style={{ color: "#1b5e20", fontSize: 18 }}>Reports</h2>
         {!LIVE && <p style={{ fontSize: 13, color: "#7a5b00" }}>Demo mode: showing reports made in this browser only.</p>}
         {user === undefined && <p>Loading…</p>}

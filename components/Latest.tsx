@@ -7,7 +7,7 @@ import { THEME } from "./ui";
 
 // Home page: newest listings (left) and newest Podium topics (right), compact so the home page fits one screen.
 const SEC: Record<string, [string, string, string, string]> = {
-  jobs: ["💼", "Help Wanted", "အလုပ်အကိုင်", "#c0392b"], hundi: ["💸", "Hundi", "ဟွန်ဒီ", "#7c3aed"],
+  jobs: ["💼", "Help Wanted", "အလုပ်အကိုင်", "#c0392b"], services: ["🛠️", "Services", "ဝန်ဆောင်မှု", "#7c3aed"], events: ["🎉", "Event", "ပွဲလမ်း", "#4d7c0f"],
   rent: ["🏠", "Rent", "အိမ်ငှား", "#0891b2"], cargo: ["✈️", "Cargo", "ကုန်တင်ဆောင်", "#d97706"],
   goods: ["🛍️", "Buy / Sell", "ဝယ်/ရောင်း", "#16a34a"], biz: ["🏪", "Business", "လုပ်ငန်း", "#9d174d"],
 };
